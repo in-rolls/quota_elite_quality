@@ -24,6 +24,8 @@ https://www.india.gov.in/my-government/constitution-india/amendments/constitutio
 
 Some research suggests that how educated a politician is matters for growth (in certain contexts) (see [here](https://academic.oup.com/ej/article-abstract/121/554/F205/5079434)). Other research suggests that candidates with criminal records cause poverty. (see [here](https://link.springer.com/article/10.1007/s12116-019-09290-5)).
 
+Caveat = None of this is to say that the net output would be lower. In fact, there is plenty of research that suggests some nice consequences of reserving local body seats for women. The point may help with interpretation of those effects. 
+
 ### Results
 
 Table 1: Bihar 2016 Sarpanch
