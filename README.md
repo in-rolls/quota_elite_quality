@@ -55,8 +55,6 @@ Table 2: UP 2015
  
 Table 3: UP 2021
 
-Table: UP 2021
-
 |reservation         | prop_illiterate| prop_college_or_more|      n|
 |:-------------------|---------------:|--------------------:|------:|
 |अनारक्षित            |            0.09|                 0.17| 126028|
