@@ -1,4 +1,4 @@
-## Effect of Quotas on the Quality of Elites
+## Effect of Gender Quotas on the Quality of Elites
 
 ### Context
 
