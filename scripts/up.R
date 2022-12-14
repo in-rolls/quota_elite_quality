@@ -35,3 +35,19 @@ tab_2 <- up_all_dat %>%
   summarize(prop_illiterate = round(mean(education == "निरक्षर", na.rm = T), 2), 
             prop_college_or_more = round(mean(education %in% c('परास्नातक', 'स्नातक', 'पी० एच० डी०'), na.rm = T), 2), 
             n = n())
+
+### UP 2021
+
+up_2021 <- readr::read_csv("up_gram_panchayat_pradhan_2021.csv.zip")
+
+tab_3 <- up_2021 %>% 
+  group_by(reservation) %>% 
+  summarize(prop_illiterate = round(mean(education_2021 == "निरक्षर", na.rm = T), 2), 
+            prop_college_or_more = round(mean(education_2021 %in% c('परास्नातक', 'स्नातक', 'पी० एच० डी०'), na.rm = T), 2), 
+            n = n())
+
+kable(tab_3, format = "pipe", caption = "UP 2021")
+
+
+
+
