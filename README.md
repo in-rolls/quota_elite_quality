@@ -69,14 +69,15 @@ Table 3: UP 2021
 
 Table 4: Rajasthan Municipal
 
-|ward_cat  | prop_hs_or_less|   n|
-|:---------|---------------:|---:|
-|gen women |            0.73| 396|
-|general   |            0.64| 870|
-|obc       |            0.67| 287|
-|obc women |            0.77| 148|
-|sc        |            0.67| 203|
-|sc women  |            0.80| 104|
-|st        |            0.68|  50|
-|st women  |            0.86|  21|
-|women     |            0.81|  26|
+|ward_cat  | prop_hs_or_less| mean_age|   n|
+|:---------|---------------:|--------:|---:|
+|gen women |            0.73|       41| 396|
+|general   |            0.64|       42| 870|
+|obc       |            0.67|       42| 287|
+|obc women |            0.77|       41| 148|
+|sc        |            0.67|       40| 203|
+|sc women  |            0.80|       35| 104|
+|st        |            0.68|       39|  50|
+|st women  |            0.86|       37|  21|
+|women     |            0.81|       43|  26|
+

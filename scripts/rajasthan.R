@@ -22,6 +22,7 @@ dat <- left_join(
 tab_4 <- dat %>% 
   group_by(ward_cat = tolower(ward_category)) %>% 
   summarize(prop_hs_or_less = round(mean(elected_member_educ %in% c("PRIMARY", "LITERA TE", "LITERATE", "ILLITERA TE", "10th", "12th", "3th", "4th", "5 th", "5th", "5TH", "6th", "6TH", "7th", "8 th", "8 TH", "8th", "8TH", "9th", "9TH"), na.rm = T), 2), 
+            mean_age = round(mean(age)), 
             n = n())
 
 kable(tab_4, format = "pipe", caption = "Rajasthan 2019 Municipal")
