@@ -30,6 +30,8 @@ Caveat = None of this is to say that the net output would be lower. In fact, the
 
 See Table 3A here: https://www.nber.org/system/files/working_papers/w8615/w8615.pdf (Chattopadhyay and Duflo 2001)
 
+<img src = "c_d_tab_3.png" width = 50%>
+
 They find yet more dramatic differences even when constraining themselves to SC/ST seats where they argue the differences are likely smaller.
 
 ### Results
