@@ -2,11 +2,11 @@
 
 ### Context
 
-"In 1993, a constitutional amendment was passed in India that called for a random* one third of village council leader, or sarpanch, positions in gram panchayat, to be reserved for women. The village council, which encompasses between five and fifteen villages, is responsible for the provision of local infrastructure - such as public buildings, water, and roads - and for identifying government program beneficiaries. Although all decisions in the village council are made by majority, the pradhan is the only full-time member and exercises significant control over the final council decisions. The village council is required to organize two village meetings per year, during which they present their proposed budget and report on their activities in the previous six months. The pradhan must also set up regular office hours where villagers can lodge complaints or requests."
+"In 1993, a constitutional amendment was passed in India that called for a random* one-third of [the] village council leader, or sarpanch, positions in gram panchayat, to be reserved for women. The village council, which encompasses between five and fifteen villages, is responsible for the provision of local infrastructure - such as public buildings, water, and roads - and for identifying government program beneficiaries. Although all decisions in the village council are made by majority, the pradhan is the only full-time member and exercises significant control over the final council decisions. The village council is required to organize two village meetings per year, during which they present their proposed budget and report on their activities in the previous six months. The pradhan must also set up regular office hours where villagers can lodge complaints or requests."
 
 via https://www.povertyactionlab.org/evaluation/influencing-provision-social-services-through-mandated-female-representation
 
-*there is no mention of random. In fact there is a separate callout that these seats can be allocated by rotation: "Not less than one-third (including the number of seats reserved for women belonging to the Scheduled Castes and the Scheduled Tribes) of the total number of seats to be filled by direct election in every Panchayat shall be reserved for women and such seats may be allotted by rotation to different constituencies in a Panchayat."
+*there is no mention of random. In fact, there is a separate callout that these seats can be allocated by rotation: "Not less than one-third (including the number of seats reserved for women belonging to the Scheduled Castes and the Scheduled Tribes) of the total number of seats to be filled by direct election in every Panchayat shall be reserved for women and such seats may be allotted by rotation to different constituencies in a Panchayat."
 
 https://www.india.gov.in/my-government/constitution-india/amendments/constitution-india-seventy-third-amendment-act-1992
 
@@ -18,13 +18,19 @@ https://www.india.gov.in/my-government/constitution-india/amendments/constitutio
 
 * Education: Given the inequalities in education, we expect gender quotas to cause less educated candidates (at least initially).
 
-* Occupation: Again, given inequalities in opportunities to work, we expect gender quotas to cause candidates who are no working professionally and given differences in human capital (caused by inequality in education, etc.), more blue collar jobs. 
+* Occupation: Again, given inequalities in opportunities to work, we expect gender quotas to cause candidates who are not working professionally and given differences in human capital (caused by inequality in education, etc.), more blue-collar jobs. 
 
 * Age: We expect gender quotas to cause younger candidates.
 
 Some research suggests that how educated a politician is matters for growth (in certain contexts) (see [here](https://academic.oup.com/ej/article-abstract/121/554/F205/5079434)). Other research suggests that candidates with criminal records cause poverty. (see [here](https://link.springer.com/article/10.1007/s12116-019-09290-5)).
 
-Caveat = None of this is to say that the net output would be lower. In fact, there is plenty of research that suggests some positive consequences of reserving local body seats for women. The point may help with interpretation of those effects. 
+Caveat = None of this is to say that the net output would be lower. In fact, there is plenty of research that suggests some positive consequences of reserving local body seats for women. The point may help with the interpretation of those effects. 
+
+### Prior Research
+
+See Table 3A here: https://www.nber.org/system/files/working_papers/w8615/w8615.pdf (Chattopadhyay and Duflo 2001)
+
+They find yet more dramatic differences even when constraining themselves to SC/ST seats where they argue the differences are likely smaller.
 
 ### Results
 
