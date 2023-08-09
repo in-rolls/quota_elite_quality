@@ -32,6 +32,10 @@ See Table 3A here: https://www.nber.org/system/files/working_papers/w8615/w8615.
 
 <img src = "c_d_tab_3.png" width = 50%>
 
+See Table 8 and 9 here: https://vijayendrarao.org/papers/EDCC_Reservations_to_go.pdf (Ban and Rao 2008)
+
+<img src = "ban_rao.png" width = 50%>
+
 They find yet more dramatic differences even when constraining themselves to SC/ST seats where they argue the differences are likely smaller.
 
 ### Results
