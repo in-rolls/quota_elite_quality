@@ -6,7 +6,7 @@ library(readr)
 library(knitr)
 library(kableExtra)
 
-### Read in the Bihar 2016 Sarpanch data
+### Read in the Rajasthan 2019 Municipal Winning Cand. data
 
 raj_2019 <- readr::read_csv("rajasthan_municipal_2019.csv")
 ed <- readr::read_csv("rajasthan_municipal_2019_education_winning.csv")
@@ -26,7 +26,4 @@ tab_4 <- dat %>%
             n = n())
 
 kable(tab_4, format = "pipe", caption = "Rajasthan 2019 Municipal")
-
-
-
 
