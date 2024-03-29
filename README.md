@@ -95,3 +95,40 @@ Table 4: Rajasthan Municipal
 |st women  |            0.86|       37|  21|
 |women     |            0.81|       43|  26|
 
+
+But Kerala provides a nice counter-example with very small differences
+
+
+Table 5: Kerala
+
+|LGI Type        |Reservation | hs_or_below| prop_bachelors| prop_masters_or_above| prop_other|     n|
+|:---------------|:-----------|-----------:|--------------:|---------------------:|----------:|-----:|
+|Block           |General     |        0.60|           0.22|                  0.05|       0.13|  2478|
+|Block           |Woman       |        0.66|           0.18|                  0.04|       0.12|  2988|
+|Block           |SC          |        0.71|           0.09|                  0.03|       0.16|   446|
+|Block           |SC Woman    |        0.74|           0.12|                  0.02|       0.12|   214|
+|Block           |ST          |        0.78|           0.03|                  0.02|       0.17|    60|
+|Block           |ST Woman    |        0.91|           0.03|                  0.03|       0.03|    32|
+|Corporation     |General     |        0.59|           0.21|                  0.04|       0.16|   556|
+|Corporation     |Woman       |        0.47|           0.30|                  0.08|       0.15|   551|
+|Corporation     |SC          |        0.66|           0.17|                  0.00|       0.17|    35|
+|Corporation     |SC Woman    |        0.60|           0.14|                  0.07|       0.19|    43|
+|District        |General     |        0.36|           0.40|                  0.07|       0.17|   429|
+|District        |Woman       |        0.44|           0.36|                  0.07|       0.13|   449|
+|District        |SC          |        0.57|           0.27|                  0.00|       0.16|    51|
+|District        |SC Woman    |        0.38|           0.38|                  0.15|       0.10|    48|
+|District        |ST          |        0.67|           0.25|                  0.00|       0.08|    12|
+|District        |ST Woman    |        1.00|           0.00|                  0.00|       0.00|     4|
+|Grama Panchayat |General     |        0.69|           0.12|                  0.03|       0.15| 20149|
+|Grama Panchayat |Woman       |        0.72|           0.12|                  0.03|       0.13| 22456|
+|Grama Panchayat |SC          |        0.77|           0.07|                  0.02|       0.14|  2924|
+|Grama Panchayat |SC Woman    |        0.76|           0.09|                  0.02|       0.13|  2250|
+|Grama Panchayat |ST          |        0.79|           0.03|                  0.01|       0.18|   425|
+|Grama Panchayat |ST Woman    |        0.81|           0.02|                  0.00|       0.17|   310|
+|Municipality    |General     |        0.68|           0.16|                  0.05|       0.11|  3840|
+|Municipality    |Woman       |        0.68|           0.17|                  0.04|       0.10|  3908|
+|Municipality    |SC          |        0.79|           0.09|                  0.03|       0.09|   297|
+|Municipality    |SC Woman    |        0.70|           0.14|                  0.05|       0.12|   307|
+|Municipality    |ST          |        0.83|           0.06|                  0.00|       0.11|    18|
+|Municipality    |ST Woman    |        0.81|           0.00|                  0.00|       0.19|    16|
+

@@ -4,7 +4,7 @@ library(readr)
 library(knitr)
 
 # Load dat
-kerala_lsgi <- read_csv("/Users/soodoku/Downloads/lsgi-election-kerala.csv")
+kerala_lsgi <- read_csv("data/lsgi-election-kerala.csv")
 
 # Rename
 names(kerala_lsgi)[names(kerala_lsgi) == "Educational Qualification"] <- "educ"
@@ -92,17 +92,17 @@ result <- kerala_lsgi %>%
 kable(result)
 
 result <- kerala_lsgi %>%
-  group_by(Reservation, Year) %>%
+  group_by(`LGI Type`, Reservation) %>%
   summarize(
     hs_or_below = (sum(recoded_education == "6th grade or lower") + 
-                        sum(recoded_education == "7th to 10th grade") + 
-                        sum(recoded_education == "11th or High School")) / n(),
+                   sum(recoded_education == "7th to 10th grade") + 
+                   sum(recoded_education == "11th or High School")) / n(),
     prop_bachelors = sum(recoded_education == "Bachelor's degree or above") / n(),
     prop_masters_or_above = sum(recoded_education == "Master's degree or above") / n(),
     prop_other = sum(recoded_education == "Other") / n(),
     n = n()
   ) %>%
-  arrange(Year, Reservation) %>%
+  arrange(`LGI Type`, Reservation) %>%
   mutate(across(c("hs_or_below", "prop_bachelors", "prop_masters_or_above", "prop_other"), ~ round(., digits = 2)))
 
 kable(result)
