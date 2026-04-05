@@ -36,6 +36,10 @@ See Table 8 and 9 here: https://vijayendrarao.org/papers/EDCC_Reservations_to_go
 
 <img src = "ban_rao.png" width = 50%>
 
+See Table 4 here: https://cgspace.cgiar.org/server/api/core/bitstreams/c85053d0-fd33-400a-b7bb-05a04874175f/content
+
+<img src = "raabe_et_al.png" width = 50%>
+
 They find yet more dramatic differences even when constraining themselves to SC/ST seats where they argue the differences are likely smaller.
 
 ### Results
