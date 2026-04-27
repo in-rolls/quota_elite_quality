@@ -44,61 +44,59 @@ They find yet more dramatic differences even when constraining themselves to SC/
 
 ### Results
 
-Table 1: Bihar 2016 Sarpanch
+**Table 1: Bihar 2016 Sarpanch Candidates by Reservation Status**
 
-|reservation_status   | prop_illiterate| prop_graduate_or_more| mean_age|     n|
-|:--------------------|---------------:|---------------------:|--------:|-----:|
-|अनारक्षित             |            0.02|                  0.15|    46.86| 17345|
-|अनारक्षित(महिला)      |            0.08|                  0.04|    41.35| 13776|
-|अनुसूचित जनजाति        |            0.01|                  0.05|    44.53|   293|
-|अनुसूचित जनजाति(महिला) |            0.05|                  0.02|    38.03|    62|
-|अनुसूचित जाति          |            0.05|                  0.09|    44.78|  3976|
-|अनुसूचित जाति(महिला)   |            0.11|                  0.02|    39.31|  2243|
-|पिछड़ा वर्ग            |            0.03|                  0.09|    46.19|  4654|
-|पिछड़ा वर्ग(महिला)     |            0.10|                  0.02|    40.44|  2683|
+|Reservation Status (Hindi) | Reservation Status (English) | Illiterate | Graduate+ | Mean Age | N |
+|:--------------------------|:-----------------------------|----------:|---------:|---------:|-----:|
+|अनारक्षित | Unreserved | 0.02 | 0.15 | 46.86 | 17,345|
+|अनारक्षित(महिला) | Unreserved (Women) | 0.08 | 0.04 | 41.35 | 13,776|
+|अनुसूचित जनजाति | Scheduled Tribe (ST) | 0.01 | 0.05 | 44.53 | 293|
+|अनुसूचित जनजाति(महिला) | ST (Women) | 0.05 | 0.02 | 38.03 | 62|
+|अनुसूचित जाति | Scheduled Caste (SC) | 0.05 | 0.09 | 44.78 | 3,976|
+|अनुसूचित जाति(महिला) | SC (Women) | 0.11 | 0.02 | 39.31 | 2,243|
+|पिछड़ा वर्ग | Backward Class (OBC) | 0.03 | 0.09 | 46.19 | 4,654|
+|पिछड़ा वर्ग(महिला) | OBC (Women) | 0.10 | 0.02 | 40.44 | 2,683|
 
-Table 2: UP 2015
+**Table 2: Uttar Pradesh 2015 Candidates by Reservation Status**
 
-|reservation_status  | prop_illiterate| prop_college_or_more|     n|
-|:-------------------|---------------:|--------------------:|-----:|
-|अनारक्षित            |            0.08|                 0.26| 73410|
-|अनुसूचित जनजाति       |            0.10|                 0.19|   620|
-|अनुसूचित जनजाति महिला |            0.26|                 0.23|   699|
-|अनुसूचित जाति         |            0.16|                 0.15| 26875|
-|अनुसूचित जाति महिला   |            0.32|                 0.09| 17513|
-|अन्य पिछड़ा वर्ग       |            0.11|                 0.20| 34504|
-|अन्य पिछड़ा वर्ग महिला |            0.25|                 0.12| 20819|
-|महिला               |            0.21|                 0.15| 32193|
+|Reservation Status (Hindi) | Reservation Status (English) | Illiterate | College+ | N |
+|:--------------------------|:-----------------------------|----------:|---------:|-----:|
+|अनारक्षित | Unreserved | 0.08 | 0.26 | 73,410|
+|अनुसूचित जनजाति | Scheduled Tribe (ST) | 0.10 | 0.19 | 620|
+|अनुसूचित जनजाति महिला | ST Women | 0.26 | 0.23 | 699|
+|अनुसूचित जाति | Scheduled Caste (SC) | 0.16 | 0.15 | 26,875|
+|अनुसूचित जाति महिला | SC Women | 0.32 | 0.09 | 17,513|
+|अन्य पिछड़ा वर्ग | Other Backward Class (OBC) | 0.11 | 0.20 | 34,504|
+|अन्य पिछड़ा वर्ग महिला | OBC Women | 0.25 | 0.12 | 20,819|
+|महिला | Women | 0.21 | 0.15 | 32,193|
 
- 
-Table 3: UP 2021
+ **Table 3: Uttar Pradesh 2021 Candidates by Reservation Status**
 
-|reservation         | prop_illiterate| prop_college_or_more|      n|
-|:-------------------|---------------:|--------------------:|------:|
-|अनारक्षित            |            0.09|                 0.17| 126028|
-|अनुसूचित जनजाति       |            0.11|                 0.10|   1034|
-|अनुसूचित जनजाति महिला |            0.21|                 0.07|    678|
-|अनुसूचित जाति         |            0.13|                 0.12|  55808|
-|अनुसूचित जाति महिला   |            0.24|                 0.07|  29993|
-|अन्य पिछड़ा वर्ग       |            0.10|                 0.15|  64610|
-|अन्य पिछड़ा वर्ग महिला |            0.21|                 0.09|  32028|
-|महिला               |            0.17|                 0.11|  62917|
+|Reservation Status (Hindi) | Reservation Status (English) | Illiterate | College+ | N |
+|:--------------------------|:-----------------------------|----------:|---------:|------:|
+|अनारक्षित | Unreserved | 0.09 | 0.17 | 126,028|
+|अनुसूचित जनजाति | Scheduled Tribe (ST) | 0.11 | 0.10 | 1,034|
+|अनुसूचित जनजाति महिला | ST Women | 0.21 | 0.07 | 678|
+|अनुसूचित जाति | Scheduled Caste (SC) | 0.13 | 0.12 | 55,808|
+|अनुसूचित जाति महिला | SC Women | 0.24 | 0.07 | 29,993|
+|अन्य पिछड़ा वर्ग | Other Backward Class (OBC) | 0.10 | 0.15 | 64,610|
+|अन्य पिछड़ा वर्ग महिला | OBC Women | 0.21 | 0.09 | 32,028|
+|महिला | Women | 0.17 | 0.11 | 62,917|
 
 
-Table 4: Rajasthan Municipal
+**Table 4: Rajasthan Municipal Candidates by Ward Category**
 
-|ward_cat  | prop_hs_or_less| mean_age|   n|
-|:---------|---------------:|--------:|---:|
-|gen women |            0.73|       41| 396|
-|general   |            0.64|       42| 870|
-|obc       |            0.67|       42| 287|
-|obc women |            0.77|       41| 148|
-|sc        |            0.67|       40| 203|
-|sc women  |            0.80|       35| 104|
-|st        |            0.68|       39|  50|
-|st women  |            0.86|       37|  21|
-|women     |            0.81|       43|  26|
-
+|Ward Category | Reservation Status (English) | HS or Less | Mean Age | N |
+|:-------------|:----------------------------|----------:|---------:|---:|
+|gen women | General Women | 0.73 | 41 | 396|
+|general | General | 0.64 | 42 | 870|
+|obc | Other Backward Class (OBC) | 0.67 | 42 | 287|
+|obc women | OBC Women | 0.77 | 41 | 148|
+|sc | Scheduled Caste (SC) | 0.67 | 40 | 203|
+|sc women | SC Women | 0.80 | 35 | 104|
+|st | Scheduled Tribe (ST) | 0.68 | 39 | 50|
+|st women | ST Women | 0.86 | 37 | 21|
+|women | Women | 0.81 | 43 | 26|
 
 But Kerala provides a nice counter-example with very small differences
 
