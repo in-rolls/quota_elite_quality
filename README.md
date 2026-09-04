@@ -134,3 +134,20 @@ Table 5: Kerala
 |Municipality    |ST          |        0.83|           0.06|                  0.00|       0.11|    18|
 |Municipality    |ST Woman    |        0.81|           0.00|                  0.00|       0.19|    16|
 
+
+## Mumbai (BMC): who gets elected under the quota
+
+Mumbai's 227 municipal wards are reserved for women by lot before each election (one third in 2007, half from 2012). Candidate affidavits give education, age and pending criminal cases for the 2012 and 2017 councils. Data are the Praja/affidavit table held in [local_reservations](https://github.com/in-rolls/local_reservations) (`data/maharashtra/mumbai/praja_ward_ratings_2011_2018.csv`, mirrored there from the CC0 deposit of Karekurve-Ramachandra & Lee 2025, doi:10.7910/DVN/IO9SLQ); `scripts/mumbai.R` reads it from the sibling clone, checks its SHA-256 and the statutory seat counts, and writes `output/mumbai/`.
+
+Table 6: Mumbai councillors by seat type and council
+
+| council|seat               |   n| share female| share HS or less| share graduate+| mean age| share any criminal case| mean criminal cases|
+|-------:|:------------------|---:|------------:|----------------:|---------------:|--------:|-----------------------:|-------------------:|
+|    2012|Open               | 113|        0.062|            0.407|           0.248|   45.956|                   0.327|               0.929|
+|    2012|Reserved for women | 114|        1.000|            0.447|           0.351|   42.728|                   0.035|               0.070|
+|    2017|Open               | 110|        0.164|            0.445|           0.364|   47.791|                   0.273|               0.382|
+|    2017|Reserved for women | 112|        1.000|            0.312|           0.438|   45.518|                   0.036|               0.071|
+
+With administrative-ward and council fixed effects, a reserved seat lowers the councillor's age by 2.6 years (SE 0.9) and the share with a pending criminal case by 27 points (SE 4), and does not lower education: the share with a degree is 8 points higher (SE 4.5, p = 0.06). Mumbai looks like Kerala, not Bihar or UP.
+
+Whether these councillors are rated better by residents is the question of [quota_unquote](https://github.com/in-rolls/quota_unquote), which uses the same data with the lottery as identification.
