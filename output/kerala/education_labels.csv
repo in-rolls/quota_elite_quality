@@ -1200,7 +1200,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2010,gp_ward,BACHELOR OF ACADAMIC LAW,NA,unclassified,1
 2010,gp_ward,BACHELOR OF FINE ARTS,NA,unclassified,1
 2010,gp_ward,BACHELOR OF PHYSIOTHERAPY,NA,unclassified,1
-2010,gp_ward,"BAL , L L B",NA,unclassified,1
+2010,gp_ward,"BAL , L L B",1,recognized qualification,1
 2010,gp_ward,BAM,NA,unclassified,1
 2010,gp_ward,BBA,1,recognized qualification,3
 2010,gp_ward,"BBA, LLB",1,recognized qualification,1
@@ -1332,7 +1332,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2010,gp_ward,DEGRE,NA,unclassified,1
 2010,gp_ward,DEGREE,1,recognized qualification,178
 2010,gp_ward,DEGREE (BCOM),1,recognized qualification,1
-2010,gp_ward,"DEGREE (DISCONTINUE), NTTC, DTP",1,recognized qualification,1
+2010,gp_ward,"DEGREE (DISCONTINUE), NTTC, DTP",NA,unclassified,1
 2010,gp_ward,DEGREE (FAILED),NA,unclassified,1
 2010,gp_ward,DEGREE (UNCOMPLETE),1,recognized qualification,1
 2010,gp_ward,"DEGREE ,DIPLOMA",1,recognized qualification,1
@@ -1576,7 +1576,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2010,gp_ward,K.G.C.E,NA,unclassified,2
 2010,gp_ward,K.G.C.E.,NA,unclassified,1
 2010,gp_ward,KGTE (DRAWING),NA,unclassified,1
-2010,gp_ward,L L B,NA,unclassified,3
+2010,gp_ward,L L B,1,recognized qualification,3
 2010,gp_ward,L.L.B,1,recognized qualification,8
 2010,gp_ward,L.L.B 1ST SEMESTER,1,recognized qualification,1
 2010,gp_ward,L.L.B.,1,recognized qualification,1
@@ -2827,7 +2827,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2010,zp_member,GRADUATION,1,recognized qualification,1
 2010,zp_member,I.T.I,0,recognized qualification,1
 2010,zp_member,II PUC,0,recognized qualification,2
-2010,zp_member,L L M,NA,unclassified,1
+2010,zp_member,L L M,1,recognized qualification,1
 2010,zp_member,LLB,1,recognized qualification,1
 2010,zp_member,M A,1,recognized qualification,1
 2010,zp_member,M A ENGLISH,1,recognized qualification,1
@@ -3215,7 +3215,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2015,block_member,P D C,0,recognized qualification,22
 2015,block_member,P D C + HINDI PRAVEEN,0,recognized qualification,1
 2015,block_member,P G,NA,unclassified,1
-2015,block_member,P G DIPLOMA IN CLINICAL NUTRITION,0,recognized qualification,1
+2015,block_member,P G DIPLOMA IN CLINICAL NUTRITION,NA,unclassified,1
 2015,block_member,"P U C, DIPLOMA IN COMPUTER",0,recognized qualification,1
 2015,block_member,"P U C,BCOM",1,recognized qualification,1
 2015,block_member,P.D.C,0,recognized qualification,36
@@ -3638,7 +3638,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2015,gp_ward,"B-COM, TTC",1,recognized qualification,1
 2015,gp_ward,"B-COM,COMPUTER DIPLOMA,T.T.C",1,recognized qualification,1
 2015,gp_ward,B-ED,1,recognized qualification,2
-2015,gp_ward,B-SC 1 YEAR,1,recognized qualification,1
+2015,gp_ward,B-SC 1 YEAR,NA,unclassified,1
 2015,gp_ward,B-TECH,1,recognized qualification,2
 2015,gp_ward,B. A,1,recognized qualification,5
 2015,gp_ward,B. A. ECONOMICS,1,recognized qualification,2
@@ -4325,7 +4325,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2015,gp_ward,K.G.C.E. IN ENGINEERING,NA,unclassified,1
 2015,gp_ward,KGCE (CIVIL),NA,unclassified,1
 2015,gp_ward,KGTE,NA,unclassified,1
-2015,gp_ward,L L B,NA,unclassified,1
+2015,gp_ward,L L B,1,recognized qualification,1
 2015,gp_ward,L.L.B,1,recognized qualification,6
 2015,gp_ward,LIC AGENT,NA,unclassified,1
 2015,gp_ward,LLB,1,recognized qualification,11
@@ -5348,7 +5348,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2015,zp_member,GRADUATION IN ECONOMICS,1,recognized qualification,1
 2015,zp_member,HINDI SAHITHYAVADYA,NA,unclassified,1
 2015,zp_member,IX TH,0,recognized qualification,1
-2015,zp_member,"L L M, M PHILL",NA,unclassified,1
+2015,zp_member,"L L M, M PHILL",1,recognized qualification,1
 2015,zp_member,L LB,NA,unclassified,1
 2015,zp_member,"L.L.B , PGDCP",1,recognized qualification,1
 2015,zp_member,LLB,1,recognized qualification,2
@@ -5659,8 +5659,8 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2020,block_member,JDC,NA,unclassified,1
 2020,block_member,"JDC, DIPLOMA",0,recognized qualification,1
 2020,block_member,JPHN,NA,unclassified,1
-2020,block_member,L L B,NA,unclassified,3
-2020,block_member,"L L B,HRM( P G DIPLOMA)",0,recognized qualification,1
+2020,block_member,L L B,1,recognized qualification,3
+2020,block_member,"L L B,HRM( P G DIPLOMA)",1,recognized qualification,1
 2020,block_member,L.L.B,1,recognized qualification,1
 2020,block_member,LLB,1,recognized qualification,9
 2020,block_member,"LLB, MBA",1,recognized qualification,1
@@ -5770,7 +5770,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2020,block_member,"PDC,ITI DIPLOMA(DRAFTSMAN MECH)",0,recognized qualification,1
 2020,block_member,"PDC,TTC",0,recognized qualification,1
 2020,block_member,PG,NA,unclassified,1
-2020,block_member,PG DIPLOMA,0,recognized qualification,1
+2020,block_member,PG DIPLOMA,NA,unclassified,1
 2020,block_member,PG IN ENGLISH,NA,unclassified,1
 2020,block_member,PG IN POLITICAL SCIENCE,NA,unclassified,1
 2020,block_member,"PG, BED",1,recognized qualification,1
@@ -6768,7 +6768,7 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2020,gp_ward,KG CE,NA,unclassified,1
 2020,gp_ward,KGCG,NA,unclassified,1
 2020,gp_ward,KGTA,NA,unclassified,1
-2020,gp_ward,L L B,NA,unclassified,1
+2020,gp_ward,L L B,1,recognized qualification,1
 2020,gp_ward,L.L.B,1,recognized qualification,4
 2020,gp_ward,LAB TECHNICIAN COURSE,NA,unclassified,1
 2020,gp_ward,LLB,1,recognized qualification,20
@@ -7119,8 +7119,8 @@ year,tier,education_raw,graduate_plus,education_rule,records
 2020,gp_ward,PEDIGREE FAILED,NA,unclassified,1
 2020,gp_ward,PG,NA,unclassified,8
 2020,gp_ward,"PG , BED , SET",1,recognized qualification,1
-2020,gp_ward,PG DIPLOMA IN JOURNALISAM,0,recognized qualification,1
-2020,gp_ward,PG DIPLOMA IN JOURNALISM,0,recognized qualification,1
+2020,gp_ward,PG DIPLOMA IN JOURNALISAM,NA,unclassified,1
+2020,gp_ward,PG DIPLOMA IN JOURNALISM,NA,unclassified,1
 2020,gp_ward,PG IN JOURNALISM,NA,unclassified,1
 2020,gp_ward,PG URDU,NA,unclassified,1
 2020,gp_ward,"PG, B.ED",1,recognized qualification,2

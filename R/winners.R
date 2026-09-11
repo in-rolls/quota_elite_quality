@@ -46,7 +46,7 @@ schooling <- function(x, state) {
     clean <- str_squish(str_replace_all(str_replace_all(label, "[,-]", " "), "[.]", ""))
     degrees <- paste0(
       "(^|[^a-z])(ba|b a|bcom|b com|bsc|b sc|btech|b tech|be|b e|bba|bca|bpharm|b pharm|bpt|",
-      "bed|b ed|llb|llm|mbbs|bams|bhms|bums|ma|m a|msc|m sc|mcom|m com|mba|mtech|m tech|msw|",
+      "bed|b ed|llb|l l b|llm|l l m|mbbs|bams|bhms|bums|ma|m a|msc|m sc|mcom|m com|mba|mtech|m tech|msw|",
       "mca|phd|graduate|graduation|degree|postgraduate)([^a-z]|$)"
     )
     school <- paste0(
@@ -62,9 +62,10 @@ schooling <- function(x, state) {
     high <- high & !str_detect(clean, "pree?.?degree|pree?.?digree")
     incomplete <- !is.na(clean) & str_detect(clean, paste0(
       "fail|incomplete|pursuing|studying|ongoing|under.?graduate|not complet|",
-      "course complet|first year|second year|final year"
+      "course complet|discont|[123] ?year|first year|second year|final year"
     ))
-    graduate[low & !high] <- 0L
+    postgrad_diploma <- !is.na(clean) & str_detect(clean, "p ?g ?diploma")
+    graduate[low & !high & !postgrad_diploma] <- 0L
     graduate[high & !incomplete] <- 1L
     illiterate <- rep(NA_integer_, length(label))
   }

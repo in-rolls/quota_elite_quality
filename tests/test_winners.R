@@ -63,3 +63,12 @@ testthat::test_that("missing-education bounds collapse to OLS with complete data
   testthat::expect_true(all(b$all_winners_lower <= b$all_winners_upper))
   testthat::expect_true(all(b$all_winners_upper[b$state == "uttar_pradesh"] < 0))
 })
+
+
+testthat::test_that("incomplete degrees and ambiguous postgraduate diplomas remain missing", {
+  d <- schooling(c(
+    "DEGREE (DISCONTINUE), NTTC, DTP", "B-SC 1 YEAR", "PG DIPLOMA",
+    "P G DIPLOMA IN CLINICAL NUTRITION", "L L B,HRM( P G DIPLOMA)"
+  ), "kerala")
+  testthat::expect_equal(d$graduate_plus, c(NA_integer_, NA_integer_, NA_integer_, NA_integer_, 1L))
+})
