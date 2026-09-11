@@ -15,3 +15,7 @@ paper selective emphasis,checked,All fitted outcomes exported; Kerala nulls and 
 paper external validity,limited,State/election/office-specific estimates; no national average or urban-rural pooling
 rejected concern Bihar changed sample,rejected,Explicit 2016 filter restores exactly prior regression descriptive and flow CSVs after source expansion
 legacy UP reproducibility,untestable,Original 2015 candidate directory absent; original table retained with source commit
+T2 education categories,checked,Graduate and illiterate indicators are mutually exclusive on identical classified samples; no joint distribution claim; one education outcome in main figures
+T2 covariance reconstruction,checked,Explicit OLS and manual cluster-score covariance with finite-sample adjustments for UP Rajasthan Kerala and Mumbai; Bihar unadjusted score check retained
+T2 interval reconstruction,checked,All rural and Mumbai saved intervals and p values reproduced with Student t and G minus one degrees of freedom
+T2 few clusters,unresolved inferential limitation,Kerala village and district models use 14 clusters; no wild-cluster or CR2 sensitivity supplied; main text and table cluster counts make limitation explicit

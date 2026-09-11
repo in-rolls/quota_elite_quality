@@ -1,7 +1,7 @@
 office_labels <- c(
   gp_head = "Village head", gp_ward = "Ward member",
   kachahari_head = "Sarpanch", kachahari_member = "Panch",
-  block_member = "Block council member", zp_member = "District council member"
+  block_member = "Block member", zp_member = "District member"
 )
 
 theme_evidence <- function() {

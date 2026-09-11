@@ -24,7 +24,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
-                     fig.align = "center", out.width = "100%")
+                     fig.align = "center", fig.pos = "H", out.width = "100%")
 options(knitr.graphics.rel_path = FALSE)
 source("R/paper.R")
 bihar_n <- jsonlite::read_json("output/bihar_2016/provenance.json")
@@ -32,17 +32,45 @@ bounds <- read_csv("output/missing_education_bounds.csv", show_col_types = FALSE
 raj_bounds <- filter(bounds, state == "rajasthan")
 ```
 
+\begin{abstract}
+
+How does reserving an office for women change the qualifications of the person elected? We examine rural panchayats in Bihar, Uttar Pradesh, Rajasthan and Kerala, and urban councillors in Mumbai. Education is measured consistently by the share with a university degree. Among rural village heads, the adjusted reserved-minus-open difference is `r gsub("%", "\\%", contrast(get_result("Bihar", 2016, "gp_head")), fixed = TRUE)` in Bihar, and negative in each UP election. Rajasthan's classified-winner estimate is negative, but missing education prevents an all-winner conclusion. Kerala's village ward members show smaller, imprecise differences. In Mumbai, reserved-seat councillors have a higher estimated graduate share, with an interval that includes zero, and fewer pending criminal cases. These comparisons control for geography and, in the rural analyses, caste reservation. Their causal interpretation requires conditional comparability of reserved and open seats. The evidence concerns qualifications at election; it does not establish how reservation changes performance in office.
+
+\end{abstract}
+
 # Introduction
 
-Among winners with classifiable education, female reservation is associated with lower graduate shares among village heads in Bihar, Uttar Pradesh and Rajasthan. Rajasthan's missing education is too extensive to determine the direction of the all-winner difference. Kerala's village ward members show much smaller differences. Urban evidence points in another direction: Mumbai's reserved-seat councillors have a higher estimated graduate share and fewer pending criminal cases. This paper studies the effect of reserving an office for women on the qualifications of the person elected to it. Rural panchayats and urban councils are analyzed separately.
+Reserving elected offices for women changes who can contest them. Does it also change the qualifications of the people elected? The relevant comparison is between winners of women-reserved and open seats. Open seats can elect women, so a comparison of female and male politicians does not answer this question.
 
-The graduate-share difference for Bihar's mukhiyas is `r contrast(get_result("Bihar", 2016, "gp_head"))`. The corresponding estimates in UP are negative in each election analyzed. Kerala's ward-member estimates are close to zero, with intervals that include both gains and losses. Mumbai's graduate-share interval also includes zero. These comparisons describe specific offices and elections; they do not establish a single national effect.
+Existing rural studies often find lower schooling and less political experience under reservation. Their evidence spans different offices, outcomes and research designs. Some compare candidates rather than winners; others compare women in reserved seats with men in open seats. These distinctions determine which findings bear on the reservation effect on elected elites.
 
-Education, political experience and pending criminal cases measure different attributes of elected officials. Age describes their composition without ranking competence. The analysis retains these distinctions rather than combining them into a quality index. It also keeps leader qualifications separate from performance in office. A reservation can change both, but a result for public spending or corruption does not establish how reservation changes entrants' qualifications.
+This paper brings that evidence together with administrative records of elected officials. The rural analyses cover village heads and council members in Bihar, Uttar Pradesh, Rajasthan and Kerala; the urban analysis covers Mumbai councillors. Graduate share provides a common education measure. The comparisons remain separate by office and election, and rural panchayats remain separate from urban councils.
 
-# Estimand and evidence
+Education, experience and pending criminal cases describe different attributes. Their value as measures of elite quality depends on their relationship to the work of governing. A degree records formal education, while a pending case records an allegation. Neither alone establishes competence or performance. Age describes the composition of elected officials and is reported separately.
+
+# Existing evidence
+
+Lower schooling and less experience under reservation appear in several rural studies. In the 2001 working paper's West Bengal sample, reserved council heads have 7.13 rather than 9.92 years of schooling, a difference of −2.79 years (SE 0.54); 11% rather than 43% had previously been elected to the council [@cd, Table 3]. In the subsequent Birbhum council term, the adjusted schooling gap is −2.10 years (SE 0.55), and reserved leaders are 26.5 percentage points more likely to be first-time pradhans (SE 6.8) [@beaman, Table II, column 6]. These samples overlap geographically and are not independent national tests.
+
+The May 2007 southern-state draft, published in 2008, reports −2.62 years of schooling (SE 0.77) and a political-knowledge gap of −1.41 points (SE 0.29). That regression excludes caste-reserved councils [@ban, Table 9]. Karnataka's descriptive comparison reports degrees among none of the 23 reserved female presidents and among 19% of the 48 male presidents. Illiteracy is 9% and 4%, respectively; the comparison also conditions on the leader's gender, so it is not a clean reservation contrast [@raabe, Tables 3–4].
+
+The 2011 working paper on the NCAER village panel, published in 2015, reports illiteracy of 24.72% in reserved observations versus 5.74% in unreserved observations, secondary education or above of 28.65% versus 62.69%, and previous officeholding of 11.67% versus 24.24%. These are descriptive comparisons across 180 reserved and 459 unreserved observations [@deininger, Table 3]. The 2013 Andhra Pradesh working paper, published in 2017, reports that 15% of reserved heads versus 54% of unreserved heads have higher-secondary schooling or more; 11% versus 22% have prior political experience. The characteristics table covers 128 reserved and 169 unreserved heads [@afridi, Table 2].
+
+Recent studies require additional distinctions. The September 2022 Karnataka candidate draft reports lower absolute qualification distributions under reservation [@mori, Figure 2 and Table 3]. The published article reports stronger cognitive selection relative to the eligible female population [@moripublished]. That relative benchmark does not establish that reservation increases the elected elite's absolute qualifications. It also concerns candidates. The March 2026 Bihar threshold draft reports standardized schooling effects of −0.765 SD for candidates (SE 0.024; N=44,583) and −0.921 SD for winners (SE 0.073; N=3,294). Substituting husbands' schooling gives −0.147 SD and −0.364 SD, respectively [@bamezai, Table 7]. Spousal schooling does not reveal who governs.
+
+Favorable judgments about participation, voter attitudes or policy performance address different outcomes. They can coexist with lower schooling among entrants. Likewise, a positive selection score relative to same-gender citizens can coexist with lower absolute schooling. A synthesis of the reservation effect must keep the outcome, elected status, comparison group and office fixed before combining estimates. The studies reviewed here do not yet supply a harmonized meta-analysis.
+
+# Data and empirical strategy
+
+## Outcomes and samples
 
 The target is the impact of female reservation on the elected officeholder's qualification, relative to opening the same office to either sex. An open seat can elect a woman. Comparing female and male winners would answer a different question, as would comparing all candidates rather than the people elected.
+
+The main education outcome is an indicator for a completed university degree or above. Its mean is the graduate share. Illiteracy describes the lower end of the same education distribution and appears alongside graduate share in the appendix. These indicators are mutually exclusive but not exhaustive: a literate non-graduate belongs to neither. Their estimates must not be counted as independent measures of quality or independent studies. Unknown qualifications remain missing.
+
+Separate linear regressions for these binary outcomes estimate changes in their shares; they do not assume that the outcomes are statistically independent. On an identical sample with identical controls, coefficients for a complete set of education categories would sum to zero. Testing a change in the entire education distribution would require a joint test that accounts for the covariance across category estimates. The paper reports pointwise intervals for individual shares, without making that joint claim.
+
+## Specification and inference
 
 For each rural state, election and office, the analysis estimates
 
@@ -50,9 +78,9 @@ For each rural state, election and office, the analysis estimates
 Y_i = \alpha + \beta R_i + \gamma_{g(i)} + \delta_{c(i)} + \epsilon_i,
 \]
 
-where $R_i$ records female seat reservation, $\gamma_{g(i)}$ controls for geography and $\delta_{c(i)}$ for caste reservation. Geography is the block when it is populated throughout the relevant slice, and otherwise the district. The district and block together identify a block. Standard errors are clustered at the geographic-control level. All reported intervals are pointwise 95% intervals from `fixest`, using its default small-sample adjustment. They do not adjust for testing several offices or outcomes.
+where $R_i$ records female seat reservation, $\gamma_{g(i)}$ controls for geography and $\delta_{c(i)}$ for caste reservation. Geography is the block when it is populated throughout the relevant slice, and otherwise the district. The district and block together identify a block. Standard errors are clustered at the geographic-control level. All reported intervals are pointwise 95% intervals from `fixest`, with its small-sample variance adjustment and a Student $t$ critical value based on the number of clusters minus one. They do not adjust for testing several offices or outcomes. Kerala's village and district-member regressions have only `r num(get_result("Kerala", 2020, "gp_ward")$clusters)` district clusters. Their intervals use a few-cluster approximation and warrant particular caution.
 
-The coefficient $\beta$ is an adjusted reserved-versus-open difference. Its causal interpretation requires conditional comparability of reservation assignments and adequate outcome coverage. Geographic and caste controls alone do not verify that requirement. No lottery or discontinuity design is claimed for these administrative-data regressions. Mumbai uses administrative-ward and council effects, with standard errors clustered by electoral ward.
+For the binary education outcome, $100\beta$ is the adjusted reserved-minus-open difference in percentage points. The linear model describes this difference without imposing equal distances between school qualifications. Its causal interpretation requires conditional comparability of reservation assignments and adequate outcome coverage. Geographic and caste controls alone do not verify that requirement. No lottery or discontinuity design is claimed for these administrative-data regressions. Mumbai uses administrative-ward and council effects, with standard errors clustered by electoral ward. That specification does not include caste-reservation controls, so its adjustment set differs from the rural models.
 
 The administrative inputs flow from state election repositories through [local_reservations](https://github.com/in-rolls/local_reservations). The analysis records input hashes, winner selection, exclusions, outcome classification and regression samples. Bihar's winners are inferred from unique highest recorded votes or sole uncontested candidacies. UP's earlier files report elected pradhans; its latest candidate file marks winners. Rajasthan links nomination characteristics to results. Kerala records elected ward members, including those who subsequently hold council leadership positions. The reservation variable for those records refers to their ward, not the presidency.
 
@@ -64,14 +92,6 @@ The administrative inputs flow from state election repositories through [local_r
 knitr::include_graphics(normalizePath("output/rural_heads.png"))
 ```
 
-```{r rural-heads-table, results='asis'}
-heads <- rural %>% filter(tier == "gp_head", outcome == "graduate_plus") %>%
-  mutate(Election = paste(state, year), Difference = fmt(estimate * 100),
-         `95% CI` = paste0("[", fmt(conf_low * 100), ", ", fmt(conf_high * 100), "]"), N = num(n)) %>%
-  select(Election, Difference, `95% CI`, N)
-kable(heads, caption = "Rural village heads: graduate-share differences in percentage points.", booktabs = TRUE)
-```
-
 UP's graduate-share gap is `r contrast(get_result("Uttar Pradesh", 2010, "gp_head"))` in 2010, `r contrast(get_result("Uttar Pradesh", 2015, "gp_head"))` in 2015, and `r contrast(get_result("Uttar Pradesh", 2021, "gp_head"))` in 2021. These are separate election samples. Changes in their coefficients do not by themselves identify learning, convergence or an effect of repeated reservation.
 
 Rajasthan's estimate is `r contrast(get_result("Rajasthan", 2020, "gp_head"))`. Its source includes many qualifications labelled "Other", which remain unclassified. The estimate therefore describes winners whose graduate status can be classified. Allowing every missing qualification to take either degree status puts the adjusted difference for all eligible winners between `r fmt(raj_bounds$all_winners_lower * 100)` and `r fmt(raj_bounds$all_winners_upper * 100)` percentage points. These data alone do not determine its direction.
@@ -80,11 +100,11 @@ Rajasthan's estimate is `r contrast(get_result("Rajasthan", 2020, "gp_head"))`. 
 
 Bihar provides evidence across village, block and district offices. Its analysis includes `r num(bihar_n$analysis_winners)` elected seats after excluding ambiguous candidate serials. Unknown education remains missing. Implausible or missing ages do not remove a winner from education regressions.
 
-```{r bihar-plot, fig.cap="Bihar 2016: education of elected officials by office. Points are reserved-minus-open differences with block and caste-reservation controls, except district council members, who use districts. Bars are pointwise 95% confidence intervals clustered at that geographic level. Unknown education and ambiguous winner records are excluded. Source: Bihar SEC candidate records through the central election repository."}
+```{r bihar-plot, fig.cap="Bihar 2016: graduate-share differences by office. Points are reserved-minus-open differences with block and caste-reservation controls, except district council members, who use districts. Bars are pointwise 95% confidence intervals clustered at that geographic level. Unknown education and ambiguous winner records are excluded. Source: Bihar SEC candidate records through the central election repository."}
 knitr::include_graphics(normalizePath("output/bihar_2016/education.png"))
 ```
 
-The graduate-share estimate is negative in every office. Illiteracy is higher in reserved seats, although the district-council estimate is imprecise. The separate age regressions describe younger winners under reservation; age is not treated as an ordinal measure of quality.
+The graduate-share estimate is negative in every office. The appendix reports illiteracy alongside graduate share as another part of the education distribution. Separate age regressions describe younger winners under reservation.
 
 ## Kerala by election and office
 
@@ -115,19 +135,15 @@ The graduate-share difference is `r contrast(mg)`. The pending-case difference i
 
 The earlier Rajasthan municipal comparison and Kerala's urban descriptive tables belong to this urban evidence, not the rural estimates above. Rajasthan's category "high school or less" includes the twelfth standard; Mumbai's ends at the tenth. Those levels cannot be pooled as a common outcome. The historical tables remain available in the evidence archive, with their original denominators and qualifications.
 
-# What the existing studies establish
+# Discussion
 
-Lower schooling and less experience under reservation appear in several rural studies. In the 2001 working paper's West Bengal sample, reserved council heads have 7.13 rather than 9.92 years of schooling, a difference of −2.79 years (SE 0.54); 11% rather than 43% had previously been elected to the council [@cd, Table 3]. In the subsequent Birbhum council term, the adjusted schooling gap is −2.10 years (SE 0.55), and reserved leaders are 26.5 percentage points more likely to be first-time pradhans (SE 6.8) [@beaman, Table II, column 6]. These samples overlap geographically and are not independent national tests.
+The clearest negative education differences occur among rural village heads in Bihar and UP. Rajasthan's missing qualifications prevent an all-winner conclusion. Kerala supplies evidence on different offices, with smaller ward-member estimates and wider uncertainty about their signs. Mumbai supplies an urban comparison in which the graduate-share estimate is positive but imprecise, while the pending-case estimate is negative. The paper does not estimate an urban-rural difference or a national average.
 
-The May 2007 southern-state draft, published in 2008, reports −2.62 years of schooling (SE 0.77) and a political-knowledge gap of −1.41 points (SE 0.29). That regression excludes caste-reserved councils [@ban, Table 9]. Karnataka's descriptive comparison reports degrees among none of the 23 reserved female presidents and among 19% of the 48 male presidents. Illiteracy is 9% and 4%, respectively; the comparison also conditions on the leader's gender, so it is not a clean reservation contrast [@raabe, Tables 3–4].
+A quantitative synthesis would need a common outcome and office, comparable reservation contrasts, and an accounting of shared samples. Schooling years, graduate shares, political knowledge and same-gender selection scores cannot be averaged as though they measured the same quantity. Multiple education thresholds from one sample also do not create independent evidence. The current evidence supports an organized comparison; a pooled reservation-effect estimate requires further harmonization.
 
-The 2011 working paper on the NCAER village panel, published in 2015, reports illiteracy of 24.72% in reserved observations versus 5.74% in unreserved observations, secondary education or above of 28.65% versus 62.69%, and previous officeholding of 11.67% versus 24.24%. These are descriptive comparisons across 180 reserved and 459 unreserved observations [@deininger, Table 3]. The 2013 Andhra Pradesh working paper, published in 2017, reports that 15% of reserved heads versus 54% of unreserved heads have higher-secondary schooling or more; 11% versus 22% have prior political experience. The characteristics table covers 128 reserved and 169 unreserved heads [@afridi, Table 2].
+\clearpage
 
-Recent studies require additional distinctions. The September 2022 Karnataka candidate draft reports lower absolute qualification distributions under reservation [@mori, Figure 2 and Table 3]. The published article reports stronger cognitive selection relative to the eligible female population [@moripublished]. That relative benchmark does not establish that reservation increases the elected elite's absolute qualifications. It also concerns candidates. The March 2026 Bihar threshold draft reports standardized schooling effects of −0.765 SD for candidates (SE 0.024; N=44,583) and −0.921 SD for winners (SE 0.073; N=3,294). Substituting husbands' schooling gives −0.147 SD and −0.364 SD, respectively [@bamezai, Table 7]. Spousal schooling does not reveal who governs.
-
-Favorable judgments about participation, voter attitudes or policy performance address different outcomes. They can coexist with lower schooling among entrants. Likewise, a positive selection score relative to same-gender citizens can coexist with lower absolute schooling. A synthesis of the reservation effect must keep the outcome, elected status, comparison group and office fixed before combining estimates. The studies reviewed here do not yet supply a harmonized meta-analysis.
-
-# Measurement and reproducibility
+# Appendix: measurement and reproducibility
 
 ```{r missingness, results='asis'}
 coverage <- bind_rows(lapply(c("uttar_pradesh", "rajasthan", "kerala"), function(state) {
@@ -163,11 +179,16 @@ kable(bound_table, caption = "Missing-education bounds on the adjusted all-winne
 
 ```{r complete-results, results='asis'}
 for (state in unique(rural$state)) {
-  cat("\n\n## ", state, "\n\n", sep = "")
-  print(result_table(filter(rural, .data$state == .env$state),
-                     paste(state, "rural officials. Graduate and illiterate: percentage points; age: years. 95% intervals clustered by geography; caste controls included.")))
+  cat("\n\n## ", state, ": education\n\n", sep = "")
+  print(education_table(filter(rural, .data$state == .env$state),
+    paste(state, "rural officials: two parts of the education distribution.",
+          "Differences in percentage points with pointwise 95% confidence intervals.",
+          "N: classified winners; G: geographic clusters. Caste controls included.",
+          if (state == "Kerala") "Illiteracy is unavailable." else "")))
   cat("\n\n")
 }
+cat("\n\n## Age\n\n")
+print(age_table(rural))
 ```
 
 # References {-}

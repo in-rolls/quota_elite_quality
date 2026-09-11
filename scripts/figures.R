@@ -42,14 +42,13 @@ save_evidence(
   "output/kerala/education", 9, 3.4
 )
 bihar_plot <- bihar |>
-  filter(outcome != "age") |>
+  filter(outcome == "graduate_plus") |>
   mutate(
-    label = factor(office_labels[tier], levels = rev(unname(office_labels))),
-    outcome = recode(outcome, graduate_plus = "Graduate or above", illiterate = "Illiterate")
+    label = factor(office_labels[tier], levels = rev(unname(office_labels)))
   )
 save_evidence(
-  interval_plot(bihar_plot, "Bihar 2016: elected officials") + facet_wrap(~outcome),
-  "output/bihar_2016/education", 9, 4.5
+  interval_plot(bihar_plot, "Bihar 2016: graduate or above"),
+  "output/bihar_2016/education", 7, 4.2
 )
 mumbai <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE) |>
   filter(outcome %in% c("educ_grad_plus", "any_criminal")) |>

@@ -44,6 +44,14 @@ testthat::test_that("new state estimates agree with explicit fixed-effect OLS", 
     testthat::expect_equal(unname(coef(m)["quota"]), results$estimate, tolerance = 1e-8)
     testthat::expect_equal(nobs(m), results$n)
     testthat::expect_equal(dplyr::n_distinct(d[[results$geography]]), results$clusters)
+    controls <- as.formula(paste("quota ~ factor(", results$geography, ") + factor(caste_reservation)"))
+    x <- residuals(lm(controls, data = d))
+    scores <- tapply(x * residuals(m), d[[results$geography]], sum)
+    groups <- results$clusters
+    parameters <- 1 + dplyr::n_distinct(d$caste_reservation)
+    adjustment <- groups / (groups - 1) * (nrow(d) - 1) / (nrow(d) - parameters)
+    manual_se <- sqrt(adjustment * sum(scores^2)) / sum(x^2)
+    testthat::expect_equal(manual_se, results$se, tolerance = 1e-8)
   }
 })
 
@@ -71,4 +79,43 @@ testthat::test_that("incomplete degrees and ambiguous postgraduate diplomas rema
     "P G DIPLOMA IN CLINICAL NUTRITION", "L L B,HRM( P G DIPLOMA)"
   ), "kerala")
   testthat::expect_equal(d$graduate_plus, c(NA_integer_, NA_integer_, NA_integer_, NA_integer_, 1L))
+})
+
+
+testthat::test_that("education indicators describe disjoint categories on the same sample", {
+  for (state in c("bihar_2016", "uttar_pradesh", "rajasthan")) {
+    d <- read_parquet(file.path("output", state, "winners.parquet"))
+    testthat::expect_identical(is.na(d$graduate_plus), is.na(d$illiterate))
+    known <- !is.na(d$graduate_plus)
+    middle <- 1 - d$graduate_plus[known] - d$illiterate[known]
+    testthat::expect_true(all(middle %in% 0:1))
+  }
+})
+
+testthat::test_that("all reported intervals use cluster rather than observation degrees of freedom", {
+  rural <- read_csv("output/rural_estimates.csv", show_col_types = FALSE)
+  mumbai <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE) |>
+    rename(estimate = coef_quota)
+  d <- bind_rows(rural, mumbai)
+  critical <- qt(0.975, df = d$clusters - 1)
+  testthat::expect_equal(d$conf_low, d$estimate - critical * d$se, tolerance = 1e-10)
+  testthat::expect_equal(d$conf_high, d$estimate + critical * d$se, tolerance = 1e-10)
+  testthat::expect_equal(d$p, 2 * pt(-abs(d$estimate / d$se), df = d$clusters - 1), tolerance = 1e-10)
+})
+
+
+testthat::test_that("Mumbai education and cases agree with explicit OLS and clustered covariance", {
+  d <- as.data.frame(read_parquet("output/mumbai/winners.parquet"))
+  results <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE)
+  x <- residuals(lm(quota ~ factor(adminward) + factor(council), data = d))
+  for (outcome in c("educ_grad_plus", "any_criminal")) {
+    m <- lm(as.formula(paste(outcome, "~ quota + factor(adminward) + factor(council)")), data = d)
+    row <- results |> filter(.data$outcome == .env$outcome)
+    scores <- tapply(x * residuals(m), d$ward_no, sum)
+    groups <- dplyr::n_distinct(d$ward_no)
+    adjustment <- groups / (groups - 1) * (nrow(d) - 1) / (nrow(d) - m$rank)
+    manual_se <- sqrt(adjustment * sum(scores^2)) / sum(x^2)
+    testthat::expect_equal(unname(coef(m)["quota"]), row$coef_quota, tolerance = 1e-9)
+    testthat::expect_equal(manual_se, row$se, tolerance = 1e-9)
+  }
 })
