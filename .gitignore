@@ -4,3 +4,13 @@
 .Ruserdata
 .DS_Store
 data/
+renv/library/
+renv/staging/
+evidence/sources/
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.out
+manuscript/*.tex
+manuscript/*.knit.md
+manuscript/*.utf8.md
+manuscript/*_files/

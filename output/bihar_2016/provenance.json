@@ -1,7 +1,7 @@
 {
   "source_files": {
-    "candidates_bihar.parquet": "6deab80b25ac050b2beb49506e5a6082bad1e4e960602e6774f7fe6750390cee",
-    "master_bihar.parquet": "ca13d31a6bf07333b6a5e3a3a93075943883fa1cf5928d20b5e891b26f127bb5"
+    "candidates_bihar.parquet": "784f72f7538b2fc22a7b1228802693a861c4744dfaad113ac5fb468181a105d1",
+    "master_bihar.parquet": "c632a1f7459b70b9e2d36cc5fb1a7c0aca5f807831db82d4181c662ee6528613"
   },
   "candidate_records": 644507,
   "seat_records": 219117,

@@ -30,7 +30,7 @@ write_md <- function(x, file, caption) {
   print(kable(x, format = "pipe", digits = 3))
 }
 
-d <- read_csv(ratings_path, show_col_types = FALSE, guess_max = 2000) %>%
+d <- read_csv(ratings_path, show_col_types = FALSE, guess_max = 2000) |>
   mutate(
     council = as.integer(council),
     quota = as.integer(woman_reserved),
@@ -41,43 +41,32 @@ d <- read_csv(ratings_path, show_col_types = FALSE, guess_max = 2000) %>%
 
 # The deposit's quota flag: 76 women's seats in the 2007 council (one third),
 # 114 from 2012 (one half). Wrong counts would mean a miscoded treatment.
-counts <- d %>% group_by(council, survey_year) %>% summarise(quota = sum(quota), .groups = "drop")
+counts <- d |>
+  group_by(council, survey_year) |>
+  summarise(quota = sum(quota), .groups = "drop")
 print(counts)
 stopifnot(all(counts$quota[counts$council == 2007] == 76))
 stopifnot(all(counts$quota[counts$council >= 2012] == 114))
 
-normalize_educ <- function(x) str_squish(gsub("\\(.*?\\)", "", gsub("\\.", "", tolower(x))))
-recode_educ_mumbai <- function(e) {
-  if (is.na(e) || e == "") return("Unknown")
-  if (str_detect(e, "^(upto )?(fourth|fifth|sixth|seventh|eighth|ninth)$")) return("Below 10th")
-  if (str_detect(e, "^(ssc|upto ssc|matriculation|ssc, dme)$")) return("10th (SSC)")
-  if (str_detect(e, paste0(
-    "^(hsc|upto hsc|eleventh|upto twelfth|inter arts|fyjc|thirteenth|fourteenth|fybcom|fyba|",
-    "sybcom|syba|ty bio -technology|under graduate|iti diploma|technical diploma|diploma in .*|",
-    "dme|nctvt|d ?ed|dpharm|dhms|civil engineering)$"
-  ))) return("11th to some college / diploma")
-  if (str_detect(e, paste0(
-    "^(b ?com|bcom.*|ba|ba.*|bsc.*|graduate|be.*|barch|bams|bums|bhms|bafa|tybcom|bms.*|",
-    "ba llb|bcom, llb|bachelor of dental surgery|lceh)$"
-  ))) return("Bachelor's")
-  if (str_detect(e, "^(post graduate|ma|mms|mbbs|md.*|phd)$")) return("Master's / professional")
-  "Other"
-}
-d <- d %>% mutate(
+source("R/mumbai.R")
+d <- d |> mutate(
   educ5 = map_chr(normalize_educ(councillor_education), recode_educ_mumbai),
   educ_hs_or_less = as.integer(educ5 %in% c("Below 10th", "10th (SSC)")),
   educ_grad_plus = as.integer(educ5 %in% c("Bachelor's", "Master's / professional"))
 )
 cat("\nEducation strings not matched (should be empty):\n")
-print(d %>% filter(educ5 == "Other") %>% count(councillor_education, sort = TRUE))
+print(d |> filter(educ5 == "Other") |> count(councillor_education, sort = TRUE))
 
 # One row per councillor spell: affidavit fields repeat across the waves of a term.
-cand <- d %>% filter(!is.na(councillor_age)) %>%
-  group_by(councillor_spell_id) %>% slice_min(survey_year, n = 1, with_ties = FALSE) %>% ungroup()
+cand <- d |>
+  filter(!is.na(councillor_age)) |>
+  group_by(councillor_spell_id) |>
+  slice_min(survey_year, n = 1, with_ties = FALSE) |>
+  ungroup()
 
-quality_tab <- cand %>%
-  mutate(seat = if_else(quota == 1, "Reserved for women", "Open")) %>%
-  group_by(council, seat) %>%
+quality_tab <- cand |>
+  mutate(seat = if_else(quota == 1, "Reserved for women", "Open")) |>
+  group_by(council, seat) |>
   summarise(
     n = n(),
     `share female` = mean(female),
@@ -88,17 +77,40 @@ quality_tab <- cand %>%
     `mean criminal cases` = mean(councillor_criminal_cases, na.rm = TRUE),
     .groups = "drop"
   )
-write_md(quality_tab, "tab_quality.md",
-  "Who gets elected in Mumbai: councillors by seat type and council (affidavit data; none for the 2007 council).")
+write_md(
+  quality_tab, "tab_quality.md",
+  "Who gets elected in Mumbai: councillors by seat type and council (affidavit data; none for the 2007 council)."
+)
 
 quality_reg <- map_dfr(
   c("educ_hs_or_less", "educ_grad_plus", "councillor_age", "any_criminal"),
   function(y) {
     m <- feols(as.formula(paste(y, "~ quota | adminward + council")), data = cand, cluster = ~ward_no)
-    tibble(outcome = y, coef_quota = coef(m)[["quota"]], se = se(m)[["quota"]],
-      p = pvalue(m)[["quota"]], n = nobs(m))
+    ci <- as.numeric(confint(m, "quota"))
+    tibble(
+      outcome = y, coef_quota = coef(m)[["quota"]], se = se(m)[["quota"]],
+      conf_low = ci[1], conf_high = ci[2],
+      p = pvalue(m)[["quota"]], n = nobs(m), clusters = n_distinct(cand$ward_no)
+    )
   }
 )
-write_md(quality_reg, "tab_quality_reg.md",
-  "Reserved-seat effect on councillor characteristics, administrative-ward and council fixed effects, SE clustered by ward.")
+write_md(
+  quality_reg, "tab_quality_reg.md",
+  paste(
+    "Reserved-seat effect on councillor characteristics;",
+    "administrative-ward and council effects, SE clustered by ward."
+  )
+)
 cat("\nDone. Outputs in", out_dir, "\n")
+
+write_csv(quality_tab, file.path(out_dir, "descriptive.csv"))
+write_csv(quality_reg, file.path(out_dir, "regressions.csv"))
+arrow::write_parquet(
+  cand |> select(
+    councillor_spell_id,
+    council, quota, adminward, ward_no, educ5, educ_hs_or_less,
+    educ_grad_plus, councillor_age, any_criminal
+  ),
+  file.path(out_dir, "winners.parquet"),
+  compression = "zstd"
+)

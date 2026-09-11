@@ -1,0 +1,10 @@
+citation,artifact,source_url,version,location,rendering,artifact_sha256
+cd,chattopadhyay_duflo_2001_table_3.png,https://www.nber.org/system/files/working_papers/w8615/w8615.pdf,December 2001,"Table 3, panel A",existing excerpt,cf7a5ff8759edf2b9744229481964d88eecd83940743bc9e7885ae53fe5e511b
+ban,ban_rao_2007_table_9.png,https://vijayendrarao.org/papers/EDCC_Reservations_to_go.pdf,May 2007,Table 9,existing excerpt,103645d07cd8cc18478b50a0a623ac1b7e508a48f195ca4ca5a6a519f87ef3eb
+raabe,raabe_2009_table_4.png,https://cgspace.cgiar.org/server/api/core/bitstreams/c85053d0-fd33-400a-b7bb-05a04874175f/content,2009,Table 4,existing excerpt,61da4e3920e4d745cf886b4140ff2163b5b6852242e8f8d7631a034a4d2dc833
+beaman,beaman_2009_table_2.png,https://www.povertyactionlab.org/sites/default/files/research-paper/310%20Female%20Quotas%20Nov%2009.pdf,published 2009,"Table II, printed p.1507","PDF page 11 rotated 90 degrees, rendered at 2.2x",0aff7c63a734bff91b3497462ee4ad0d0413b07e610924cbd93e653e862f73f2
+deininger,deininger_2011_table_3.png,https://documents1.worldbank.org/curated/en/595231468040603055/pdf/WPS5708.pdf,June 2011,"Table 3, printed p.22","PDF page 24, rendered at 1600px",cbd53d6a7594446bac7a7349d97094e7716c9e3cdbd098df64a56f506d309732
+afridi,afridi_2013_table_2.png,https://docs.iza.org/dp7212.pdf,February 2013,"Table 2, printed p.38","PDF page 40, rendered at 1600px",9e4a98ff0bc66956db35e26c689303aef645f6b7c377d488e5e335bd0e8e1303
+mori,mori_2022_figure_2.png,https://www.isid.ac.in/~epu/acegd2022/papers/Yuko_Mori.pdf,September 15 2022,"Figure 2, cognitive and reading panels","PDF page 24, rendered at 1800px",f2f74deb5f9575a1abc82063d8b02d72119773e8ae69542f4deb1eb78ad66123
+bamezai,bamezai_2026_table_7.png,https://www.mrsharan.com/papers/political-selection.pdf,March 26 2026,"Table 7, p.44",existing excerpt,143d447e48b3dd640bef544aab6ac35c81e62280167e9aec18594ec416da350d
+mori,mori_2022_figure_2_education.png,https://www.isid.ac.in/~epu/acegd2022/papers/Yuko_Mori.pdf,September 15 2022,"Figure 2, education and self-assessed leadership panels","PDF page 25, rendered at 1.8x",85b739ef6d061f6c649123abcdd7f311f11038af2a8394e005363f2152e58dd7

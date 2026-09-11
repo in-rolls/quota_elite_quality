@@ -1,0 +1,101 @@
+year,tier,education_raw,graduate_plus,education_rule,records
+2010,gp_head,Graduate,1,recognized qualification,5569
+2010,gp_head,High School,0,recognized qualification,7669
+2010,gp_head,Illiterate,0,recognized qualification,2789
+2010,gp_head,Intermediate,0,recognized qualification,6951
+2010,gp_head,Junior High School,0,recognized qualification,6545
+2010,gp_head,Literate,0,recognized qualification,13453
+2010,gp_head,Postgraduate,1,recognized qualification,1871
+2010,gp_head,Primary,0,recognized qualification,6748
+2010,gp_head,"इण्टर
+  जूनियर हाई स्कूल",NA,unclassified,1
+2010,gp_head,"इण्टर
+  साक्षर",NA,unclassified,1
+2010,gp_head,"इण्टर 
+जूनियर हाई स्कूल",NA,unclassified,1
+2010,gp_head,"इण्टर 
+प्राईमरी",NA,unclassified,1
+2010,gp_head,इण्टर ग्राम,NA,unclassified,1
+2010,gp_head,जूनियर,NA,unclassified,1
+2010,gp_head,जूनियर हाई,NA,unclassified,3
+2010,gp_head,"जूनियर हाई स्कूल
+  स्नातक",NA,unclassified,1
+2010,gp_head,"जूनियर हाई स्कूल
+  हाई स्कूल
+  साक्षर",NA,unclassified,1
+2010,gp_head,"जूनियर हाई स्कूल 
+प्राईमरी",NA,unclassified,1
+2010,gp_head,"जूनियर हाई स्कूल 
+साक्षर",NA,unclassified,1
+2010,gp_head,"जूनियर हाई स्कूल 
+हाई स्कूल",NA,unclassified,2
+2010,gp_head,जूनियर हाई स्कूल जूनियर हाई स्कूल,NA,unclassified,4
+2010,gp_head,"निरक्षर
+निरक्षर",NA,unclassified,1
+2010,gp_head,"निरक्षर
+प्राईमरी",NA,unclassified,3
+2010,gp_head,"निरक्षर
+साक्षर",NA,unclassified,1
+2010,gp_head,"निरक्षर
+हाई स्कूल",NA,unclassified,1
+2010,gp_head,परास्नातक,1,recognized qualification,1
+2010,gp_head,"परास्नातक
+  जूनियर हाई स्कूल",NA,unclassified,1
+2010,gp_head,"परास्नातक
+ प्राईमरी",NA,unclassified,1
+2010,gp_head,"परास्नातक 
+हाई स्कूल",NA,unclassified,1
+2010,gp_head,"परास्नातक  
+  स्नातक",NA,unclassified,1
+2010,gp_head,पिछड़ी जाति,NA,unclassified,1
+2010,gp_head,"प्राईमरी
+  जूनियर हाई स्कूल",NA,unclassified,2
+2010,gp_head,"प्राईमरी
+  निरक्षर",NA,unclassified,1
+2010,gp_head,"प्राईमरी
+निरक्षर",NA,unclassified,2
+2010,gp_head,"प्राईमरी 
+जूनियर हाई स्कूल",NA,unclassified,1
+2010,gp_head,प्राईमरी ग्राम,NA,unclassified,1
+2010,gp_head,मटेहॅू,NA,unclassified,1
+2010,gp_head,रहाई स्कूल,NA,unclassified,1
+2010,gp_head,"साक्षर
+  निरक्षर",NA,unclassified,1
+2010,gp_head,"साक्षर
+ निरक्षर",NA,unclassified,1
+2010,gp_head,"साक्षर
+ साक्षर",NA,unclassified,1
+2010,gp_head,"साक्षर
+इण्टर",NA,unclassified,1
+2010,gp_head,"साक्षर
+साक्षर",NA,unclassified,1
+2010,gp_head,"साक्षर 
+हाई स्कूल",NA,unclassified,1
+2010,gp_head,स्नातक,1,recognized qualification,1
+2010,gp_head,"स्नातक
+  इण्टर",NA,unclassified,2
+2010,gp_head,"स्नातक
+ साक्षर",NA,unclassified,1
+2010,gp_head,"स्नातक
+निरक्षर",NA,unclassified,1
+2010,gp_head,हाई स्कूल,NA,unclassified,1
+2010,gp_head,NA,NA,missing or unspecified,214
+2015,gp_head,इंटर,0,recognized qualification,6798
+2015,gp_head,जूनियर हाईस्कूल,0,recognized qualification,7915
+2015,gp_head,निरक्षर,0,recognized qualification,5686
+2015,gp_head,परास्नातक,1,recognized qualification,2156
+2015,gp_head,पी० एच० डी०,1,recognized qualification,21
+2015,gp_head,प्राईमरी,0,recognized qualification,23562
+2015,gp_head,स्नातक,1,recognized qualification,6062
+2015,gp_head,हाईस्कूल,0,recognized qualification,6819
+2021,gp_head,अन्य,NA,unclassified,2509
+2021,gp_head,इंटर,0,recognized qualification,7243
+2021,gp_head,जूनियर हाईस्कूल,0,recognized qualification,4929
+2021,gp_head,डिप्लोमा,NA,unclassified,34
+2021,gp_head,निरक्षर,0,recognized qualification,5410
+2021,gp_head,परास्नातक,1,recognized qualification,2143
+2021,gp_head,पी० एच० डी०,1,recognized qualification,40
+2021,gp_head,प्राईमरी,0,recognized qualification,15097
+2021,gp_head,स्नातक,1,recognized qualification,5934
+2021,gp_head,हाईस्कूल,0,recognized qualification,6432
+2021,gp_head,NA,NA,missing or unspecified,1

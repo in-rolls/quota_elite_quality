@@ -1,0 +1,13 @@
+year,tier,education_raw,graduate_plus,education_rule,records
+2020,gp_head,5th,0,recognized qualification,1691
+2020,gp_head,8th,0,recognized qualification,1302
+2020,gp_head,Graduate,1,recognized qualification,1357
+2020,gp_head,Higher Secondary,0,recognized qualification,1173
+2020,gp_head,Illiterate,0,recognized qualification,4
+2020,gp_head,Other,NA,missing or unspecified,3135
+2020,gp_head,PostGraduate,1,recognized qualification,516
+2020,gp_head,Professional Graduate,1,recognized qualification,102
+2020,gp_head,Professional Post Graduate,1,recognized qualification,47
+2020,gp_head,Secondary,0,recognized qualification,1525
+2020,gp_head,literate,0,recognized qualification,31
+2020,gp_head,NA,NA,missing or unspecified,421

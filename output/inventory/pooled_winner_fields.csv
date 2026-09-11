@@ -1,0 +1,43 @@
+state,year,tier,column,records,reservation_present,named_winner
+Kerala,2010,block_member,winner_age,1996,1996,1996
+Kerala,2010,block_member,winner_education,1977,1977,1977
+Kerala,2010,block_member,winner_occupation,1692,1692,1692
+Kerala,2010,gp_ward,winner_age,14979,14979,14979
+Kerala,2010,gp_ward,winner_education,15726,15726,15726
+Kerala,2010,gp_ward,winner_occupation,14029,14029,14029
+Kerala,2010,zp_member,winner_age,331,331,331
+Kerala,2010,zp_member,winner_education,317,317,317
+Kerala,2010,zp_member,winner_occupation,241,241,241
+Kerala,2015,block_member,winner_age,2062,2062,2062
+Kerala,2015,block_member,winner_education,1878,1878,1878
+Kerala,2015,block_member,winner_occupation,1660,1660,1660
+Kerala,2015,gp_ward,winner_age,15921,15921,15921
+Kerala,2015,gp_ward,winner_education,14589,14589,14589
+Kerala,2015,gp_ward,winner_occupation,12725,12725,12725
+Kerala,2015,zp_member,winner_age,331,331,331
+Kerala,2015,zp_member,winner_education,316,316,316
+Kerala,2015,zp_member,winner_occupation,240,240,240
+Kerala,2020,block_member,winner_age,2078,2078,2078
+Kerala,2020,block_member,winner_education,1908,1908,1908
+Kerala,2020,block_member,winner_occupation,1638,1638,1638
+Kerala,2020,gp_ward,winner_age,15952,15952,15952
+Kerala,2020,gp_ward,winner_education,13953,13953,13953
+Kerala,2020,gp_ward,winner_occupation,12298,12298,12298
+Kerala,2020,zp_member,winner_age,331,331,331
+Kerala,2020,zp_member,winner_education,301,301,301
+Kerala,2020,zp_member,winner_occupation,217,217,217
+Rajasthan,2020,gp_head,winner_age,11128,11128,11128
+Rajasthan,2020,gp_head,winner_education,10883,10883,10883
+Rajasthan,2020,gp_head,winner_occupation,11128,11128,11128
+Rajasthan,2021,gp_head,winner_age,79,79,79
+Rajasthan,2021,gp_head,winner_education,79,79,79
+Rajasthan,2021,gp_head,winner_occupation,79,79,79
+Rajasthan,2022,gp_head,winner_age,50,50,50
+Rajasthan,2022,gp_head,winner_education,50,50,50
+Rajasthan,2022,gp_head,winner_occupation,50,50,50
+Uttar Pradesh,2010,gp_head,winner_age,51718,51686,51712
+Uttar Pradesh,2010,gp_head,winner_education,51647,51616,51642
+Uttar Pradesh,2015,gp_head,winner_education,59019,59019,59019
+Uttar Pradesh,2021,gp_head,criminal_history,49772,49772,49771
+Uttar Pradesh,2021,gp_head,immovable_property,49772,49772,49771
+Uttar Pradesh,2021,gp_head,movable_property,49772,49772,49771

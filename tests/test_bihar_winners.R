@@ -8,8 +8,8 @@ testthat::test_that("unknown schooling never becomes observed non-graduate or li
 })
 
 testthat::test_that("absorbed effects match explicit OLS and clustered score sums", {
-  d <- read_parquet("output/bihar_2016/winners.parquet") %>%
-    filter(tier == "gp_head", !is.na(graduate_plus), !is.na(block_id)) %>%
+  d <- read_parquet("output/bihar_2016/winners.parquet") |>
+    filter(tier == "gp_head", !is.na(graduate_plus), !is.na(block_id)) |>
     as.data.frame()
   explicit <- lm(graduate_plus ~ quota + block_id + caste_reservation, data = d)
   absorbed <- feols(graduate_plus ~ quota | block_id + caste_reservation,
@@ -24,7 +24,7 @@ testthat::test_that("absorbed effects match explicit OLS and clustered score sum
     tolerance = 1e-9
   )
   testthat::expect_equal(manual_se, unname(se(absorbed)["quota"]), tolerance = 1e-9)
-  saved <- read_csv("output/bihar_2016/regressions.csv", show_col_types = FALSE) %>%
+  saved <- read_csv("output/bihar_2016/regressions.csv", show_col_types = FALSE) |>
     filter(tier == "gp_head", outcome == "graduate_plus", primary)
   testthat::expect_equal(saved$estimate, unname(coef(explicit)["quota"]), tolerance = 1e-9)
 })

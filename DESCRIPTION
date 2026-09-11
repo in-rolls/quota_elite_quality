@@ -1,0 +1,23 @@
+Package: quotaelitequality
+Title: Female Reservation and the Qualifications of Local Elected Officials
+Version: 0.0.1
+Description: Reproducible analyses and manuscript on female seat reservation and elected officials in India.
+Encoding: UTF-8
+Imports:
+    arrow,
+    digest,
+    dplyr,
+    fixest,
+    ggplot2,
+    jsonlite,
+    knitr,
+    purrr,
+    readr,
+    rmarkdown,
+    stringr,
+    tidyr
+Suggests:
+    lintr,
+    renv,
+    styler,
+    testthat

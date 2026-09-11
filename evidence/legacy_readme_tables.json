@@ -1,0 +1,716 @@
+{
+  "source_commit": "86f7339",
+  "status": "transcribed from prior README; not new estimates",
+  "tables": [
+    {
+      "columns": [
+        "Study and sample",
+        "Education",
+        "Knowledge, experience and other findings"
+      ],
+      "rows": [
+        [
+          "Chattopadhyay and Duflo (2001 working paper; published 2004). West Bengal; 161 council heads.[^cd]",
+          "7.13 versus 9.92 years of schooling; difference **−2.79 years** (SE 0.54).",
+          "**11% versus 43%** had been elected to the council before 1998. Means from Table 3, panels A and B."
+        ],
+        [
+          "Ban and Rao (2008; figures from the May 2007 draft). Four southern states; 106 presidents in the adjusted comparison.[^ban]",
+          "**−2.62 years** (SE 0.77), adjusted estimate.",
+          "Political-knowledge score **−1.41 points** (SE 0.29), with less political experience. Table 9 excludes caste-reserved councils; it is not restricted to SC/ST seats."
+        ],
+        [
+          "Raabe, Sekher and Birner (2009). Karnataka; 23 reserved female presidents and 48 male presidents in Table 4.[^raabe]",
+          "**0% versus 19%** have a degree or above; **9% versus 4%** are illiterate.",
+          "Descriptive comparison of reserved female presidents with male presidents in seats with or without caste reservation. The sample includes several caste groups (Table 3)."
+        ],
+        [
+          "Beaman et al. (2009). Birbhum, West Bengal; leaders in the 2003 council term.[^beaman]",
+          "**−2.10 years** (SE 0.55), adjusted for block effects.",
+          "**26.5 percentage points more likely** to be a first-time pradhan (SE 6.8). Table II, column 6 compares currently reserved and unreserved councils."
+        ],
+        [
+          "Deininger et al. (2015; figures from the 2011 working paper). NCAER survey of 233 villages, with up to three election rounds.[^deininger]",
+          "**24.72% versus 5.74%** illiterate; **28.65% versus 62.69%** have at least secondary education.",
+          "**11.67% versus 24.24%** previously held political office. Table 3 reports descriptive comparisons, with 180 reserved and 459 unreserved observations."
+        ],
+        [
+          "Afridi, Iversen and Sharan (2017; characteristics from the 2013 working paper). Andhra Pradesh; 297 surveyed council heads with characteristics available.[^afridi]",
+          "**15% versus 54%** have higher-secondary education or more; **9% versus 0%** are illiterate.",
+          "**11% versus 22%** have prior political experience. Table 2 reports means for 128 reserved and 169 unreserved heads."
+        ],
+        [
+          "Mori et al. (2025; distributions and sample from the September 2022 draft). Karnataka's 2020 council election; 218 candidates in 97 constituencies.[^mori]",
+          "The draft's Figure 2 shows lower educational attainment among candidates in women-reserved constituencies.",
+          "The draft reports lower average cognitive and non-cognitive skills among female candidates. Its Figure 2 and Table 3 examine the distributions and selection; no numerical effect from the final article is reported here."
+        ],
+        [
+          "Bamezai et al. (March 2026 working paper). Bihar's 2016 and 2021 elections; reservation effects estimated around population thresholds.[^bamezai]",
+          "Standardized schooling: **−0.765 SD for candidates** (SE 0.024; N=44,583) and **−0.921 SD for winners** (SE 0.073; N=3,294).",
+          "Replacing the woman's schooling with her husband's still gives negative estimates: **−0.147 SD for candidates** (SE 0.031) and **−0.364 SD for winners** (SE 0.089). Table 7; these are education measures, not direct tests of who governs."
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Elected office",
+        "Graduate+ (pp)",
+        "Illiterate (pp)",
+        "Age (years)",
+        "N, education"
+      ],
+      "rows": [
+        [
+          "Mukhiya",
+          "−15.0 (0.8)",
+          "+1.5 (0.3)",
+          "−3.6 (0.2)",
+          "7,908"
+        ],
+        [
+          "Sarpanch",
+          "−12.1 (0.7)",
+          "+4.6 (0.5)",
+          "−5.7 (0.3)",
+          "7,864"
+        ],
+        [
+          "Ward member",
+          "−4.6 (0.2)",
+          "+11.6 (0.4)",
+          "−2.0 (0.1)",
+          "97,278"
+        ],
+        [
+          "Panch",
+          "−2.8 (0.1)",
+          "+14.8 (0.4)",
+          "−2.9 (0.1)",
+          "85,385"
+        ],
+        [
+          "Panchayat samiti member",
+          "−10.7 (0.6)",
+          "+3.2 (0.4)",
+          "−2.7 (0.2)",
+          "10,769"
+        ],
+        [
+          "Zila parishad member",
+          "−13.0 (2.9)",
+          "+1.6 (0.9)",
+          "−4.1 (0.7)",
+          "889"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Reservation Status (Hindi)",
+        "Reservation Status (English)",
+        "Illiterate",
+        "Graduate+",
+        "Mean Age",
+        "N"
+      ],
+      "rows": [
+        [
+          "अनारक्षित",
+          "Unreserved",
+          "0.02",
+          "0.15",
+          "46.86",
+          "17,345"
+        ],
+        [
+          "अनारक्षित(महिला)",
+          "Unreserved (Women)",
+          "0.08",
+          "0.04",
+          "41.35",
+          "13,776"
+        ],
+        [
+          "अनुसूचित जनजाति",
+          "Scheduled Tribe (ST)",
+          "0.01",
+          "0.05",
+          "44.53",
+          "293"
+        ],
+        [
+          "अनुसूचित जनजाति(महिला)",
+          "ST (Women)",
+          "0.05",
+          "0.02",
+          "38.03",
+          "62"
+        ],
+        [
+          "अनुसूचित जाति",
+          "Scheduled Caste (SC)",
+          "0.05",
+          "0.09",
+          "44.78",
+          "3,976"
+        ],
+        [
+          "अनुसूचित जाति(महिला)",
+          "SC (Women)",
+          "0.11",
+          "0.02",
+          "39.31",
+          "2,243"
+        ],
+        [
+          "पिछड़ा वर्ग",
+          "Backward Class (OBC)",
+          "0.03",
+          "0.09",
+          "46.19",
+          "4,654"
+        ],
+        [
+          "पिछड़ा वर्ग(महिला)",
+          "OBC (Women)",
+          "0.10",
+          "0.02",
+          "40.44",
+          "2,683"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Reservation Status (Hindi)",
+        "Reservation Status (English)",
+        "Illiterate",
+        "College+",
+        "N"
+      ],
+      "rows": [
+        [
+          "अनारक्षित",
+          "Unreserved",
+          "0.08",
+          "0.26",
+          "73,410"
+        ],
+        [
+          "अनुसूचित जनजाति",
+          "Scheduled Tribe (ST)",
+          "0.10",
+          "0.19",
+          "620"
+        ],
+        [
+          "अनुसूचित जनजाति महिला",
+          "ST Women",
+          "0.26",
+          "0.23",
+          "699"
+        ],
+        [
+          "अनुसूचित जाति",
+          "Scheduled Caste (SC)",
+          "0.16",
+          "0.15",
+          "26,875"
+        ],
+        [
+          "अनुसूचित जाति महिला",
+          "SC Women",
+          "0.32",
+          "0.09",
+          "17,513"
+        ],
+        [
+          "अन्य पिछड़ा वर्ग",
+          "Other Backward Class (OBC)",
+          "0.11",
+          "0.20",
+          "34,504"
+        ],
+        [
+          "अन्य पिछड़ा वर्ग महिला",
+          "OBC Women",
+          "0.25",
+          "0.12",
+          "20,819"
+        ],
+        [
+          "महिला",
+          "Women",
+          "0.21",
+          "0.15",
+          "32,193"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Reservation Status (Hindi)",
+        "Reservation Status (English)",
+        "Illiterate",
+        "College+",
+        "N"
+      ],
+      "rows": [
+        [
+          "अनारक्षित",
+          "Unreserved",
+          "0.09",
+          "0.17",
+          "126,028"
+        ],
+        [
+          "अनुसूचित जनजाति",
+          "Scheduled Tribe (ST)",
+          "0.11",
+          "0.10",
+          "1,034"
+        ],
+        [
+          "अनुसूचित जनजाति महिला",
+          "ST Women",
+          "0.21",
+          "0.07",
+          "678"
+        ],
+        [
+          "अनुसूचित जाति",
+          "Scheduled Caste (SC)",
+          "0.13",
+          "0.12",
+          "55,808"
+        ],
+        [
+          "अनुसूचित जाति महिला",
+          "SC Women",
+          "0.24",
+          "0.07",
+          "29,993"
+        ],
+        [
+          "अन्य पिछड़ा वर्ग",
+          "Other Backward Class (OBC)",
+          "0.10",
+          "0.15",
+          "64,610"
+        ],
+        [
+          "अन्य पिछड़ा वर्ग महिला",
+          "OBC Women",
+          "0.21",
+          "0.09",
+          "32,028"
+        ],
+        [
+          "महिला",
+          "Women",
+          "0.17",
+          "0.11",
+          "62,917"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Ward Category",
+        "Reservation Status (English)",
+        "HS or Less",
+        "Mean Age",
+        "N"
+      ],
+      "rows": [
+        [
+          "gen women",
+          "General Women",
+          "0.73",
+          "41",
+          "396"
+        ],
+        [
+          "general",
+          "General",
+          "0.64",
+          "42",
+          "870"
+        ],
+        [
+          "obc",
+          "Other Backward Class (OBC)",
+          "0.67",
+          "42",
+          "287"
+        ],
+        [
+          "obc women",
+          "OBC Women",
+          "0.77",
+          "41",
+          "148"
+        ],
+        [
+          "sc",
+          "Scheduled Caste (SC)",
+          "0.67",
+          "40",
+          "203"
+        ],
+        [
+          "sc women",
+          "SC Women",
+          "0.80",
+          "35",
+          "104"
+        ],
+        [
+          "st",
+          "Scheduled Tribe (ST)",
+          "0.68",
+          "39",
+          "50"
+        ],
+        [
+          "st women",
+          "ST Women",
+          "0.86",
+          "37",
+          "21"
+        ],
+        [
+          "women",
+          "Women",
+          "0.81",
+          "43",
+          "26"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "Local body",
+        "Reservation",
+        "HS or below",
+        "Bachelor's",
+        "Master's or above",
+        "Other/unknown",
+        "N"
+      ],
+      "rows": [
+        [
+          "Block",
+          "General",
+          "0.60",
+          "0.22",
+          "0.05",
+          "0.13",
+          "2478"
+        ],
+        [
+          "Block",
+          "Woman",
+          "0.66",
+          "0.18",
+          "0.04",
+          "0.12",
+          "2988"
+        ],
+        [
+          "Block",
+          "SC",
+          "0.71",
+          "0.09",
+          "0.03",
+          "0.16",
+          "446"
+        ],
+        [
+          "Block",
+          "SC Woman",
+          "0.74",
+          "0.12",
+          "0.02",
+          "0.12",
+          "214"
+        ],
+        [
+          "Block",
+          "ST",
+          "0.78",
+          "0.03",
+          "0.02",
+          "0.17",
+          "60"
+        ],
+        [
+          "Block",
+          "ST Woman",
+          "0.91",
+          "0.03",
+          "0.03",
+          "0.03",
+          "32"
+        ],
+        [
+          "Corporation",
+          "General",
+          "0.59",
+          "0.21",
+          "0.04",
+          "0.16",
+          "556"
+        ],
+        [
+          "Corporation",
+          "Woman",
+          "0.47",
+          "0.30",
+          "0.08",
+          "0.15",
+          "551"
+        ],
+        [
+          "Corporation",
+          "SC",
+          "0.66",
+          "0.17",
+          "0.00",
+          "0.17",
+          "35"
+        ],
+        [
+          "Corporation",
+          "SC Woman",
+          "0.60",
+          "0.14",
+          "0.07",
+          "0.19",
+          "43"
+        ],
+        [
+          "District",
+          "General",
+          "0.36",
+          "0.40",
+          "0.07",
+          "0.17",
+          "429"
+        ],
+        [
+          "District",
+          "Woman",
+          "0.44",
+          "0.36",
+          "0.07",
+          "0.13",
+          "449"
+        ],
+        [
+          "District",
+          "SC",
+          "0.57",
+          "0.27",
+          "0.00",
+          "0.16",
+          "51"
+        ],
+        [
+          "District",
+          "SC Woman",
+          "0.38",
+          "0.38",
+          "0.15",
+          "0.10",
+          "48"
+        ],
+        [
+          "District",
+          "ST",
+          "0.67",
+          "0.25",
+          "0.00",
+          "0.08",
+          "12"
+        ],
+        [
+          "District",
+          "ST Woman",
+          "1.00",
+          "0.00",
+          "0.00",
+          "0.00",
+          "4"
+        ],
+        [
+          "Grama Panchayat",
+          "General",
+          "0.69",
+          "0.12",
+          "0.03",
+          "0.15",
+          "20149"
+        ],
+        [
+          "Grama Panchayat",
+          "Woman",
+          "0.72",
+          "0.12",
+          "0.03",
+          "0.13",
+          "22456"
+        ],
+        [
+          "Grama Panchayat",
+          "SC",
+          "0.77",
+          "0.07",
+          "0.02",
+          "0.14",
+          "2924"
+        ],
+        [
+          "Grama Panchayat",
+          "SC Woman",
+          "0.76",
+          "0.09",
+          "0.02",
+          "0.13",
+          "2250"
+        ],
+        [
+          "Grama Panchayat",
+          "ST",
+          "0.79",
+          "0.03",
+          "0.01",
+          "0.18",
+          "425"
+        ],
+        [
+          "Grama Panchayat",
+          "ST Woman",
+          "0.81",
+          "0.02",
+          "0.00",
+          "0.17",
+          "310"
+        ],
+        [
+          "Municipality",
+          "General",
+          "0.68",
+          "0.16",
+          "0.05",
+          "0.11",
+          "3840"
+        ],
+        [
+          "Municipality",
+          "Woman",
+          "0.68",
+          "0.17",
+          "0.04",
+          "0.10",
+          "3908"
+        ],
+        [
+          "Municipality",
+          "SC",
+          "0.79",
+          "0.09",
+          "0.03",
+          "0.09",
+          "297"
+        ],
+        [
+          "Municipality",
+          "SC Woman",
+          "0.70",
+          "0.14",
+          "0.05",
+          "0.12",
+          "307"
+        ],
+        [
+          "Municipality",
+          "ST",
+          "0.83",
+          "0.06",
+          "0.00",
+          "0.11",
+          "18"
+        ],
+        [
+          "Municipality",
+          "ST Woman",
+          "0.81",
+          "0.00",
+          "0.00",
+          "0.19",
+          "16"
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "council",
+        "seat",
+        "n",
+        "share female",
+        "share HS or less",
+        "share graduate+",
+        "mean age",
+        "share any criminal case",
+        "mean criminal cases"
+      ],
+      "rows": [
+        [
+          "2012",
+          "Open",
+          "113",
+          "0.062",
+          "0.407",
+          "0.248",
+          "45.956",
+          "0.327",
+          "0.929"
+        ],
+        [
+          "2012",
+          "Reserved for women",
+          "114",
+          "1.000",
+          "0.447",
+          "0.351",
+          "42.728",
+          "0.035",
+          "0.070"
+        ],
+        [
+          "2017",
+          "Open",
+          "110",
+          "0.164",
+          "0.445",
+          "0.364",
+          "47.791",
+          "0.273",
+          "0.382"
+        ],
+        [
+          "2017",
+          "Reserved for women",
+          "112",
+          "1.000",
+          "0.312",
+          "0.438",
+          "45.518",
+          "0.036",
+          "0.071"
+        ]
+      ]
+    }
+  ]
+}

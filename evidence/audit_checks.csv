@@ -1,0 +1,17 @@
+check,status,evidence
+T1 denominators,checked,Unknown education retained; per-group classified N; no candidates interpreted as winners
+T1 missing as zero,checked,New schooling retains NA; all Mumbai analyzed education strings classified; all-winner bounds generated
+T1 joins and row loss,checked,Unique row_id; declared join cardinalities; sample conservation tests; ambiguous winner exclusions
+T1 provenance,checked with limitation,Input hashes and adapter diff preserved; UP integration has not been reconciled to final published central release
+T1 internal consistency,checked,Manuscript computed numbers read generated outputs; rural and urban separate
+T2 EDA and ranges,checked,Education dictionaries; group missingness; age 21-100; binary treatment and education range tests
+T2 implementation,checked,Explicit OLS comparisons for Bihar UP Rajasthan Kerala; independently summed Bihar cluster scores
+T2 inference,conditional,Pointwise clustered t intervals; cluster counts exported; no multiplicity adjustment
+T3 design,unverified,Geography and caste controls do not establish as-if-random assignment
+T3 attrition/measurement,checked with limitation,Missing-education coefficient bounds; transcription and classification error not independently validated
+T4 IV/RD/DiD,not applicable,Administrative regressions claim none of these designs; external threshold study not replicated
+paper mechanisms,not claimed,No causal mechanism or net governance conclusion inferred from schooling or cases
+paper selective emphasis,checked,All fitted outcomes exported; Kerala nulls and urban counterevidence retained
+paper external validity,limited,State/election/office-specific estimates; no national average or urban-rural pooling
+rejected concern Bihar changed sample,rejected,Explicit 2016 filter restores exactly prior regression descriptive and flow CSVs after source expansion
+legacy UP reproducibility,untestable,Original 2015 candidate directory absent; original table retained with source commit
