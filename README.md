@@ -1,50 +1,74 @@
 ## Effect of Gender Quotas on Some Qualities of Elites
 
+Women's quotas often bring less educated and less politically experienced leaders into India's rural local governments. The evidence includes both early reservation cycles in West Bengal and recent elections in Bihar.[^cd][^beaman][^bamezai] The pattern varies by place: our [Bihar, UP and Rajasthan tables](#results) show education gaps, while [Kerala](#kerala) and [Mumbai](#mumbai-bmc-who-gets-elected-under-the-quota) provide counterexamples. Mumbai's reserved-seat councillors also have fewer pending criminal cases.
+
+These are separate qualities of candidates and elected leaders. Lower education or less experience need not imply worse performance in office: women leaders in Andhra Pradesh initially underperform in programme implementation but catch up during their term.[^afridi] Younger age, household wealth and occupation describe who enters politics; they are not, by themselves, rankings of competence.
+
 ### Context
 
-"In 1993, a constitutional amendment was passed in India that called for a random* one-third of [the] village council leader, or sarpanch, positions in gram panchayat, to be reserved for women. The village council, which encompasses between five and fifteen villages, is responsible for the provision of local infrastructure - such as public buildings, water, and roads - and for identifying government program beneficiaries. Although all decisions in the village council are made by majority, the pradhan is the only full-time member and exercises significant control over the final council decisions. The village council is required to organize two village meetings per year, during which they present their proposed budget and report on their activities in the previous six months. The pradhan must also set up regular office hours where villagers can lodge complaints or requests."
+The 73rd Constitutional Amendment requires at least one-third of directly elected Panchayat seats and chairperson positions to be reserved for women. Article 243D provides for rotation; it does not require random assignment. Identifying a causal effect therefore depends on the allocation rule in the state and election being studied. See [Article 243D in the amendment](https://www.legislative.gov.in/static/uploads/2025/07/d6e04624ef8b6b869af003909507cfe6.pdf). The Bihar study below, for example, uses population thresholds rather than a lottery.[^bamezai]
 
-via https://www.povertyactionlab.org/evaluation/influencing-provision-social-services-through-mandated-female-representation
-
-*there is no mention of random. In fact, there is a separate callout that these seats can be allocated by rotation: "Not less than one-third (including the number of seats reserved for women belonging to the Scheduled Castes and the Scheduled Tribes) of the total number of seats to be filled by direct election in every Panchayat shall be reserved for women and such seats may be allotted by rotation to different constituencies in a Panchayat."
-
-https://www.india.gov.in/my-government/constitution-india/amendments/constitution-india-seventy-third-amendment-act-1992
+Village councils provide local infrastructure and identify government programme beneficiaries. Council heads exercise substantial influence over these decisions, which is why changes in who holds office may matter. See the [description of the West Bengal study](https://www.povertyactionlab.org/evaluation/influencing-provision-social-services-through-mandated-female-representation).
 
 ### Hypotheses About the Effect of Gender Quotas on Quality of Elites
 
-* Political Experience: Gender quotas in local electoral bodies are at least initially likely to cause candidates who are less experienced in politics. (In fact, that is one of the reasons for reserving seats for women.) 
+* Political Experience: We expect quotas to bring in candidates with less political experience, at least initially.
+* Criminal Record: We expect candidates under quotas to have fewer pending criminal cases.
+* Education: Where women have had fewer educational opportunities, we expect quotas to bring in less educated candidates, at least initially.
+* Occupation: Where women have had fewer opportunities for paid and professional work, we expect candidates under quotas to be less likely to have those occupations.
+* Age: We expect quotas to bring in younger candidates.
 
-* Criminal Record: Given women commit crime at vastly lower rates than men, we expect quotas to cause candidates with smaller criminal record. 
-
-* Education: Given the inequalities in education, we expect gender quotas to cause less educated candidates (at least initially).
-
-* Occupation: Again, given inequalities in opportunities to work, we expect gender quotas to cause candidates who are not working professionally and given differences in human capital (caused by inequality in education, etc.), more blue-collar jobs. 
-
-* Age: We expect gender quotas to cause younger candidates.
-
-Some research suggests that how educated a politician is matters for growth (in certain contexts) (see [here](https://academic.oup.com/ej/article-abstract/121/554/F205/5079434)). Other research suggests that candidates with criminal records cause poverty. (see [here](https://link.springer.com/article/10.1007/s12116-019-09290-5)).
-
-Caveat = None of this is to say that the net output would be lower. In fact, there is plenty of research that suggests some positive consequences of reserving local body seats for women. The point may help with the interpretation of those effects. 
+Education and criminal charges may matter for performance. Research on national leaders finds higher growth under more educated leaders ([Besley, Montalvo and Reynal-Querol 2011](https://academic.oup.com/ej/article-abstract/121/554/F205/5079434)). In India, the close-election victory of state legislators facing criminal charges reduces household electrification and literacy ([Cheng and Urpelainen 2019](https://link.springer.com/article/10.1007/s12116-019-09290-5)). These studies concern different offices and do not establish the consequences of women's local-election quotas.
 
 ### Prior Research
 
-See Table 3A here: https://www.nber.org/system/files/working_papers/w8615/w8615.pdf (Chattopadhyay and Duflo 2001)
+The comparisons below concern seats reserved for women versus seats without a women's reservation, unless otherwise stated. An unreserved seat can elect a woman. Percentages are group averages; differences labelled as adjusted estimates come from regressions. SE means standard error; SD means standard deviation. Schooling, knowledge scores and experience remain separate measures.
 
-<img src = "c_d_tab_3.png" width = 50%>
+| Study and sample | Education | Knowledge, experience and other findings |
+|:-----------------|:----------|:----------------------------------------|
+| Chattopadhyay and Duflo (2001 working paper; published 2004). West Bengal; 161 council heads.[^cd] | 7.13 versus 9.92 years of schooling; difference **−2.79 years** (SE 0.54). | **11% versus 43%** had been elected to the council before 1998. Means from Table 3, panels A and B. |
+| Ban and Rao (2008; figures from the May 2007 draft). Four southern states; 106 presidents in the adjusted comparison.[^ban] | **−2.62 years** (SE 0.77), adjusted estimate. | Political-knowledge score **−1.41 points** (SE 0.29), with less political experience. Table 9 excludes caste-reserved councils; it is not restricted to SC/ST seats. |
+| Raabe, Sekher and Birner (2009). Karnataka; 23 reserved female presidents and 48 male presidents in Table 4.[^raabe] | **0% versus 19%** have a degree or above; **9% versus 4%** are illiterate. | Descriptive comparison of reserved female presidents with male presidents in seats with or without caste reservation. The sample includes several caste groups (Table 3). |
+| Beaman et al. (2009). Birbhum, West Bengal; leaders in the 2003 council term.[^beaman] | **−2.10 years** (SE 0.55), adjusted for block effects. | **26.5 percentage points more likely** to be a first-time pradhan (SE 6.8). Table II, column 6 compares currently reserved and unreserved councils. |
+| Deininger et al. (2015; figures from the 2011 working paper). NCAER survey of 233 villages, with up to three election rounds.[^deininger] | **24.72% versus 5.74%** illiterate; **28.65% versus 62.69%** have at least secondary education. | **11.67% versus 24.24%** previously held political office. Table 3 reports descriptive comparisons, with 180 reserved and 459 unreserved observations. |
+| Afridi, Iversen and Sharan (2017; characteristics from the 2013 working paper). Andhra Pradesh; 297 surveyed council heads with characteristics available.[^afridi] | **15% versus 54%** have higher-secondary education or more; **9% versus 0%** are illiterate. | **11% versus 22%** have prior political experience. Table 2 reports means for 128 reserved and 169 unreserved heads. |
+| Mori et al. (2025; distributions and sample from the September 2022 draft). Karnataka's 2020 council election; 218 candidates in 97 constituencies.[^mori] | The draft's Figure 2 shows lower educational attainment among candidates in women-reserved constituencies. | The draft reports lower average cognitive and non-cognitive skills among female candidates. Its Figure 2 and Table 3 examine the distributions and selection; no numerical effect from the final article is reported here. |
+| Bamezai et al. (March 2026 working paper). Bihar's 2016 and 2021 elections; reservation effects estimated around population thresholds.[^bamezai] | Standardized schooling: **−0.765 SD for candidates** (SE 0.024; N=44,583) and **−0.921 SD for winners** (SE 0.073; N=3,294). | Replacing the woman's schooling with her husband's still gives negative estimates: **−0.147 SD for candidates** (SE 0.031) and **−0.364 SD for winners** (SE 0.089). Table 7; these are education measures, not direct tests of who governs. |
 
-See Table 8 and 9 here: https://vijayendrarao.org/papers/EDCC_Reservations_to_go.pdf (Ban and Rao 2008)
+The Bihar estimates are visible in the source table below: column 1 uses the candidate's or winner's schooling, and column 3 substitutes her husband's. Both panels show negative estimates in both columns. The entries are in standardized units, with standard errors in parentheses; the [full table and notes](https://www.mrsharan.com/papers/political-selection.pdf#page=44) describe the specification.[^bamezai]
 
-<img src = "ban_rao.png" width = 50%>
+[![Bamezai et al., March 2026, Table 7: negative schooling estimates for candidates and winners, including when using husbands' schooling](evidence/bamezai_2026_table_7.png)](https://www.mrsharan.com/papers/political-selection.pdf#page=44)
 
-See Table 4 here: https://cgspace.cgiar.org/server/api/core/bitstreams/c85053d0-fd33-400a-b7bb-05a04874175f/content
+Some papers reach favorable judgments on other questions. Mori et al. find stronger cognitive selection of women relative to the eligible female population.[^mori] That comparison does not establish higher absolute qualifications under quotas. Beaman et al. find improved attitudes toward women leaders and subsequent electoral gains for women.[^beaman] Deininger et al. find gains in women's political participation and accountability despite lower leader qualifications.[^deininger]
 
-<img src = "raabe_et_al.png" width = 50%>
+Caveat: Lower qualifications do not establish lower net output. Ban and Rao find no overall performance difference between female and male leaders.[^ban] Afridi et al.'s published article finds initial implementation disadvantages followed by full catch-up during the term, with no evidence of overtaking. That is the published conclusion; its earlier working paper is used above only for the characteristics table.[^afridi]
 
-They find yet more dramatic differences even when constraining themselves to SC/ST seats where they argue the differences are likely smaller.
+The studies are not eight independent national tests. Samples, offices and reservation rules differ; the two West Bengal studies revisit Birbhum in different election cycles.[^cd][^beaman] The March 2026 Bihar draft is unpublished, and some prose estimates differ slightly from Table 7; the numbers above follow that table.[^bamezai] External studies are summarized from their papers, not replicated here.
+
+<details>
+<summary>Earlier studies: original table excerpts</summary>
+
+Chattopadhyay and Duflo, Table 3.[^cd]
+
+<img src="c_d_tab_3.png" width="50%" alt="Chattopadhyay and Duflo: characteristics of council heads by reservation status">
+
+Ban and Rao, Tables 8 and 9.[^ban]
+
+<img src="ban_rao.png" width="50%" alt="Ban and Rao: characteristics of reserved and unreserved council presidents">
+
+Raabe, Sekher and Birner, Table 4.[^raabe]
+
+<img src="raabe_et_al.png" width="50%" alt="Raabe, Sekher and Birner: education of female and male council presidents">
+
+</details>
 
 ### Results
 
+These are our own tabulations by seat category. Tables 1-5 are descriptive: their differences alone do not identify quota effects. Education thresholds differ across datasets, so the levels should not be pooled. Shares are proportions (0.15 = 15%); age is in years. N is the number of records in each group, and the number with a reported outcome may be smaller. A category labelled "Unreserved (Women)" is reserved for women but has no caste reservation.
+
 **Table 1: Bihar 2016 Sarpanch Candidates by Reservation Status**
+
+Source: [Bihar candidate data](https://github.com/in-rolls/bihar_2016_panchayat_elex/blob/master/data/sarpanch.csv), analyzed in [scripts/bihar.R](scripts/bihar.R). The script keeps candidates with a reported age below 100. Sarpanch is the office recorded in this dataset; the Bamezai et al. study above concerns mukhiya candidates.
 
 |Reservation Status (Hindi) | Reservation Status (English) | Illiterate | Graduate+ | Mean Age | N |
 |:--------------------------|:-----------------------------|----------:|---------:|---------:|-----:|
@@ -59,6 +83,8 @@ They find yet more dramatic differences even when constraining themselves to SC/
 
 **Table 2: Uttar Pradesh 2015 Candidates by Reservation Status**
 
+Source: [scripts/up.R](scripts/up.R), reading `data/up_2015/`. This table pools the offices in those files; it is not restricted to village-council heads.
+
 |Reservation Status (Hindi) | Reservation Status (English) | Illiterate | College+ | N |
 |:--------------------------|:-----------------------------|----------:|---------:|-----:|
 |अनारक्षित | Unreserved | 0.08 | 0.26 | 73,410|
@@ -70,7 +96,9 @@ They find yet more dramatic differences even when constraining themselves to SC/
 |अन्य पिछड़ा वर्ग महिला | OBC Women | 0.25 | 0.12 | 20,819|
 |महिला | Women | 0.21 | 0.15 | 32,193|
 
- **Table 3: Uttar Pradesh 2021 Candidates by Reservation Status**
+**Table 3: Uttar Pradesh 2021 Gram Panchayat Pradhan Candidates by Reservation Status**
+
+Source: [scripts/up.R](scripts/up.R), reading `up_gram_panchayat_pradhan_2021.csv.zip`. The 2015 and 2021 tables cover different office samples.
 
 |Reservation Status (Hindi) | Reservation Status (English) | Illiterate | College+ | N |
 |:--------------------------|:-----------------------------|----------:|---------:|------:|
@@ -84,7 +112,9 @@ They find yet more dramatic differences even when constraining themselves to SC/
 |महिला | Women | 0.17 | 0.11 | 62,917|
 
 
-**Table 4: Rajasthan Municipal Candidates by Ward Category**
+**Table 4: Rajasthan 2019 Municipal Winners by Ward Category**
+
+Source: [scripts/rajasthan.R](scripts/rajasthan.R), joining `rajasthan_municipal_2019.csv` and `rajasthan_municipal_2019_education_winning.csv`. Education is for elected members; the low-education category includes 12th standard.
 
 |Ward Category | Reservation Status (English) | HS or Less | Mean Age | N |
 |:-------------|:----------------------------|----------:|---------:|---:|
@@ -98,12 +128,15 @@ They find yet more dramatic differences even when constraining themselves to SC/
 |st women | ST Women | 0.86 | 37 | 21|
 |women | Women | 0.81 | 43 | 26|
 
-But Kerala provides a nice counter-example with very small differences
+### Kerala
 
+Kerala provides a counterexample, especially in Grama Panchayats: the reported bachelor's and master's shares are the same for General and Woman seats after rounding. Corporation representatives in Woman seats have higher shares in both degree categories. Other comparisons vary, and some ST groups are very small (Table 5).
 
-Table 5: Kerala
+**Table 5: Kerala Local-Government Records by Body and Reservation**
 
-|LGI Type        |Reservation | hs_or_below| prop_bachelors| prop_masters_or_above| prop_other|     n|
+Source: [scripts/kerala.R](scripts/kerala.R), reading `data/lsgi-election-kerala.csv` and pooling years. Unmatched and unknown education strings enter "Other". The UP, Rajasthan and Kerala input files are not included in this repository; their original collection details and these tabulations need verification before reuse.
+
+|Local body     |Reservation | HS or below| Bachelor's| Master's or above| Other/unknown| N|
 |:---------------|:-----------|-----------:|--------------:|---------------------:|----------:|-----:|
 |Block           |General     |        0.60|           0.22|                  0.05|       0.13|  2478|
 |Block           |Woman       |        0.66|           0.18|                  0.04|       0.12|  2988|
@@ -137,7 +170,9 @@ Table 5: Kerala
 
 ## Mumbai (BMC): who gets elected under the quota
 
-Mumbai's 227 municipal wards are reserved for women by lot before each election (one third in 2007, half from 2012). Candidate affidavits give education, age and pending criminal cases for the 2012 and 2017 councils. Data are the Praja/affidavit table held in [local_reservations](https://github.com/in-rolls/local_reservations) (`data/maharashtra/mumbai/praja_ward_ratings_2011_2018.csv`, mirrored there from the CC0 deposit of Karekurve-Ramachandra & Lee 2025, doi:10.7910/DVN/IO9SLQ); `scripts/mumbai.R` reads it from the sibling clone, checks its SHA-256 and the statutory seat counts, and writes `output/mumbai/`.
+The Mumbai data record 76 of 227 wards reserved for women in the 2007 council and 114 from 2012. Affidavit fields give education, age and pending criminal cases for the 2012 and 2017 councils. The Praja/affidavit table is held in [local_reservations](https://github.com/in-rolls/local_reservations), at `data/maharashtra/mumbai/praja_ward_ratings_2011_2018.csv`, mirrored from the [Karekurve-Ramachandra and Lee replication deposit](https://doi.org/10.7910/DVN/IO9SLQ). [scripts/mumbai.R](scripts/mumbai.R) checks the input's SHA-256 and reservation counts, then writes [the summary](output/mumbai/tab_quality.md) and [regression results](output/mumbai/tab_quality_reg.md). Its default input path uses the sibling directory `../local_elections/`; `MUMBAI_RATINGS` can specify another path.
+
+The analysis keeps one observation per councillor spell with age recorded. The 2017 table contains 222 councillors, compared with 227 in 2012. Pending cases are allegations, not convictions. "HS or less" here ends at 10th standard; Rajasthan's category includes 12th standard.
 
 Table 6: Mumbai councillors by seat type and council
 
@@ -148,6 +183,22 @@ Table 6: Mumbai councillors by seat type and council
 |    2017|Open               | 110|        0.164|            0.445|           0.364|   47.791|                   0.273|               0.382|
 |    2017|Reserved for women | 112|        1.000|            0.312|           0.438|   45.518|                   0.036|               0.071|
 
-With administrative-ward and council fixed effects, a reserved seat lowers the councillor's age by 2.6 years (SE 0.9) and the share with a pending criminal case by 27 points (SE 4), and does not lower education: the share with a degree is 8 points higher (SE 4.5, p = 0.06). Mumbai looks like Kerala, not Bihar or UP.
+With administrative-ward and council fixed effects, reserved-seat councillors are 2.6 years younger (SE 0.9) and 26.8 percentage points less likely to have a pending criminal case (SE 3.6). The graduate-or-above share is 8.4 percentage points higher (SE 4.5, p = 0.062), providing no evidence of the education decline seen in Bihar and UP. Standard errors are clustered by ward. See [regression results](output/mumbai/tab_quality_reg.md) and [the analysis](scripts/mumbai.R).
 
 Whether these councillors are rated better by residents is the question of [quota_unquote](https://github.com/in-rolls/quota_unquote), which uses the same data with the lottery as identification.
+
+[^cd]: Raghabendra Chattopadhyay and Esther Duflo. *Women as Policy Makers: Evidence from a India-Wide Randomized Policy Experiment*. [NBER Working Paper 8615, December 2001, Table 3](https://www.nber.org/system/files/working_papers/w8615/w8615.pdf). Published as *Women as Policy Makers: Evidence from a Randomized Policy Experiment in India*, Econometrica 72(5), 2004, pp. 1409-1443. The figures here are from the 2001 West Bengal sample.
+
+[^ban]: Radu Ban and Vijayendra Rao. *Tokenism or Agency? The Impact of Women's Reservations on Village Democracies in South India*. Economic Development and Cultural Change 56(3), 2008, pp. 501-530. Figures and sample restrictions here follow [Tables 8 and 9 of the May 2007 draft](https://vijayendrarao.org/papers/EDCC_Reservations_to_go.pdf).
+
+[^raabe]: Katharina Raabe, Madhushree Sekher and Regina Birner. *The Effects of Political Reservations for Women on Local Governance and Rural Service Provision: Survey Evidence from Karnataka*. [IFPRI Discussion Paper 00878, 2009, Tables 3 and 4](https://cgspace.cgiar.org/server/api/core/bitstreams/c85053d0-fd33-400a-b7bb-05a04874175f/content).
+
+[^beaman]: Lori Beaman, Raghabendra Chattopadhyay, Esther Duflo, Rohini Pande and Petia Topalova. *Powerful Women: Does Exposure Reduce Bias?* Quarterly Journal of Economics 124(4), 2009, pp. 1497-1540. [Published paper, Table II, p. 1507](https://www.povertyactionlab.org/sites/default/files/research-paper/310%20Female%20Quotas%20Nov%2009.pdf).
+
+[^deininger]: Klaus Deininger, Songqing Jin, Hari K. Nagarajan and Fang Xia. *Does Female Reservation Affect Long-Term Political Outcomes? Evidence from Rural India*. [Journal of Development Studies 51(1), 2015, pp. 32-49](https://doi.org/10.1080/00220388.2014.947279). Characteristics and sample counts here follow [World Bank Working Paper 5708, June 2011, Table 3, p. 22](https://documents1.worldbank.org/curated/en/595231468040603055/pdf/WPS5708.pdf).
+
+[^afridi]: Farzana Afridi, Vegard Iversen and M. R. Sharan. *Women Political Leaders, Corruption, and Learning: Evidence from a Large Public Program in India*. [Economic Development and Cultural Change 66(1), 2017, pp. 1-30](https://doi.org/10.1086/693679). Leader characteristics follow [IZA Discussion Paper 7212, February 2013, Table 2, p. 38](https://docs.iza.org/dp7212.pdf); the catch-up conclusion follows the published article.
+
+[^mori]: Yuko Mori, R. Manjula, D. Rajasekhar, Jun Goto and Takashi Kurosaki. *Who Becomes a Politician in a Gender Quota System? Evidence from India*. [World Development 188, 2025, article 106911](https://doi.org/10.1016/j.worlddev.2024.106911). The published article reports stronger cognitive selection relative to same-gender voters. The sample description and absolute qualification comparisons here follow the [September 15, 2022 draft, Section 2.2, Figure 2 and Table 3](https://www.isid.ac.in/~epu/acegd2022/papers/Yuko_Mori.pdf).
+
+[^bamezai]: Apurva Bamezai, Siddharth George, M. R. Sharan and Borui Sun. *The Determinants and Consequences of Political Selection in the Developing World: Evidence from India*. [Working paper, March 26, 2026, Section 7.2 and Table 7, p. 44](https://www.mrsharan.com/papers/political-selection.pdf). The education measures are standardized against citizen distributions. The table's candidate and winner counts are estimation samples, not the full linked census or candidate roster.
