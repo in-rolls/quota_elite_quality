@@ -64,6 +64,33 @@ Raabe, Sekher and Birner, Table 4.[^raabe]
 
 ### Results
 
+#### Bihar 2016: elected officials
+
+Women-reserved seats elect fewer graduates in all six offices. With block and caste-reservation controls, the graduate-share gap is **−15.0 percentage points for mukhiyas** and **−12.1 points for sarpanches**. Winners are also younger, and illiteracy is higher in five offices with confidence intervals excluding zero. Zila parishad's illiteracy estimate is less precise.
+
+| Elected office | Graduate+ (pp) | Illiterate (pp) | Age (years) | N, education |
+|:---------------|---------------:|----------------:|------------:|-------------:|
+| Mukhiya | −15.0 (0.8) | +1.5 (0.3) | −3.6 (0.2) | 7,908 |
+| Sarpanch | −12.1 (0.7) | +4.6 (0.5) | −5.7 (0.3) | 7,864 |
+| Ward member | −4.6 (0.2) | +11.6 (0.4) | −2.0 (0.1) | 97,278 |
+| Panch | −2.8 (0.1) | +14.8 (0.4) | −2.9 (0.1) | 85,385 |
+| Panchayat samiti member | −10.7 (0.6) | +3.2 (0.4) | −2.7 (0.2) | 10,769 |
+| Zila parishad member | −13.0 (2.9) | +1.6 (0.9) | −4.1 (0.7) | 889 |
+
+Entries are adjusted differences between seats reserved for women and seats open to either sex; clustered SEs are in parentheses. Each office has its own regression with block and caste-reservation fixed effects. Zila parishad uses district effects because block is unavailable. SEs are clustered at the geographic-control level. A causal interpretation requires reservation to be unrelated to unobserved determinants of qualifications after these controls.
+
+Source: [Bihar SEC records preserved in local_elections_bihar](https://github.com/in-rolls/local_elections_bihar), standardized by [local_elections](https://github.com/in-rolls/local_reservations/blob/8bf094df8a621123eddec2af533a8e134577bc89/src/local_reservations/common/adapters/bihar.py). [Analysis](scripts/bihar_winners.R), [estimates and confidence intervals](output/bihar_2016/regressions.csv), [group means](output/bihar_2016/descriptive.csv), and [sample accounting](output/bihar_2016/sample_flow.csv).
+
+![Bihar 2016: adjusted education differences among elected officials, with 95% confidence intervals](output/bihar_2016/education.png)
+
+The analysis identifies 210,955 winners from unique highest recorded votes or a sole uncontested candidacy, then excludes 45 seats with ambiguous candidate serials. Unknown education is missing, not non-graduate or literate. Age is restricted to 21–100 without dropping those records from the education analysis. Vacancies and unresolved contests supply no winner. The [analysis data](output/bihar_2016/winners.parquet) contain 210,910 seats; outcome-specific sample sizes and input hashes are recorded in the outputs.
+
+Reproduce from the sibling `local_elections` checkout with `Rscript scripts/bihar_winners.R`, then run `Rscript tests/test_bihar_winners.R`. Required R packages are `arrow`, `dplyr`, `readr`, `fixest`, `ggplot2`, `digest`, `jsonlite` and `testthat`. Set `BIHAR_MASTER` to use another input directory. Tests compare the mukhiya estimate and clustered variance with explicit OLS and independently summed cluster scores.
+
+The [Bihar data repository](https://github.com/in-rolls/local_elections_bihar#2021-and-the-current-portal) now also contains an explicitly dated 2021 Arwal pilot and a statewide mukhiya index with 8,066 affidavit links. Education and prior office appear in handwritten candidate biographies, including [this 2021 source document, p. 14](https://sec2021.bihar.gov.in/ForPublicPDF_P/Documents1n2/NominationDoc/20210913143841096.pdf#page=14). Extraction is pending; no 2021 qualification estimate is reported here.
+
+#### Descriptive comparisons
+
 These are our own tabulations by seat category. Tables 1-5 are descriptive: their differences alone do not identify quota effects. Education thresholds differ across datasets, so the levels should not be pooled. Shares are proportions (0.15 = 15%); age is in years. N is the number of records in each group, and the number with a reported outcome may be smaller. A category labelled "Unreserved (Women)" is reserved for women but has no caste reservation.
 
 **Table 1: Bihar 2016 Sarpanch Candidates by Reservation Status**

@@ -1,0 +1,18 @@
+{
+  "source_files": {
+    "candidates_bihar.parquet": "6deab80b25ac050b2beb49506e5a6082bad1e4e960602e6774f7fe6750390cee",
+    "master_bihar.parquet": "ca13d31a6bf07333b6a5e3a3a93075943883fa1cf5928d20b5e891b26f127bb5"
+  },
+  "candidate_records": 644507,
+  "seat_records": 219117,
+  "identified_winners": 210955,
+  "analysis_winners": 210910,
+  "treatment": "seat reserved for women",
+  "model": "OLS; geography and caste-reservation fixed effects",
+  "uncertainty": "geography-clustered, fixest default small-sample correction",
+  "packages": {
+    "arrow": "25.0.0",
+    "dplyr": "1.2.1",
+    "fixest": "0.14.2"
+  }
+}
