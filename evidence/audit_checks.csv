@@ -19,3 +19,4 @@ T2 education categories,checked,Graduate and illiterate indicators are mutually 
 T2 covariance reconstruction,checked,Explicit OLS and manual cluster-score covariance with finite-sample adjustments for UP Rajasthan Kerala and Mumbai; Bihar unadjusted score check retained
 T2 interval reconstruction,checked,All rural and Mumbai saved intervals and p values reproduced with Student t and G minus one degrees of freedom
 T2 few clusters,unresolved inferential limitation,Kerala village and district models use 14 clusters; no wild-cluster or CR2 sensitivity supplied; main text and table cluster counts make limitation explicit
+paper attribute citations,checked,Nine sources validated against primary PDFs or author-institution metadata and published abstract; exact 2007 Besley and 2022 Jain drafts; Joshi self-assessment and no-controls limitation retained; seven excerpts with hashes

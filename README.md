@@ -18,7 +18,7 @@ Mumbai's reserved-seat councillors have fewer pending criminal cases and a highe
 
 ![Urban Mumbai: graduate share and pending criminal cases](output/mumbai/quality.png)
 
-The manuscript starts with an abstract and the existing evidence, including contrary findings and distinctions between absolute qualifications and selection relative to same-gender citizens. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table. [Historical descriptive tables](evidence/legacy_readme_tables.json) preserve the earlier README's candidate and municipal tabulations.
+The manuscript opens with an abstract, evidence on why education, experience, criminal cases, age and economic resources may matter for governing, and existing reservation studies. It distinguishes causal findings from associations and includes contrary evidence on education. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table. [Historical descriptive tables](evidence/legacy_readme_tables.json) preserve the earlier README's candidate and municipal tabulations.
 
 ## Reproduce
 

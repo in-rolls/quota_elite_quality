@@ -18,6 +18,7 @@ header-includes:
   - \usepackage{booktabs}
   - \usepackage{float}
   - \usepackage{longtable}
+  - \usepackage{needspace}
   - \usepackage{caption}
   - \captionsetup{font=small,labelfont=bf}
 ---
@@ -46,7 +47,21 @@ Existing rural studies often find lower schooling and less political experience 
 
 This paper brings that evidence together with administrative records of elected officials. The rural analyses cover village heads and council members in Bihar, Uttar Pradesh, Rajasthan and Kerala; the urban analysis covers Mumbai councillors. Graduate share provides a common education measure. The comparisons remain separate by office and election, and rural panchayats remain separate from urban councils.
 
-Education, experience and pending criminal cases describe different attributes. Their value as measures of elite quality depends on their relationship to the work of governing. A degree records formal education, while a pending case records an allegation. Neither alone establishes competence or performance. Age describes the composition of elected officials and is reported separately.
+# Why these attributes matter
+
+Local officials help prepare budgets, pursue public works and allocate benefits. These tasks require reading documents, understanding rules and dealing with other officials [@auerbach, pp. 708–710; @joshi, p. 56]. Literacy can make those tasks easier, while further schooling may supply additional skills. But literacy, secondary schooling and a university degree measure different levels of education; the evidence does not establish that each step yields the same improvement in governing ability.
+
+In South India, more educated politicians have a smaller advantage in obtaining subsidized-food eligibility cards for their own households, and landless households are better targeted under more educated council heads. These are observational associations with public-resource allocation [@besleyrewards, Tables 4–5]. In Uttarakhand, secondary-educated and graduate heads report higher panchayat performance scores than illiterate heads. That study uses self-assessments and education-category comparisons without other controls; it supplies suggestive evidence, not a causal estimate of schooling [@joshi, pp. 57–58, Table 3].
+
+Evidence on degrees is also mixed. A close-election study of Indian state legislators finds higher night-time-light growth when a graduate narrowly defeats a non-graduate [@jaineducation, Table 2]. Another finds improved education outcomes under graduate legislators only in more developed states, with no clear overall benefit [@lahotisahoo]. Across national leaders, US legislators and Brazilian mayors, college graduates show no consistent performance advantage [@carneslupu]. These findings motivate measuring educational attainment, but do not make graduate status a sufficient measure of competence or establish its value in every local office.
+
+Political experience may help officials learn how government works. In Rajasthan's urban councils, education and prior election victories predict greater procedural knowledge. Knowledge, in turn, is associated with greater reported constituent engagement and access to higher officials; the main budget-involvement estimate is imprecise. Much of the activity evidence is self-reported, and these associations do not isolate a causal effect of education or experience. A close-election comparison finds only modest, often imprecise knowledge gains from winning office over the following eighteen months [@auerbach, Table 3 and Figures 5–6].
+
+Pending criminal cases can signal risks to public integrity. In Indian state assemblies, narrowly electing an accused candidate is followed by lower economic growth measured through night-time lights and weaker road provision, with larger losses for serious or financial accusations [@prakash]. This evidence makes criminal records relevant to evaluating entrants, but it concerns state legislators. A pending charge remains an allegation; its seriousness and the process generating charges matter. Our Mumbai indicator measures any pending case and cannot distinguish these dimensions.
+
+Age can reflect experience and the length of a politician's remaining career. Evidence from Italian municipalities shows that younger mayors facing reelection engage more in electoral budget cycles, without clear advantages in house prices or the speed of public-good provision [@alesinaage, Tables 5–7]. Age therefore describes a potentially consequential change in elite composition, without supplying a general ranking of competence.
+
+Income and wealth capture economic resources and social position. Higher household income is associated with greater procedural knowledge in Rajasthan's urban-politician survey [@auerbach, Table 3], but that association does not show that richer officials govern better. Wealth observed after election can also reflect returns to office: Indian state-election winners accumulate assets faster than runners-up, including in close elections [@fismanwealth]. Income is a flow, assets a stock, and neither is equivalent to honesty or ability. This draft estimates reservation effects on education, age and Mumbai's pending cases; income and wealth remain potential extensions.
 
 # Existing evidence
 
@@ -179,6 +194,7 @@ kable(bound_table, caption = "Missing-education bounds on the adjusted all-winne
 
 ```{r complete-results, results='asis'}
 for (state in unique(rural$state)) {
+  if (knitr::is_latex_output()) cat("\n\n\\Needspace{10\\baselineskip}\n\n")
   cat("\n\n## ", state, ": education\n\n", sep = "")
   print(education_table(filter(rural, .data$state == .env$state),
     paste(state, "rural officials: two parts of the education distribution.",
@@ -187,6 +203,7 @@ for (state in unique(rural$state)) {
           if (state == "Kerala") "Illiteracy is unavailable." else "")))
   cat("\n\n")
 }
+if (knitr::is_latex_output()) cat("\n\n\\Needspace{10\\baselineskip}\n\n")
 cat("\n\n## Age\n\n")
 print(age_table(rural))
 ```
