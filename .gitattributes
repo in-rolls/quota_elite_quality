@@ -1,0 +1,3 @@
+renv/activate.R linguist-vendored whitespace=-blank-at-eol
+evidence/central_adapters.patch whitespace=-blank-at-eol
+output/*/education_labels.csv whitespace=-blank-at-eol
