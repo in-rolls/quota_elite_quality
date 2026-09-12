@@ -7,6 +7,7 @@ analysis:
 	Rscript scripts/check_inputs.R
 	Rscript scripts/bihar_winners.R
 	Rscript scripts/mumbai.R
+	Rscript scripts/delhi.R
 	Rscript scripts/rural_winners.R
 	Rscript scripts/missing_education.R
 	Rscript scripts/inventory.R

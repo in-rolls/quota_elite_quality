@@ -35,7 +35,7 @@ raj_bounds <- filter(bounds, state == "rajasthan")
 
 \begin{abstract}
 
-How does reserving an office for women change the qualifications of the person elected? We examine rural panchayats in Bihar, Uttar Pradesh, Rajasthan and Kerala, and urban councillors in Mumbai. Education is measured consistently by the share with a university degree. Among rural village heads, the adjusted reserved-minus-open difference is `r gsub("%", "\\%", contrast(get_result("Bihar", 2016, "gp_head")), fixed = TRUE)` in Bihar, and negative in each UP election. Rajasthan's classified-winner estimate is negative, but missing education prevents an all-winner conclusion. Kerala's village ward members show smaller, imprecise differences. In Mumbai, reserved-seat councillors have a higher estimated graduate share, with an interval that includes zero, and fewer pending criminal cases. These comparisons control for geography and, in the rural analyses, caste reservation. Their causal interpretation requires conditional comparability of reserved and open seats. The evidence concerns qualifications at election; it does not establish how reservation changes performance in office.
+How does reserving an office for women change the qualifications of the person elected? We examine rural panchayats in Bihar, Uttar Pradesh, Rajasthan and Kerala, and urban councillors in Mumbai and Delhi. Education is measured consistently by the share with a university degree. Among rural village heads, the adjusted reserved-minus-open difference is `r gsub("%", "\\%", contrast(get_result("Bihar", 2016, "gp_head")), fixed = TRUE)` in Bihar, and negative in each UP election. Rajasthan's classified-winner estimate is negative, but missing education prevents an all-winner conclusion. Kerala's village ward members show smaller, imprecise differences. In Mumbai, reserved-seat councillors have a higher estimated graduate share, with an interval that includes zero, and fewer pending criminal cases. Delhi’s graduate-share intervals include zero in three elections, while pending-case differences are negative. These comparisons control for geography and, except in Mumbai, caste reservation. Their causal interpretation requires conditional comparability of reserved and open seats. The evidence concerns qualifications at election; it does not establish how reservation changes performance in office.
 
 \end{abstract}
 
@@ -45,7 +45,7 @@ Reserving elected offices for women changes who can contest them. Does it also c
 
 Existing rural studies often find lower schooling and less political experience under reservation. Their evidence spans different offices, outcomes and research designs. Some compare candidates rather than winners; others compare women in reserved seats with men in open seats. These distinctions determine which findings bear on the reservation effect on elected elites.
 
-This paper brings that evidence together with administrative records of elected officials. The rural analyses cover village heads and council members in Bihar, Uttar Pradesh, Rajasthan and Kerala; the urban analysis covers Mumbai councillors. Graduate share provides a common education measure. The comparisons remain separate by office and election, and rural panchayats remain separate from urban councils.
+This paper brings that evidence together with administrative records of elected officials. The rural analyses cover village heads and council members in Bihar, Uttar Pradesh, Rajasthan and Kerala; the urban analysis covers Mumbai and Delhi councillors. Graduate share provides a common education measure. The comparisons remain separate by office and election, and rural panchayats remain separate from urban councils.
 
 # Why these attributes matter
 
@@ -57,11 +57,11 @@ Evidence on degrees is also mixed. A close-election study of Indian state legisl
 
 Political experience may help officials learn how government works. In Rajasthan's urban councils, education and prior election victories predict greater procedural knowledge. Knowledge, in turn, is associated with greater reported constituent engagement and access to higher officials; the main budget-involvement estimate is imprecise. Much of the activity evidence is self-reported, and these associations do not isolate a causal effect of education or experience. A close-election comparison finds only modest, often imprecise knowledge gains from winning office over the following eighteen months [@auerbach, Table 3 and Figures 5–6].
 
-Pending criminal cases can signal risks to public integrity. In Indian state assemblies, narrowly electing an accused candidate is followed by lower economic growth measured through night-time lights and weaker road provision, with larger losses for serious or financial accusations [@prakash]. This evidence makes criminal records relevant to evaluating entrants, but it concerns state legislators. A pending charge remains an allegation; its seriousness and the process generating charges matter. Our Mumbai indicator measures any pending case and cannot distinguish these dimensions.
+Pending criminal cases can signal risks to public integrity. In Indian state assemblies, narrowly electing an accused candidate is followed by lower economic growth measured through night-time lights and weaker road provision, with larger losses for serious or financial accusations [@prakash]. This evidence makes criminal records relevant to evaluating entrants, but it concerns state legislators. A pending charge remains an allegation; its seriousness and the process generating charges matter. Our Mumbai and Delhi indicators measure any pending case and cannot distinguish these dimensions.
 
 Age can reflect experience and the length of a politician's remaining career. Evidence from Italian municipalities shows that younger mayors facing reelection engage more in electoral budget cycles, without clear advantages in house prices or the speed of public-good provision [@alesinaage, Tables 5–7]. Age therefore describes a potentially consequential change in elite composition, without supplying a general ranking of competence.
 
-Income and wealth capture economic resources and social position. Higher household income is associated with greater procedural knowledge in Rajasthan's urban-politician survey [@auerbach, Table 3], but that association does not show that richer officials govern better. Wealth observed after election can also reflect returns to office: Indian state-election winners accumulate assets faster than runners-up, including in close elections [@fismanwealth]. Income is a flow, assets a stock, and neither is equivalent to honesty or ability. This draft estimates reservation effects on education, age and Mumbai's pending cases; income and wealth remain potential extensions.
+Income and wealth capture economic resources and social position. Higher household income is associated with greater procedural knowledge in Rajasthan's urban-politician survey [@auerbach, Table 3], but that association does not show that richer officials govern better. Wealth observed after election can also reflect returns to office: Indian state-election winners accumulate assets faster than runners-up, including in close elections [@fismanwealth]. Income is a flow, assets a stock, and neither is equivalent to honesty or ability. This draft estimates reservation effects on education, age and pending cases in Mumbai and Delhi; income and wealth remain potential extensions.
 
 # Existing evidence
 
@@ -95,7 +95,7 @@ Y_i = \alpha + \beta R_i + \gamma_{g(i)} + \delta_{c(i)} + \epsilon_i,
 
 where $R_i$ records female seat reservation, $\gamma_{g(i)}$ controls for geography and $\delta_{c(i)}$ for caste reservation. Geography is the block when it is populated throughout the relevant slice, and otherwise the district. The district and block together identify a block. Standard errors are clustered at the geographic-control level. All reported intervals are pointwise 95% intervals from `fixest`, with its small-sample variance adjustment and a Student $t$ critical value based on the number of clusters minus one. They do not adjust for testing several offices or outcomes. Kerala's village and district-member regressions have only `r num(get_result("Kerala", 2020, "gp_ward")$clusters)` district clusters. Their intervals use a few-cluster approximation and warrant particular caution.
 
-For the binary education outcome, $100\beta$ is the adjusted reserved-minus-open difference in percentage points. The linear model describes this difference without imposing equal distances between school qualifications. Its causal interpretation requires conditional comparability of reservation assignments and adequate outcome coverage. Geographic and caste controls alone do not verify that requirement. No lottery or discontinuity design is claimed for these administrative-data regressions. Mumbai uses administrative-ward and council effects, with standard errors clustered by electoral ward. That specification does not include caste-reservation controls, so its adjustment set differs from the rural models.
+For the binary education outcome, $100\beta$ is the adjusted reserved-minus-open difference in percentage points. The linear model describes this difference without imposing equal distances between school qualifications. Its causal interpretation requires conditional comparability of reservation assignments and adequate outcome coverage. Geographic and caste controls alone do not verify that requirement. No lottery or discontinuity design is claimed for these administrative-data regressions. Mumbai uses administrative-ward and council effects, with standard errors clustered by electoral ward. That specification does not include caste-reservation controls. Delhi uses separate election-year regressions with assembly-constituency and caste-reservation effects, clustering by assembly constituency. It therefore follows the rural specification's geographic adjustment and inference convention, using urban electoral geography. Ward boundaries change across elections; no Delhi ward panel is assumed.
 
 The administrative inputs flow from state election repositories through [local_reservations](https://github.com/in-rolls/local_reservations). The analysis records input hashes, winner selection, exclusions, outcome classification and regression samples. Bihar's winners are inferred from unique highest recorded votes or sole uncontested candidacies. UP's earlier files report elected pradhans; its latest candidate file marks winners. Rajasthan links nomination characteristics to results. Kerala records elected ward members, including those who subsequently hold council leadership positions. The reservation variable for those records refers to their ward, not the presidency.
 
@@ -150,9 +150,25 @@ The graduate-share difference is `r contrast(mg)`. The pending-case difference i
 
 The earlier Rajasthan municipal comparison and Kerala's urban descriptive tables belong to this urban evidence, not the rural estimates above. Rajasthan's category "high school or less" includes the twelfth standard; Mumbai's ends at the tenth. Those levels cannot be pooled as a common outcome. The historical tables remain available in the evidence archive, with their original denominators and qualifications.
 
+## Delhi
+
+Delhi adds three urban elections with a common outcome definition and geographic adjustment. The winner roster and assembly mapping for 2012 and 2017 come from Goyal's replication deposit [@delhigoyal]. For 2022, the OpenCity/Lok Dhaba result compilation supplies winners, and the SEC gazette supplies reservation and assembly identifiers [@delhi2022results; @delhi2022seats, Annexure B]. All 2022 reservation labels agree between the compilation and the gazette. The 2012 labels also match the official schedule [@delhi2012seats, Annexures I–III].
+
+Qualifications are extracted directly from MyNeta's election-specific winner profiles, with source URLs and cached responses retained [@delhimyneta]. Each linked profile identifies a winner in the same ward and agrees with the roster's party. Missing profiles and unspecified schooling remain missing. The unlinked 2022 winners are the same two omitted by ADR because clear, complete affidavits were unavailable when its report was prepared [@delhiadr2022, p. 3]. Pending cases are read from the accusation or pending-case tables, excluding the separate conviction tables. MyNeta's headline criminal-case total can include both and is not used as the pending-case outcome.
+
+```{r delhi-plot, fig.cap="Urban Delhi: separate election-year estimates with assembly-constituency and caste-reservation effects. Bars are pointwise 95% confidence intervals clustered by assembly constituency. Each outcome uses winners with that attribute classified. Pending cases are allegations, not convictions. Sources: Goyal’s replication deposit, OpenCity/Lok Dhaba results, Delhi SEC reservation schedules and MyNeta winner profiles."}
+knitr::include_graphics(normalizePath("output/delhi/quality.png"))
+```
+
+The graduate-share differences are `r contrast(get_delhi(2012))`, `r contrast(get_delhi(2017))` and `r contrast(get_delhi(2022))` in 2012, 2017 and 2022, respectively. None of the intervals establishes the direction of the education effect. Missing-data bounds permit either sign in the first two elections. The 2022 all-winner coefficient remains negative under every completion of missing education, but those bounds omit sampling uncertainty; they do not overturn the regression interval's uncertainty about the sign.
+
+Pending-case differences are `r contrast(get_delhi(2012, "any_criminal"))`, `r contrast(get_delhi(2017, "any_criminal"))` and `r contrast(get_delhi(2022, "any_criminal"))`, respectively. All three remain negative under every binary completion of missing case records. These results concern recorded allegations, not proven misconduct or overall governing ability. The appendix reports age, education thresholds, coverage and missing-record bounds.
+
+Source reconciliation matters here. The older local CSVs agree with Karekurve-Ramachandra and Lee's deposited graduate coding [@delhi2012data; @delhi2017data; @delhikarekurve]. Against the currently retrieved profiles, however, graduate status differs for `r num(delhi_comparison$disagreements[delhi_comparison$year == 2012])` of `r num(delhi_comparison$joint[delhi_comparison$year == 2012])` jointly classified winners in 2012 and `r num(delhi_comparison$disagreements[delhi_comparison$year == 2017])` of `r num(delhi_comparison$joint[delhi_comparison$year == 2017])` in 2017. The analysis therefore uses the source profiles consistently across elections. This audit establishes disagreements with the older coding, without identifying the origin of those differences. The profiles themselves summarize self-declared affidavits; the underlying scans have not been independently re-read.
+
 # Discussion
 
-The clearest negative education differences occur among rural village heads in Bihar and UP. Rajasthan's missing qualifications prevent an all-winner conclusion. Kerala supplies evidence on different offices, with smaller ward-member estimates and wider uncertainty about their signs. Mumbai supplies an urban comparison in which the graduate-share estimate is positive but imprecise, while the pending-case estimate is negative. The paper does not estimate an urban-rural difference or a national average.
+The clearest negative education differences occur among rural village heads in Bihar and UP. Rajasthan's missing qualifications prevent an all-winner conclusion. Kerala supplies evidence on different offices, with smaller ward-member estimates and wider uncertainty about their signs. Mumbai supplies an urban comparison in which the graduate-share estimate is positive but imprecise, while the pending-case estimate is negative. Delhi supplies three further urban elections with imprecise graduate-share differences and negative pending-case estimates. The paper does not estimate an urban-rural difference or a national average.
 
 A quantitative synthesis would need a common outcome and office, comparable reservation contrasts, and an accounting of shared samples. Schooling years, graduate shares, political knowledge and same-gender selection scores cannot be averaged as though they measured the same quantity. Multiple education thresholds from one sample also do not create independent evidence. The current evidence supports an organized comparison; a pooled reservation-effect estimate requires further harmonization.
 
@@ -176,7 +192,7 @@ The confidence intervals reflect regression uncertainty conditional on the extra
 
 The scripts retain source identifiers, sample counts, recoding dictionaries and typed Parquet analysis files. Input hashes pin the local files used here. Some UP inputs come from integration work whose central adapter has uncommitted changes; the repository preserves the adapter diff and byte hashes rather than presenting that state as a published release. The final data release should reconcile those changes upstream. The included analysis snapshots allow inspection of the fitted samples in the meantime.
 
-The 2021 Bihar candidate release lacks statewide structured winner education. Its current reservation feeds and historical source checks are retained upstream; no 2021 Bihar reservation-effect estimate enters this paper. Delhi's municipal files are a separate potential urban extension whose source provenance and field coding still need verification.
+The 2021 Bihar candidate release lacks statewide structured winner education. Its current reservation feeds and historical source checks are retained upstream; no 2021 Bihar reservation-effect estimate enters this paper. Delhi’s linked source profiles cover the recorded winner universe incompletely; the appendix includes every unlinked winner in the missing-record bounds.
 
 The missing-education bounds hold the all-winner regression design fixed and allow each unclassified graduate indicator to be either zero or one. After residualizing reservation on the controls, the coefficient is a weighted sum of outcomes. Assigning missing outcomes according to the signs of those weights gives the exact minimum and maximum coefficient. These bounds concern the adjusted coefficient, not the causal effect, and contain no sampling uncertainty. UP's bounds remain negative in each election; Rajasthan's and Kerala's include both signs.
 
@@ -208,6 +224,35 @@ cat("\n\n## Age\n\n")
 print(age_table(rural))
 ```
 
+\clearpage
+
+# Appendix: Delhi estimates and coverage
+
+```{r delhi-complete, results='asis'}
+delhi_table <- delhi %>% mutate(
+  Outcome = recode(outcome, graduate_plus = "Graduate or above", illiterate = "Illiterate",
+                   age = "Age (years)", any_criminal = "Any pending case"),
+  scale = if_else(outcome == "age", 1, 100),
+  `Difference [95% CI]` = interval_text(estimate, conf_low, conf_high, scale), N = num(n), G = num(clusters)
+) %>% select(Year = year, Outcome, `Difference [95% CI]`, N, G)
+kable(delhi_table, caption = "Delhi councillors: adjusted differences in percentage points, except age in years. Assembly-constituency and caste-reservation controls; pointwise intervals clustered by assembly constituency. G denotes clusters.", booktabs = TRUE, longtable = TRUE)
+delhi_coverage <- read_csv("output/delhi/descriptive.csv", show_col_types = FALSE) %>% mutate(
+  Seat = if_else(quota == 1, "Women", "Open"),
+  `Education (%)` = fmt(100 * education_n / n), `Age (%)` = fmt(100 * age_n / n),
+  `Cases (%)` = fmt(100 * cases_n / n), N = num(n)
+) %>% select(Year = year, Seat, N, `Education (%)`, `Age (%)`, `Cases (%)`)
+kable(delhi_coverage, caption = "Delhi outcome coverage among recorded winners. Percentages use all winners of each seat type as the denominator.", booktabs = TRUE, longtable = TRUE)
+delhi_bound_table <- delhi_missing %>% mutate(
+  Outcome = recode(outcome, graduate_plus = "Graduate or above", any_criminal = "Any pending case"),
+  Lower = fmt(lower * 100), Upper = fmt(upper * 100), Missing = num(missing), N = num(n)
+) %>% select(Year = year, Outcome, Lower, Upper, Missing, N)
+kable(delhi_bound_table, caption = "Delhi missing-outcome bounds on the adjusted all-winner coefficient, in percentage points. These are not confidence intervals and allow no sampling or transcription uncertainty.", booktabs = TRUE, longtable = TRUE)
+```
+
+\clearpage
+
 # References {-}
+
+\small
 
 <div id="refs"></div>

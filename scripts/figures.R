@@ -64,3 +64,16 @@ save_evidence(
   interval_plot(mumbai, "Urban: Mumbai councillors, 2012 and 2017"),
   "output/mumbai/quality", 7, 2.8
 )
+delhi <- read_csv("output/delhi/regressions.csv", show_col_types = FALSE) |>
+  filter(outcome %in% c("graduate_plus", "any_criminal")) |>
+  mutate(
+    label = factor(year, levels = c(2022, 2017, 2012)),
+    outcome = factor(outcome,
+      levels = c("graduate_plus", "any_criminal"),
+      labels = c("Graduate or above", "Any pending criminal case")
+    )
+  )
+save_evidence(
+  interval_plot(delhi, "Urban: Delhi councillors") + facet_wrap(~outcome, nrow = 1),
+  "output/delhi/quality", 8, 3.4
+)

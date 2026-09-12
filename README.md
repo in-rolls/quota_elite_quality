@@ -16,7 +16,13 @@ Bihar and UP show lower graduate shares among elected village heads. Rajasthan h
 
 Mumbai's reserved-seat councillors have fewer pending criminal cases and a higher estimated graduate share, although the education interval includes zero. Cases are allegations, not convictions. [Estimates and intervals](output/mumbai/regressions.csv).
 
-![Urban Mumbai: graduate share and pending criminal cases](output/mumbai/quality.png)
+[Mumbai figure](output/mumbai/quality.png)
+
+Delhi adds the 2012, 2017 and 2022 elections. Graduate-share intervals include zero in each; reserved-seat winners have fewer recorded pending cases in all three. The regressions control for assembly constituency and caste reservation, with clustering by assembly constituency. [Estimates](output/delhi/regressions.csv) · [Coverage](output/delhi/descriptive.csv) · [Missing-record bounds](output/delhi/missing_outcome_bounds.csv).
+
+![Urban Delhi: graduate share and pending criminal cases by election](output/delhi/quality.png)
+
+Delhi qualifications now come from [individual MyNeta profiles](output/delhi/source_links.csv), after source checks exposed conflicting education entries in the older files. Winner rosters and geography come from [Goyal’s deposit](https://doi.org/10.7910/DVN/9XPV4I), [2022 results](https://data.opencity.in/dataset/delhi-mcd-elections-2022) and the [SEC gazette](https://sec.delhi.gov.in/sites/default/files/SEC/generic_multiple_files/reservationorder_0.pdf). Missing profiles stay missing; conviction tables are excluded from pending cases. [Upstream data and parser](https://github.com/in-rolls/local_reservations/tree/d806f279f5ddba4952580e1ea63d90c11cda573e/data/delhi). [Source audit](output/delhi/source_comparison.csv) · [SEC source excerpt](evidence/delhi_2022_reservation_annexure_b.png) · [ADR education table](evidence/delhi_2022_adr_education.png).
 
 The manuscript opens with an abstract, evidence on why education, experience, criminal cases, age and economic resources may matter for governing, and existing reservation studies. It distinguishes causal findings from associations and includes contrary evidence on education. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table. [Historical descriptive tables](evidence/legacy_readme_tables.json) preserve the earlier README's candidate and municipal tabulations.
 

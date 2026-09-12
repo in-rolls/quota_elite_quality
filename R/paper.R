@@ -6,6 +6,14 @@ suppressPackageStartupMessages({
 source("R/style.R")
 rural <- read_csv("output/rural_estimates.csv", show_col_types = FALSE)
 mumbai <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE)
+delhi <- read_csv("output/delhi/regressions.csv", show_col_types = FALSE)
+delhi_flow <- read_csv("output/delhi/sample_flow.csv", show_col_types = FALSE)
+delhi_missing <- read_csv("output/delhi/missing_outcome_bounds.csv", show_col_types = FALSE)
+get_delhi <- function(year, outcome = "graduate_plus") {
+  row <- delhi |> filter(.data$year == .env$year, .data$outcome == .env$outcome)
+  stopifnot(nrow(row) == 1)
+  row
+}
 fmt <- function(x, digits = 1) formatC(x, format = "f", digits = digits)
 num <- function(x) format(x, big.mark = ",", scientific = FALSE, trim = TRUE)
 get_result <- function(state, year, tier, outcome = "graduate_plus") {
@@ -63,3 +71,10 @@ age_table <- function(d) {
     "N: winners with age recorded; G: geographic clusters. Controls match the education models."
   ), booktabs = TRUE, row.names = FALSE, longtable = TRUE)
 }
+
+delhi_comparison <- read_csv("output/delhi/source_comparison.csv", show_col_types = FALSE) |>
+  group_by(year) |>
+  summarise(
+    joint = sum(!is.na(graduate_disagreement)),
+    disagreements = sum(graduate_disagreement, na.rm = TRUE), .groups = "drop"
+  )
