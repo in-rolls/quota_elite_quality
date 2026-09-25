@@ -1,7 +1,7 @@
 # Mumbai (BMC) councillors: does the women's quota change who gets elected?
-# Reads the Praja ward-by-wave table held in the sibling local_reservations
+# Reads the Praja ward-by-wave table held in the sibling local_elections
 # clone (affidavit fields for the 2012 and 2017 councils; the 2007 council has
-# none). The performance side of the same data lives in ../quota_unquote.
+# none). The performance side of the same data lives in ../quota_governance.
 # Run from the repo root: Rscript scripts/mumbai.R
 
 suppressPackageStartupMessages({
