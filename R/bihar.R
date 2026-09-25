@@ -13,16 +13,12 @@ education_outcomes <- function(x) {
   )
 }
 
+# The 2016 release derives each winner (top vote, uncontested, or a tie drawn by lot) and
+# names none where the source cannot decide: a serial repeated with different votes, a tie
+# with no lot mark, or several uncontested candidates. Those seats stay without a winner.
 select_winners <- function(candidates) {
-  candidates |>
-    group_by(row_id) |>
-    mutate(
-      contest_rows = n(),
-      recorded_winners = sum(elected == "1"),
-      selected = elected == "1" |
-        (recorded_winners == 0 & contest_rows == 1 & result == "Uncontested"),
-      selection_basis = if_else(elected == "1", "highest_recorded_votes", "sole_uncontested")
-    ) |>
-    filter(selected, !is.na(candidate_name), nzchar(trimws(candidate_name))) |>
-    ungroup()
+  filter(
+    candidates, coalesce(elected == "1", FALSE),
+    !is.na(candidate_name), nzchar(trimws(candidate_name))
+  )
 }

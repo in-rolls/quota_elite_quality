@@ -29,14 +29,11 @@ testthat::test_that("absorbed effects match explicit OLS and clustered score sum
   testthat::expect_equal(saved$estimate, unname(coef(explicit)["quota"]), tolerance = 1e-9)
 })
 
-testthat::test_that("uncontested records qualify only when the source has one candidate", {
+testthat::test_that("only winners the release names are selected", {
   candidates <- tibble(
-    row_id = c("a", "a", "b", "c", "d", "d", "e"),
-    candidate_name = c("A", "B", "C", "D", "E", "F", "G"),
-    elected = c("0", "1", "0", "0", "0", "0", "0"),
-    result = c("0", "0", "Uncontested", "Vacant", "Uncontested", "Uncontested", "0")
+    row_id = c("a", "a", "b", "c", "c", "d"),
+    candidate_name = c("A", "B", "C", "D", "E", " "),
+    elected = c("0", "1", "1", NA, NA, "1")
   )
-  d <- select_winners(candidates)
-  testthat::expect_equal(d$candidate_name, c("B", "C"))
-  testthat::expect_equal(d$selection_basis, c("highest_recorded_votes", "sole_uncontested"))
+  testthat::expect_equal(select_winners(candidates)$candidate_name, c("B", "C"))
 })

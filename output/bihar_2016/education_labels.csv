@@ -1,12 +1,12 @@
 candidate_education,education_known,n
-Literate,TRUE,113119
-Illiterate,TRUE,29734
-Higher,TRUE,21127
-Middle,TRUE,15865
-Inter,TRUE,14819
-Graduate,TRUE,8715
-Primary,TRUE,5749
-Post Graduate,TRUE,1008
+Literate,TRUE,112999
+Illiterate,TRUE,29711
+Higher,TRUE,21100
+Middle,TRUE,15853
+Inter,TRUE,14794
+Graduate,TRUE,8696
+Primary,TRUE,5740
+Post Graduate,TRUE,1005
 Others,FALSE,787
---,FALSE,30
+NA,FALSE,30
 illiterate,TRUE,2

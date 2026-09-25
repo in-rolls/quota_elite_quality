@@ -22,7 +22,7 @@ run_bihar <- function() {
     as_tibble() |>
     filter(year == 2016)
   stopifnot(
-    nrow(candidates) == 644507L, nrow(seats) == 219117L,
+    nrow(candidates) == 644537L, nrow(seats) == 227317L,
     !anyDuplicated(candidates$candidate_id), !anyDuplicated(seats$row_id),
     all(candidates$row_id %in% seats$row_id), all(candidates$year == 2016)
   )
@@ -31,28 +31,28 @@ run_bihar <- function() {
   stopifnot(!anyDuplicated(winners$row_id))
   winners <- winners |>
     left_join(
-      select(seats, row_id, quality_flags),
-      by = "row_id", relationship = "many-to-one"
+      select(seats, row_id, selection_basis = winner_basis),
+      by = "row_id", relationship = "one-to-one"
     ) |>
     mutate(
-      serial_ambiguous = grepl("serial_not_unique", coalesce(quality_flags, "")),
       quota = as.integer(woman_reserved),
       age = suppressWarnings(as.numeric(candidate_age)),
       age = if_else(age >= 21 & age <= 100, age, NA_real_),
       block_id = interaction(district, block, drop = TRUE, lex.order = TRUE),
       caste_reservation = factor(caste_reservation)
     )
+  stopifnot(!anyNA(winners$selection_basis))
   winners <- bind_cols(winners, education_outcomes(winners$candidate_education))
   flow <- seats |>
     select(row_id, tier, woman_reserved) |>
-    left_join(winners |> select(row_id, selection_basis, serial_ambiguous, education_known, age),
+    left_join(winners |> select(row_id, selection_basis, education_known, age),
       by = "row_id", relationship = "one-to-one"
     ) |>
     group_by(tier, woman_reserved) |>
     summarise(
       source_seats = n(), identified_winners = sum(!is.na(selection_basis)),
-      uncontested_winners = sum(selection_basis == "sole_uncontested", na.rm = TRUE),
-      ambiguous_serial = sum(serial_ambiguous, na.rm = TRUE),
+      uncontested_winners = sum(selection_basis == "uncontested", na.rm = TRUE),
+      lot_winners = sum(selection_basis == "lot", na.rm = TRUE),
       education_unknown = sum(!education_known, na.rm = TRUE),
       age_missing = sum(!is.na(selection_basis) & is.na(age)), .groups = "drop"
     )
@@ -62,7 +62,7 @@ run_bihar <- function() {
     file.path(out_dir, "education_labels.csv")
   )
   analysis <- winners |>
-    filter(!serial_ambiguous, !is.na(quota), !is.na(caste_reservation)) |>
+    filter(!is.na(quota), !is.na(caste_reservation)) |>
     select(
       row_id, tier, district, block, block_id, caste_reservation, quota,
       selection_basis, education_known, illiterate, graduate_plus, age
