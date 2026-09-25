@@ -4,7 +4,7 @@ suppressPackageStartupMessages({
   library(readr)
   library(stringr)
 })
-root <- Sys.getenv("RESERVATIONS_MASTER", "../local_elections/data/master")
+root <- Sys.getenv("LOCAL_ELECTIONS_MASTER", "../local_elections/data/master")
 extras <- read_parquet(file.path(root, "master_extras.parquet")) |>
   filter(column %in% c(
     "winner_education", "winner_age",

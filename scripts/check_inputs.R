@@ -1,4 +1,4 @@
-master_directory <- Sys.getenv("RESERVATIONS_MASTER", "../local_elections/data/master")
+master_directory <- Sys.getenv("LOCAL_ELECTIONS_MASTER", "../local_elections/data/master")
 inputs <- readr::read_csv("evidence/analysis_inputs.csv", show_col_types = FALSE)
 for (i in seq_len(nrow(inputs))) {
   path <- inputs$path[i]

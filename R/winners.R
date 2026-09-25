@@ -7,7 +7,7 @@ suppressPackageStartupMessages({
   library(fixest)
 })
 
-master_dir <- function() Sys.getenv("RESERVATIONS_MASTER", "../local_elections/data/master")
+master_dir <- function() Sys.getenv("LOCAL_ELECTIONS_MASTER", "../local_elections/data/master")
 
 read_seats <- function(state) {
   path <- file.path(master_dir(), paste0("master_", state, ".parquet"))
