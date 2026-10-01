@@ -4,9 +4,11 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 source("R/style.R")
-bihar <- read_csv("output/bihar_2016/regressions.csv", show_col_types = FALSE) |>
-  filter(primary) |>
-  mutate(state = "Bihar", year = 2016)
+bihar <- bind_rows(lapply(c(2016, 2021), function(year) {
+  read_csv(file.path("output", paste0("bihar_", year), "regressions.csv"), show_col_types = FALSE) |>
+    filter(primary) |>
+    mutate(state = "Bihar", year = year)
+}))
 rural <- bind_rows(bihar, bind_rows(lapply(c("uttar_pradesh", "rajasthan", "kerala"), function(state) {
   read_csv(file.path("output", state, "regressions.csv"), show_col_types = FALSE)
 }))) |> mutate(state = recode(state, uttar_pradesh = "Uttar Pradesh", rajasthan = "Rajasthan", kerala = "Kerala"))
@@ -42,7 +44,7 @@ save_evidence(
   "output/kerala/education", 9, 3.4
 )
 bihar_plot <- bihar |>
-  filter(outcome == "graduate_plus") |>
+  filter(year == 2016, outcome == "graduate_plus") |>
   mutate(
     label = factor(office_labels[tier], levels = rev(unname(office_labels)))
   )

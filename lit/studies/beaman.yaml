@@ -1,0 +1,42 @@
+key: beaman
+label: Beaman et al. (2009)
+version: Quarterly Journal of Economics 124(4), 2009
+url: https://www.povertyactionlab.org/sites/default/files/research-paper/310%20Female%20Quotas%20Nov%2009.pdf
+location: Table II, column 6, printed p. 1507
+setting:
+  state: West Bengal (Birbhum)
+  years: 2003 term
+  office: GP pradhan
+  design: Randomized rotation
+  sample_group: birbhum
+  controls: Block fixed effects; GP-clustered SEs
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: true
+  n_reserved: 55
+  n_open: 110
+  se_source: reported
+  note: Column 6 compares GPs reserved in 2003 (columns 1-2) with GPs unreserved in 2003 (columns 3-4); pooled group means are not reported. Group sizes are GP counts from p. 1506 (35 + 20 reserved, 36 + 74 unreserved); the surveyed pradhan count is not reported in the table.
+estimates:
+- outcome: Years of schooling
+  family: years
+  unit: years
+  diff: -2.104
+  se: 0.548
+  status: confirmed
+  source: Table II, column 6, Years of education
+- outcome: First time as pradhan in 2003 term
+  family: first_time
+  unit: share
+  diff: 0.265
+  se: 0.068
+  status: confirmed
+  source: Table II, column 6
+- outcome: Other political experience
+  family: prior_office
+  unit: share
+  diff: -0.121
+  se: 0.079
+  status: confirmed
+  source: Table II, column 6

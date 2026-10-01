@@ -1,0 +1,49 @@
+key: afridi
+label: Afridi, Iversen and Sharan (2013)
+version: IZA discussion paper 7212, February 2013
+url: https://docs.iza.org/dp7212.pdf
+location: Table 2, panel I, printed p. 38
+setting:
+  state: Andhra Pradesh (8 districts)
+  years: In office 2006-10
+  office: GP sarpanch
+  design: Descriptive
+  sample_group: andhra_2006
+  controls: None
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: false
+  n_reserved: 128
+  n_open: 169
+  se_source: reported
+  note: The paper reports unreserved minus reserved; the sign is reversed here.
+estimates:
+- outcome: Illiterate
+  family: illiterate
+  unit: share
+  reserved: 0.09
+  open: 0.00
+  diff: 0.09
+  se: 0.022
+  status: confirmed
+  source: Table 2, panel I
+- outcome: Higher secondary or more
+  family: secondary_plus
+  unit: share
+  reserved: 0.15
+  open: 0.54
+  diff: -0.40
+  se: 0.052
+  status: confirmed
+  source: Table 2, panel I
+  note: The reported difference (0.40) differs from the rounded means (0.39).
+- outcome: Own prior political experience
+  family: prior_office
+  unit: share
+  reserved: 0.11
+  open: 0.22
+  diff: -0.11
+  se: 0.044
+  status: confirmed
+  source: Table 2, panel I

@@ -1,0 +1,48 @@
+key: cd
+label: Chattopadhyay and Duflo (2001)
+version: NBER working paper 8615, December 2001
+url: https://www.nber.org/system/files/working_papers/w8615/w8615.pdf
+location: Table 3, panels A and B
+setting:
+  state: West Bengal (Birbhum)
+  years: 1998 term
+  office: GP pradhan
+  design: Randomized rotation
+  sample_group: birbhum
+  controls: None
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: false
+  n_reserved: 54
+  n_open: 107
+  se_source: reported
+estimates:
+- outcome: Years of schooling
+  family: years
+  unit: years
+  reserved: 7.13
+  open: 9.92
+  diff: -2.79
+  se: 0.54
+  status: confirmed
+  source: Table 3, panel A, Education
+- outcome: Literate
+  family: literate
+  unit: share
+  reserved: 0.80
+  open: 0.98
+  diff: -0.19
+  se: 0.04
+  status: confirmed
+  source: Table 3, panel A, Literacy
+  note: The reported difference (-0.19) differs from the rounded means (-0.18).
+- outcome: Elected to GP council before 1998
+  family: prior_office
+  unit: share
+  reserved: 0.11
+  open: 0.43
+  diff: -0.32
+  se: 0.07
+  status: confirmed
+  source: Table 3, panel B

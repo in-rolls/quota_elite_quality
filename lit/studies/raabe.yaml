@@ -1,0 +1,38 @@
+key: raabe
+label: Raabe, Sekher and Birner (2009)
+version: IFPRI discussion paper 00878, 2009
+url: https://cgspace.cgiar.org/server/api/core/bitstreams/c85053d0-fd33-400a-b7bb-05a04874175f/content
+location: Table 4
+setting:
+  state: Karnataka (12 districts)
+  years: 2006 survey
+  office: GP president
+  design: Descriptive
+  sample_group: karnataka_2006
+  controls: None
+defaults:
+  population: winners
+  comparison: reserved_women_vs_men
+  adjusted: false
+  n_reserved: 23
+  n_open: 48
+  se_source: computed
+  note: Compares women in women-reserved seats with men in any other seat, so it mixes reservation with gender. SE computed from counts as an independent-proportions SE.
+estimates:
+- outcome: Illiterate
+  family: illiterate
+  unit: share
+  reserved: 0.09
+  open: 0.04
+  diff: 0.05
+  status: confirmed
+  source: Table 4 (2 of 23; 2 of 48)
+- outcome: Degree or above
+  family: graduate
+  unit: share
+  reserved: 0.00
+  open: 0.19
+  diff: -0.19
+  status: confirmed
+  source: Table 4 (0 of 23; 9 of 48)
+  note: Zero reserved graduates, so the computed SE reflects the open group only.

@@ -19,6 +19,7 @@ paper: figures
 	$(MAKE) manuscript
 
 manuscript:
+	Rscript scripts/lit_table.R
 	Rscript -e 'options(tinytex.install_packages = FALSE); rmarkdown::render("manuscript/main.Rmd", knit_root_dir = getwd(), quiet = TRUE)'
 
 format:

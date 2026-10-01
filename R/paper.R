@@ -15,6 +15,17 @@ get_delhi <- function(year, outcome = "graduate_plus") {
   row
 }
 fmt <- function(x, digits = 1) formatC(x, format = "f", digits = digits)
+# Rajasthan is left out of the head range because missing education leaves its all-winner sign open.
+setting_summary <- function() {
+  heads <- rural |> filter(tier == "gp_head", outcome == "graduate_plus", state %in% c("Bihar", "Uttar Pradesh"))
+  kerala <- rural |> filter(state == "Kerala", tier == "gp_ward", outcome == "graduate_plus")
+  cases <- c(mumbai$coef_quota[mumbai$outcome == "any_criminal"], delhi$estimate[delhi$outcome == "any_criminal"])
+  list(
+    head_gap = 100 * range(-heads$estimate),
+    kerala_bound = 100 * max(abs(c(kerala$conf_low, kerala$conf_high))),
+    case_gap = 100 * range(-cases)
+  )
+}
 num <- function(x) format(x, big.mark = ",", scientific = FALSE, trim = TRUE)
 get_result <- function(state, year, tier, outcome = "graduate_plus") {
   row <- rural |> filter(

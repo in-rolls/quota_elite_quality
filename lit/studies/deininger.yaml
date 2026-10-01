@@ -1,0 +1,45 @@
+key: deininger
+label: Deininger et al. (2011)
+version: World Bank working paper 5708, June 2011
+url: https://documents1.worldbank.org/curated/en/595231468040603055/pdf/WPS5708.pdf
+location: Table 3, printed p. 22
+setting:
+  state: National (REDS, 233 villages)
+  years: Up to three elections; REDS 2007 survey
+  office: GP pradhan
+  design: Descriptive
+  sample_group: reds_2007
+  controls: None
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: false
+  n_reserved: 180
+  n_open: 459
+  se_source: computed
+  note: Observations are village-election pairs across up to three elections, so villages repeat. Shares reported in percent. SE computed as an independent-proportions SE, ignoring the repetition.
+estimates:
+- outcome: Illiterate
+  family: illiterate
+  unit: share
+  reserved: 0.2472
+  open: 0.0574
+  diff: 0.1898
+  status: confirmed
+  source: Table 3, Pradhan characteristics
+- outcome: At least secondary education
+  family: secondary_plus
+  unit: share
+  reserved: 0.2865
+  open: 0.6269
+  diff: -0.3404
+  status: confirmed
+  source: Table 3, Pradhan characteristics
+- outcome: Held political office before
+  family: prior_office
+  unit: share
+  reserved: 0.1167
+  open: 0.2424
+  diff: -0.1257
+  status: confirmed
+  source: Table 3, Pradhan characteristics

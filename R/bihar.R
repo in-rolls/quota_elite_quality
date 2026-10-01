@@ -16,9 +16,11 @@ education_outcomes <- function(x) {
 # The 2016 release derives each winner (top vote, uncontested, or a tie drawn by lot) and
 # names none where the source cannot decide: a serial repeated with different votes, a tie
 # with no lot mark, or several uncontested candidates. Those seats stay without a winner.
-select_winners <- function(candidates) {
+# In 2021 a seat's only nominee has no result record, so no candidate row is flagged;
+# `sole` names those seats, and their one candidate is the winner.
+select_winners <- function(candidates, sole = character()) {
   filter(
-    candidates, coalesce(elected == "1", FALSE),
+    candidates, coalesce(elected == "1", FALSE) | row_id %in% sole,
     !is.na(candidate_name), nzchar(trimws(candidate_name))
   )
 }
