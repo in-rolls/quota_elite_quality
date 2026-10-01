@@ -1,3 +1,4 @@
 source("tests/test_bihar_winners.R")
 source("tests/test_winners.R")
 source("tests/test_delhi.R")
+source("tests/test_literature.R")

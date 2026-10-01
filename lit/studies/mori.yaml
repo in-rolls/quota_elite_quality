@@ -1,0 +1,40 @@
+key: mori
+label: Mori et al. (2022)
+version: Working paper, September 15 2022; published in World Development 188, 2025
+url: https://www.isid.ac.in/~epu/acegd2022/papers/Yuko_Mori.pdf
+location: Table 3, panel B
+setting:
+  state: Karnataka (Kolar, Tumkur)
+  years: December 2020 election
+  office: GP member (single-seat)
+  design: Random rotation
+  sample_group: karnataka_2020
+  controls: GP fixed effects; history of reservation; GP-clustered SEs
+defaults:
+  adjusted: true
+  se_source: reported
+  n_reserved: 45
+  n_open: 52
+  note: Observations are constituencies (45 reserved, 52 general in the survey). The outcome is a selection score, the candidate's position in the villager education distribution, not years of schooling. The published version reports the relative benchmark.
+estimates:
+- outcome: Education position among all villagers
+  population: candidates
+  comparison: reserved_vs_open
+  family: selection_score
+  unit: index
+  diff: -0.41
+  se: 0.33
+  status: confirmed
+  location: Table 3, panel B, column 1
+  source: Table 3, panel B, column 1
+- outcome: Education position among same-gender villagers
+  population: winners
+  comparison: relative_own_gender
+  family: selection_score
+  unit: index
+  diff: 0.74
+  se: 0.44
+  n_total: 92
+  status: confirmed
+  location: Table 3, panel B, column 3
+  source: Table 3, panel B, column 3

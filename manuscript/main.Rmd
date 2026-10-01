@@ -20,6 +20,8 @@ header-includes:
   - \usepackage{longtable}
   - \usepackage{needspace}
   - \usepackage{caption}
+  - \usepackage{pdflscape}
+  - \usepackage{ragged2e}
   - \captionsetup{font=small,labelfont=bf}
 ---
 
@@ -67,15 +69,11 @@ Income and wealth capture economic resources and social position. Higher househo
 
 # Existing evidence
 
-Lower schooling and less experience under reservation appear in several rural studies. In the 2001 working paper's West Bengal sample, reserved council heads have 7.13 rather than 9.92 years of schooling, a difference of −2.79 years (SE 0.54); 11% rather than 43% had previously been elected to the council [@cd, Table 3]. In the subsequent Birbhum council term, the adjusted schooling gap is −2.10 years (SE 0.55), and reserved leaders are 26.5 percentage points more likely to be first-time pradhans (SE 6.8) [@beaman, Table II, column 6]. These samples overlap geographically and are not independent national tests.
+Table \ref{tab:literature} in the appendix collects the published comparisons, one row per study and outcome, with the source table for each number. Among elected village heads, every comparison of women-reserved and open seats finds less schooling under reservation, and each that measures political experience finds less of it. The schooling gap is about two to three years where it is measured in years: −2.79 (SE 0.54) in West Bengal's 1998 term [@cd, Table 3], −2.10 (SE 0.55) in the next Birbhum term [@beaman, Table II, column 6] and −2.62 (SE 0.77) in four southern states [@ban, Table 9]. In shares, reserved heads are less likely to have secondary schooling in a national village panel and in Andhra Pradesh [@deininger, Table 3; @afridi, Table 2], and in Bihar the reserved winner has 0.92 SD fewer years of schooling at the reservation threshold [@bamezai, Table 7].
 
-The May 2007 southern-state draft, published in 2008, reports −2.62 years of schooling (SE 0.77) and a political-knowledge gap of −1.41 points (SE 0.29). That regression excludes caste-reserved councils [@ban, Table 9]. Karnataka's descriptive comparison reports degrees among none of the 23 reserved female presidents and among 19% of the 48 male presidents. Illiteracy is 9% and 4%, respectively; the comparison also conditions on the leader's gender, so it is not a clean reservation contrast [@raabe, Tables 3–4].
+These rows are not independent tests. The two West Bengal studies use the same Birbhum councils in successive terms. About half the rows are differences in means without controls, and two use different comparison groups: Karnataka's descriptive table compares reserved women with men in all other seats, so it mixes reservation with gender [@raabe, Table 4], and the Karnataka candidate study measures position in the villager education distribution rather than schooling [@mori, Table 3].
 
-The 2011 working paper on the NCAER village panel, published in 2015, reports illiteracy of 24.72% in reserved observations versus 5.74% in unreserved observations, secondary education or above of 28.65% versus 62.69%, and previous officeholding of 11.67% versus 24.24%. These are descriptive comparisons across 180 reserved and 459 unreserved observations [@deininger, Table 3]. The 2013 Andhra Pradesh working paper, published in 2017, reports that 15% of reserved heads versus 54% of unreserved heads have higher-secondary schooling or more; 11% versus 22% have prior political experience. The characteristics table covers 128 reserved and 169 unreserved heads [@afridi, Table 2].
-
-Recent studies require additional distinctions. The September 2022 Karnataka candidate draft reports lower absolute qualification distributions under reservation [@mori, Figure 2 and Table 3]. The published article reports stronger cognitive selection relative to the eligible female population [@moripublished]. That relative benchmark does not establish that reservation increases the elected elite's absolute qualifications. It also concerns candidates. The March 2026 Bihar threshold draft reports standardized schooling effects of −0.765 SD for candidates (SE 0.024; N=44,583) and −0.921 SD for winners (SE 0.073; N=3,294). Substituting husbands' schooling gives −0.147 SD and −0.364 SD, respectively [@bamezai, Table 7]. Spousal schooling does not reveal who governs.
-
-Favorable judgments about participation, voter attitudes or policy performance address different outcomes. They can coexist with lower schooling among entrants. Likewise, a positive selection score relative to same-gender citizens can coexist with lower absolute schooling. A synthesis of the reservation effect must keep the outcome, elected status, comparison group and office fixed before combining estimates. The studies reviewed here do not yet supply a harmonized meta-analysis.
+The benchmark also matters. Relative to eligible women, reserved leaders are positively selected: the published Karnataka article reports stronger selection among women [@moripublished], and the Bihar threshold study finds reserved candidates more educated than the average woman [@bamezai, Section 7.2.2]. That relative benchmark does not establish that reservation raises the elected elite's absolute qualifications. Substituting husbands' schooling shrinks the Bihar winner gap to −0.36 SD, but spousal schooling does not reveal who governs. Favorable findings on participation, voter attitudes or policy concern different outcomes and can coexist with lower schooling among entrants. A synthesis must hold the outcome, elected status, comparison group and office fixed before combining estimates; the studies here do not yet support a harmonized meta-analysis.
 
 # Data and empirical strategy
 
@@ -178,7 +176,21 @@ A quantitative synthesis would need a common outcome and office, comparable rese
 
 \clearpage
 
-# Appendix: measurement and reproducibility
+# References {-}
+
+\small
+
+<div id="refs"></div>
+
+\normalsize
+
+\clearpage
+
+\appendix
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+
+# Measurement and reproducibility
 
 ```{r missingness, results='asis'}
 coverage <- bind_rows(lapply(c("uttar_pradesh", "rajasthan", "kerala"), function(state) {
@@ -210,7 +222,7 @@ bound_table <- bounds %>% mutate(
 kable(bound_table, caption = "Missing-education bounds on the adjusted all-winner graduate-share difference (percentage points). These are not confidence intervals.", booktabs = TRUE, longtable = TRUE)
 ```
 
-# Appendix: complete rural estimates
+# Complete rural estimates
 
 ```{r complete-results, results='asis'}
 for (state in unique(rural$state)) {
@@ -230,7 +242,7 @@ print(age_table(rural))
 
 \clearpage
 
-# Appendix: Delhi estimates and coverage
+# Delhi estimates and coverage
 
 ```{r delhi-complete, results='asis'}
 delhi_table <- delhi %>% mutate(
@@ -255,8 +267,8 @@ kable(delhi_bound_table, caption = "Delhi missing-outcome bounds on the adjusted
 
 \clearpage
 
-# References {-}
+# Published comparisons
 
-\small
-
-<div id="refs"></div>
+```{r literature-table, results='asis'}
+if (knitr::is_latex_output()) cat(readLines("output/literature_table.tex"), sep = "\n")
+```

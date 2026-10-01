@@ -1,0 +1,47 @@
+key: ban
+label: Ban and Rao (2007)
+version: Working paper, May 2007; published in Economic Development and Cultural Change 56(3), 2008
+url: https://vijayendrarao.org/papers/EDCC_Reservations_to_go.pdf
+location: Table 8 (means), Table 9 column 2 (difference)
+setting:
+  state: Andhra Pradesh, Karnataka, Kerala, Tamil Nadu
+  years: 2002 survey
+  office: GP president
+  design: Rotation; caste-reserved GPs excluded
+  sample_group: south_india_2002
+  controls: Block fixed effects, SC/ST, religion, household and village covariates; GP-clustered SEs
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: true
+  n_reserved: 27
+  n_open: 79
+  se_source: reported
+  note: Means are unadjusted (Table 8); the difference is the adjusted Table 9 coefficient, so it need not equal reserved minus open.
+estimates:
+- outcome: Years of schooling
+  family: years
+  unit: years
+  reserved: 6.074
+  open: 8.456
+  diff: -2.620
+  se: 0.766
+  status: confirmed
+  source: Table 8 columns 4-5; Table 9 column 2
+- outcome: Political knowledge score
+  family: knowledge
+  unit: index
+  reserved: 3.185
+  open: 4.608
+  diff: -1.413
+  se: 0.292
+  status: confirmed
+  source: Table 8 columns 4-5; Table 9 column 2
+  note: Table 9 marks no significance stars on this coefficient although its t-ratio is about -4.8.
+- outcome: Prior political positions (count)
+  family: prior_office
+  unit: count
+  diff: -0.461
+  se: 0.188
+  status: confirmed
+  source: Table 9 column 2; categories 0, 1, 2+ in Table 8

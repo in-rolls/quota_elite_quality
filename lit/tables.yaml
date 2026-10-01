@@ -1,0 +1,22 @@
+caption: Published comparisons of leader qualifications by women's reservation
+label: tab:literature
+study_order: [cd, beaman, ban, raabe, deininger, afridi, mori, bamezai]
+sections:
+- heading: Elected leaders, women-reserved vs. open seats
+  population: winners
+  comparison: [reserved_vs_open]
+- heading: Elected leaders, reserved women vs. men in other seats
+  population: winners
+  comparison: [reserved_women_vs_men]
+- heading: Candidates, women-reserved vs. open seats
+  population: candidates
+  comparison: [reserved_vs_open]
+- heading: Elected leaders, other benchmarks
+  population: winners
+  comparison: [relative_own_gender, husband_vs_open]
+comparison_labels:
+  relative_own_gender: Reserved winner's position among women vs. open winner's position among men
+  husband_vs_open: Reserved winner's husband vs. open-seat winner
+notes:
+- Reserved and Open are group means; shares are in percent. Difference is reserved minus open, in the outcome's unit (percentage points for shares), with its standard error in parentheses. Adjusted differences come from the study's regression and need not equal the difference in means. A dagger marks an SE computed from reported shares and group sizes as for independent samples; these ignore clustering. N is the number of reserved plus open units where reported separately, otherwise the regression sample. SD rows are standardized against the GP's citizens; selection-score rows measure position in the villager education distribution.
+- Chattopadhyay and Duflo (2001) and Beaman et al. (2009) study the same Birbhum GPs in successive terms. Mori et al.'s published version (2025) reports the same-gender benchmark. Row-level source locations and transcription notes are in the repository's lit/studies files.
