@@ -143,7 +143,10 @@ economic_table <- function() {
   ) |>
     mutate(
       Outcome = unname(outcomes[outcome]), scale = if_else(outcome == "log_assets", 1, 100),
-      `Difference [95% CI]` = interval_text(estimate, conf_low, conf_high, scale),
+      digits = if_else(outcome %in% c("log_assets", "criminal_record"), 2, 1),
+      `Difference [95% CI]` = sprintf(
+        "%.*f [%.*f, %.*f]", digits, estimate * scale, digits, conf_low * scale, digits, conf_high * scale
+      ),
       N = num(n)
     ) |>
     arrange(match(outcome, names(outcomes)), state, year) |>
