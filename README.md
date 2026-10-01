@@ -2,7 +2,7 @@
 
 How does reserving an office for women change the qualifications of the person elected? We analyze **rural panchayats and urban councils separately**, by state, election and office.
 
-**[Read the manuscript](manuscript/main.pdf)** · [Editable source](manuscript/main.Rmd) · [Original paper excerpts](evidence/) · [Source links and table locations](evidence/sources.csv) · [Input hashes](evidence/analysis_inputs.csv)
+**[Read the manuscript](manuscript/main.pdf)** · [Editable source](manuscript/main.Rmd) · [Evidence guide](evidence/) · [Original paper excerpts](evidence/excerpts/) · [Source links and table locations](evidence/sources.csv) · [Input hashes](evidence/analysis_inputs.csv)
 
 ## Rural panchayats
 
@@ -22,7 +22,7 @@ Delhi adds the 2012, 2017 and 2022 elections. Graduate-share intervals include z
 
 ![Urban Delhi: graduate share and pending criminal cases by election](output/delhi/quality.png)
 
-Delhi qualifications now come from [individual MyNeta profiles](output/delhi/source_links.csv), after source checks exposed conflicting education entries in the older files. Winner rosters and geography come from [Goyal’s deposit](https://doi.org/10.7910/DVN/9XPV4I), [2022 results](https://data.opencity.in/dataset/delhi-mcd-elections-2022) and the [SEC gazette](https://sec.delhi.gov.in/sites/default/files/SEC/generic_multiple_files/reservationorder_0.pdf). Missing profiles stay missing; conviction tables are excluded from pending cases. [Upstream data and parser](https://github.com/in-rolls/local_elections/tree/d806f279f5ddba4952580e1ea63d90c11cda573e/data/delhi). [Source audit](output/delhi/source_comparison.csv) · [SEC source excerpt](evidence/delhi_2022_reservation_annexure_b.png) · [ADR education table](evidence/delhi_2022_adr_education.png).
+Delhi qualifications now come from [individual MyNeta profiles](output/delhi/source_links.csv), after source checks exposed conflicting education entries in the older files. Winner rosters and geography come from [Goyal’s deposit](https://doi.org/10.7910/DVN/9XPV4I), [2022 results](https://data.opencity.in/dataset/delhi-mcd-elections-2022) and the [SEC gazette](https://sec.delhi.gov.in/sites/default/files/SEC/generic_multiple_files/reservationorder_0.pdf). Missing profiles stay missing; conviction tables are excluded from pending cases. [Upstream data and parser](https://github.com/in-rolls/local_elections/tree/d806f279f5ddba4952580e1ea63d90c11cda573e/data/delhi). [Source audit](output/delhi/source_comparison.csv) · [SEC source excerpt](evidence/excerpts/delhi_2022_reservation_annexure_b.png) · [ADR education table](evidence/excerpts/delhi_2022_adr_education.png).
 
 The manuscript opens with an abstract, evidence on why education, experience, criminal cases, age and economic resources may matter for governing, and existing reservation studies. It distinguishes causal findings from associations and includes contrary evidence on education. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table. [Historical descriptive tables](evidence/legacy_readme_tables.json) preserve the earlier README's candidate and municipal tabulations.
 
@@ -30,7 +30,7 @@ The manuscript opens with an abstract, evidence on why education, experience, cr
 
 Reserved-seat winners are far more likely to report no occupation in Rajasthan, Kerala and Delhi, including where their education matches open-seat winners', and declare fewer assets in Rajasthan and Uttar Pradesh. [Estimates](output/rural_estimates.csv) · [occupation labels](output/kerala/occupation_labels.csv).
 
-Published reserved-vs-open schooling comparisons among village heads pool to a standardized difference of about −0.9 across five independent samples; this paper's graduate-share gaps pool by setting. [Forest plots and meta-analyses](output/meta/) · [study files](lit/studies/).
+Published reserved-vs-open schooling comparisons among village heads pool to a standardized difference of about −0.9 across five independent samples; this paper's graduate-share gaps pool by setting. [Forest plots and meta-analyses](output/meta/) · [study files](evidence/literature/studies/).
 
 [Deposit audit](evidence/deposit_audit.md): the Delhi 2012 education in Karekurve-Ramachandra and Lee's AJPS deposit agrees with winners' MyNeta profiles no better than chance; their Mumbai deposit agrees.
 

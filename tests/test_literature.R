@@ -2,13 +2,31 @@ source("R/literature.R")
 
 lit <- read_literature()
 
+testthat::test_that("literature studies have source-registry entries", {
+  sources <- readr::read_csv("evidence/sources.csv", show_col_types = FALSE)
+  testthat::expect_true(all(lit$key %in% sources$citation))
+})
+
+testthat::test_that("registered artifacts exist and match their recorded hashes", {
+  sources <- readr::read_csv("evidence/sources.csv", show_col_types = FALSE)
+  artifacts <- sources[!is.na(sources$artifact) & nzchar(sources$artifact), ]
+  paths <- file.path("evidence", artifacts$artifact)
+  testthat::expect_true(all(file.exists(paths)), info = paste(paths[!file.exists(paths)], collapse = ", "))
+  hashed <- which(!is.na(artifacts$artifact_sha256) & nzchar(artifacts$artifact_sha256))
+  for (i in hashed) {
+    testthat::expect_equal(
+      digest::digest(paths[i], algo = "sha256", file = TRUE), artifacts$artifact_sha256[i], info = paths[i]
+    )
+  }
+})
+
 testthat::test_that("literature rows carry the fields the table and later pooling need", {
   required <- c("key", "outcome", "family", "unit", "population", "comparison", "diff", "se", "se_source", "status")
   testthat::expect_true(all(required %in% names(lit)))
   testthat::expect_false(anyNA(lit[required]))
   testthat::expect_true(all(lit$status == "confirmed"))
   testthat::expect_true(all(lit$se > 0))
-  testthat::expect_true(all(lit$key %in% yaml::read_yaml("lit/tables.yaml")$study_order))
+  testthat::expect_true(all(lit$key %in% yaml::read_yaml("evidence/literature/tables.yaml")$study_order))
 })
 
 testthat::test_that("shares are proportions and unadjusted differences equal reserved minus open", {

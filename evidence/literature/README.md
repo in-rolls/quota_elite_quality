@@ -2,11 +2,13 @@
 
 Source for the appendix table "Published comparisons of leader qualifications by women's reservation".
 
-- `studies/<bibkey>.yaml`: one file per study, keyed to `manuscript/references.bib`. This is the source of truth.
-- `tables.yaml`: caption, study order, sections and notes.
-- `R/literature.R` reads the studies into one row per (study, outcome) and computes SEs marked `se_source: computed`.
-- `scripts/lit_table.R` typesets `output/literature_table.tex`; `make manuscript` runs it. It changes no content.
-- `tests/test_literature.R` checks required fields, share ranges, reserved − open arithmetic, the computed-SE formula, and that numbers quoted in the Existing evidence section match these files.
+- [Study files](studies/): one `<bibkey>.yaml` per study, keyed to the [bibliography](../../manuscript/references.bib). This is the source of truth for transcribed estimates.
+- [Table specification](tables.yaml): caption, study order, sections and notes.
+- [Literature reader](../../R/literature.R) reads the studies into one row per (study, outcome) and computes SEs marked `se_source: computed`.
+- [Table script](../../scripts/lit_table.R) typesets [the appendix table](../../output/literature_table.tex); `make manuscript` runs it. It changes no content.
+- [Literature tests](../../tests/test_literature.R) check required fields, share ranges, reserved − open arithmetic, the computed-SE formula, source-registry coverage, artifact paths and hashes, and that numbers quoted in the Existing evidence section match these files.
+
+The [source registry](../sources.csv) records source URLs, versions, table locations, and hashes for the [excerpt images](../excerpts/). Its `citation` field matches each study's `key`. See the [evidence guide](../README.md) for project audits and input provenance.
 
 ## Study files
 

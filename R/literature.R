@@ -18,7 +18,7 @@ read_study <- function(path) {
 # independent samples and ignores any clustering, so it understates uncertainty for repeated villages.
 proportion_se <- function(p1, n1, p2, n2) sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2) / n2)
 
-read_literature <- function(dir = "lit/studies") {
+read_literature <- function(dir = "evidence/literature/studies") {
   d <- dplyr::bind_rows(lapply(list.files(dir, pattern = "\\.yaml$", full.names = TRUE), read_study))
   for (col in c(
     "reserved", "open", "se", "t", "n_reserved", "n_open", "n_total",

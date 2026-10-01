@@ -19,7 +19,7 @@ lit <- read_literature() |>
 es <- t(vapply(seq_len(nrow(lit)), function(i) standardized_difference(lit[i, ]), c(yi = 0, vi = 0)))
 lit <- lit |>
   mutate(yi = es[, "yi"], vi = es[, "vi"], low = yi - 1.96 * sqrt(vi), high = yi + 1.96 * sqrt(vi)) |>
-  arrange(desc(match(key, yaml::read_yaml("lit/tables.yaml")$study_order))) |>
+  arrange(desc(match(key, yaml::read_yaml("evidence/literature/tables.yaml")$study_order))) |>
   mutate(
     row = row_number() + 1,
     label = paste0(label, ", ", sub(" \\(.*", "", state), ": ", tolower(sub(",.*", "", outcome)))

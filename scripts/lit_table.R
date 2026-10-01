@@ -1,8 +1,8 @@
-# Typeset the literature table from lit/tables.yaml and lit/studies/*.yaml; content lives in those files.
+# Typeset the literature table from the study files and table specification in evidence/literature/.
 suppressPackageStartupMessages(library(dplyr))
 source("R/literature.R")
 
-tab <- yaml::read_yaml("lit/tables.yaml")
+tab <- yaml::read_yaml("evidence/literature/tables.yaml")
 lit <- read_literature() |> mutate(level = if_else(office == "Municipal councillor", "municipal", "village"))
 
 latex_escape <- function(x) {
