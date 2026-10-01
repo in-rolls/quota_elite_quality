@@ -28,7 +28,7 @@ The manuscript reviews evidence on officials' qualifications, candidate selectio
 
 ## Occupation, assets and the literature
 
-Reserved-seat winners are far more likely to report no occupation in Rajasthan, Kerala and Delhi, including where their education matches open-seat winners', and declare fewer assets in Rajasthan and Uttar Pradesh. [Estimates](manuscript/main.pdf) · [occupation coding](R/analysis.R).
+Reserved-seat winners are far more likely to report no occupation in Rajasthan, Kerala and Delhi, including settings with small estimated education differences, and declare fewer assets in Rajasthan and Uttar Pradesh. [Estimates](manuscript/main.pdf) · [occupation coding](R/analysis.R).
 
 Published reserved-vs-open schooling comparisons among village heads pool to a standardized difference of about −0.9 across five independent samples; this paper's graduate-share gaps pool by setting. [Forest plots](figs/) · [study files](evidence/literature/studies/).
 
@@ -56,6 +56,8 @@ The build starts in [build.R](build.R). The analysis code has five parts:
 - [R/paper.R](R/paper.R): manuscript values, formatted tables, and figures.
 
 The default inputs are in the sibling `../local_elections` checkout ([in-rolls/local_elections](https://github.com/in-rolls/local_elections)). Set `LOCAL_ELECTIONS_MASTER` to use a different verified master directory. Exact hashes and state source revisions are recorded in [the input manifest](evidence/analysis_inputs.csv). State repositories own collection, parsing and cross-year linkage; the central repository standardizes election events; this repository estimates reservation effects.
+
+Original source downloads, including replication deposits, may be retained in `data/` with their URLs, versions, and checksums recorded. The current replication files are already preserved in the upstream checkout.
 
 Preparation, estimation, missing-data bounds, plots, tests, and manuscript tables share R objects in one build process. Tables use `knitr::kable()` directly; the literature appendix has a formatted LaTeX include in [tabs](tabs/). The build saves [figures](figs/) and [the manuscript](manuscript/main.pdf). It does not save prepared datasets, result CSVs, or session logs.
 
