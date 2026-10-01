@@ -25,6 +25,8 @@ estimates:
   open: 9.92
   diff: -2.79
   se: 0.54
+  se_mean_reserved: 0.48
+  se_mean_open: 0.29
   status: confirmed
   source: Table 3, panel A, Education
 - outcome: Literate

@@ -1,0 +1,56 @@
+legacy_education,education,winners
+10th Pass,10th Pass,5
+10th Pass,12th Pass,8
+10th Pass,5th Pass,2
+10th Pass,8th Pass,1
+10th Pass,Graduate,3
+10th Pass,Graduate Professional,3
+10th Pass,Illiterate,1
+10th Pass,Literate,3
+10th Pass,Post Graduate,2
+12th Pass,10th Pass,3
+12th Pass,12th Pass,2
+12th Pass,5th Pass,1
+12th Pass,8th Pass,4
+12th Pass,Graduate,8
+12th Pass,Graduate Professional,1
+12th Pass,Literate,1
+5th Pass,10th Pass,5
+5th Pass,12th Pass,3
+5th Pass,8th Pass,3
+5th Pass,Graduate,3
+5th Pass,Illiterate,1
+8th Pass,10th Pass,4
+8th Pass,12th Pass,4
+8th Pass,5th Pass,2
+8th Pass,8th Pass,1
+8th Pass,Graduate,11
+8th Pass,Graduate Professional,4
+8th Pass,Post Graduate,7
+Doctorate,Graduate,1
+Graduate,10th Pass,6
+Graduate,12th Pass,3
+Graduate,8th Pass,1
+Graduate,Graduate,9
+Graduate,Graduate Professional,2
+Graduate,Literate,1
+Graduate,Post Graduate,3
+Graduate Professional,10th Pass,3
+Graduate Professional,12th Pass,4
+Graduate Professional,Post Graduate,1
+Illiterate,10th Pass,2
+Illiterate,12th Pass,1
+Illiterate,8th Pass,2
+Illiterate,Doctorate,1
+Illiterate,Graduate,1
+Illiterate,Graduate Professional,2
+Literate,10th Pass,4
+Literate,12th Pass,1
+Literate,8th Pass,1
+Literate,Graduate,1
+Literate,Post Graduate,1
+Post Graduate,10th Pass,1
+Post Graduate,12th Pass,3
+Post Graduate,8th Pass,4
+Post Graduate,Graduate,3
+Post Graduate,Post Graduate,2

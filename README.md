@@ -26,6 +26,14 @@ Delhi qualifications now come from [individual MyNeta profiles](output/delhi/sou
 
 The manuscript opens with an abstract, evidence on why education, experience, criminal cases, age and economic resources may matter for governing, and existing reservation studies. It distinguishes causal findings from associations and includes contrary evidence on education. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table. [Historical descriptive tables](evidence/legacy_readme_tables.json) preserve the earlier README's candidate and municipal tabulations.
 
+## Occupation, assets and the literature
+
+Reserved-seat winners are far more likely to report no occupation in Rajasthan, Kerala and Delhi, including where their education matches open-seat winners', and declare fewer assets in Rajasthan and Uttar Pradesh. [Estimates](output/rural_estimates.csv) · [occupation labels](output/kerala/occupation_labels.csv).
+
+Published reserved-vs-open schooling comparisons among village heads pool to a standardized difference of about −0.9 across five independent samples; this paper's graduate-share gaps pool by setting. [Forest plots and meta-analyses](output/meta/) · [study files](lit/studies/).
+
+[Deposit audit](evidence/deposit_audit.md): the Delhi 2012 education in Karekurve-Ramachandra and Lee's AJPS deposit agrees with winners' MyNeta profiles no better than chance; their Mumbai deposit agrees.
+
 ## Reproduce
 
 R packages are pinned in `renv.lock`. The paper also requires Pandoc and XeLaTeX.

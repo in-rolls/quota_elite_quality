@@ -26,8 +26,10 @@ estimates:
   open: 8.456
   diff: -2.620
   se: 0.766
+  sd_reserved: 4.287
+  sd_open: 3.426
   status: confirmed
-  source: Table 8 columns 4-5; Table 9 column 2
+  source: Table 8 columns 4-5 (means and SDs); Table 9 column 2
 - outcome: Political knowledge score
   family: knowledge
   unit: index

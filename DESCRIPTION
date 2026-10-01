@@ -9,13 +9,17 @@ Imports:
     dplyr,
     fixest,
     ggplot2,
+    haven,
     jsonlite,
     knitr,
+    metafor,
     purrr,
     readr,
     rmarkdown,
     stringr,
-    tidyr
+    tidyr,
+    xml2,
+    yaml
 Suggests:
     lintr,
     renv,

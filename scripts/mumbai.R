@@ -36,7 +36,13 @@ d <- read_csv(ratings_path, show_col_types = FALSE, guess_max = 2000) |>
     quota = as.integer(woman_reserved),
     female = as.integer(councillor_woman),
     adminward = factor(adminward),
-    any_criminal = as.integer(councillor_criminal_cases > 0)
+    any_criminal = as.integer(councillor_criminal_cases > 0),
+    # A tax ID (PAN) marks participation in the formal economy; "not given" means none was declared.
+    no_pan = case_when(
+      tolower(councillor_pan_card) == "yes" ~ 0L,
+      tolower(councillor_pan_card) %in% c("no", "not given") ~ 1L,
+      TRUE ~ NA_integer_
+    )
   )
 
 # The deposit's quota flag: 76 women's seats in the 2007 council (one third),
@@ -74,6 +80,7 @@ quality_tab <- cand |>
     `share graduate+` = mean(educ_grad_plus[educ5 != "Unknown"]),
     `mean age` = mean(councillor_age, na.rm = TRUE),
     `share any criminal case` = mean(any_criminal, na.rm = TRUE),
+    `share no PAN declared` = mean(no_pan, na.rm = TRUE),
     `mean criminal cases` = mean(councillor_criminal_cases, na.rm = TRUE),
     .groups = "drop"
   )
@@ -83,7 +90,7 @@ write_md(
 )
 
 quality_reg <- map_dfr(
-  c("educ_hs_or_less", "educ_grad_plus", "councillor_age", "any_criminal"),
+  c("educ_hs_or_less", "educ_grad_plus", "councillor_age", "any_criminal", "no_pan"),
   function(y) {
     m <- feols(as.formula(paste(y, "~ quota | adminward + council")), data = cand, cluster = ~ward_no)
     ci <- as.numeric(confint(m, "quota"))
@@ -109,7 +116,7 @@ arrow::write_parquet(
   cand |> select(
     councillor_spell_id,
     council, quota, adminward, ward_no, educ5, educ_hs_or_less,
-    educ_grad_plus, councillor_age, any_criminal
+    educ_grad_plus, councillor_age, any_criminal, no_pan
   ),
   file.path(out_dir, "winners.parquet"),
   compression = "zstd"

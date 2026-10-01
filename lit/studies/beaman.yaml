@@ -24,8 +24,10 @@ estimates:
   unit: years
   diff: -2.104
   se: 0.548
+  parts_reserved: {size: [35, 20], mean: [8.091, 8.895], sd: [4.126, 3.017]}
+  parts_open: {size: [36, 74], mean: [11.229, 10.278], sd: [2.691, 3.199]}
   status: confirmed
-  source: Table II, column 6, Years of education
+  source: Table II, columns 1-4 (means and SDs by reservation history) and column 6
 - outcome: First time as pradhan in 2003 term
   family: first_time
   unit: share
