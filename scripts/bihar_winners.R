@@ -9,25 +9,37 @@ suppressPackageStartupMessages({
 source("R/bihar.R")
 source("R/style.R")
 
-run_bihar <- function() {
+# 2021 records no candidate education, so that election contributes age alone.
+ELECTIONS <- list(
+  "2016" = list(
+    candidates = 644537L, seats = 227317L,
+    outcomes = c("graduate_plus", "illiterate", "age")
+  ),
+  "2021" = list(candidates = 924708L, seats = 247671L, outcomes = "age")
+)
+
+run_bihar <- function(year = "2016") {
+  election <- ELECTIONS[[year]]
   source_dir <- Sys.getenv("BIHAR_MASTER", "../local_elections/data/master")
-  out_dir <- Sys.getenv("BIHAR_OUTPUT", "output/bihar_2016")
+  out_dir <- file.path(Sys.getenv("BIHAR_OUTPUT", "output"), paste0("bihar_", year))
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   paths <- file.path(source_dir, c("candidates_bihar.parquet", "master_bihar.parquet"))
   hashes <- vapply(paths, digest::digest, character(1), algo = "sha256", file = TRUE)
   candidates <- read_parquet(paths[1]) |>
     as_tibble() |>
-    filter(year == 2016)
+    filter(.data$year == as.integer(.env$year))
   seats <- read_parquet(paths[2]) |>
     as_tibble() |>
-    filter(year == 2016)
+    filter(.data$year == as.integer(.env$year))
   stopifnot(
-    nrow(candidates) == 644537L, nrow(seats) == 227317L,
+    nrow(candidates) == election$candidates, nrow(seats) == election$seats,
     !anyDuplicated(candidates$candidate_id), !anyDuplicated(seats$row_id),
-    all(candidates$row_id %in% seats$row_id), all(candidates$year == 2016)
+    all(candidates$row_id %in% seats$row_id)
   )
 
-  winners <- select_winners(candidates)
+  sole <- seats$row_id[seats$winner_basis %in% "sole_candidate"]
+  stopifnot(all(table(candidates$row_id[candidates$row_id %in% sole]) == 1L))
+  winners <- select_winners(candidates, sole)
   stopifnot(!anyDuplicated(winners$row_id))
   winners <- winners |>
     left_join(
@@ -51,7 +63,7 @@ run_bihar <- function() {
     group_by(tier, woman_reserved) |>
     summarise(
       source_seats = n(), identified_winners = sum(!is.na(selection_basis)),
-      uncontested_winners = sum(selection_basis == "uncontested", na.rm = TRUE),
+      uncontested_winners = sum(selection_basis %in% c("uncontested", "sole_candidate")),
       lot_winners = sum(selection_basis == "lot", na.rm = TRUE),
       education_unknown = sum(!education_known, na.rm = TRUE),
       age_missing = sum(!is.na(selection_basis) & is.na(age)), .groups = "drop"
@@ -81,7 +93,7 @@ run_bihar <- function() {
   results <- list()
   for (office in unique(as.character(analysis$tier))) {
     for (geography in c("district", if (office != "zp_member") "block_id")) {
-      for (outcome in c("graduate_plus", "illiterate", "age")) {
+      for (outcome in election$outcomes) {
         d <- analysis |> filter(tier == office, !is.na(.data[[outcome]]), !is.na(.data[[geography]]))
         model <- feols(
           as.formula(paste(outcome, "~ quota |", geography, "+ caste_reservation")),
@@ -117,4 +129,4 @@ run_bihar <- function() {
   invisible(results)
 }
 
-if (sys.nframe() == 0L) run_bihar()
+if (sys.nframe() == 0L) for (year in names(ELECTIONS)) run_bihar(year)

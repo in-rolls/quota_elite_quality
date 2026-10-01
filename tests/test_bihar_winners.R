@@ -36,4 +36,8 @@ testthat::test_that("only winners the release names are selected", {
     elected = c("0", "1", "1", NA, NA, "1")
   )
   testthat::expect_equal(select_winners(candidates)$candidate_name, c("B", "C"))
+  sole <- tibble(row_id = c("e", "f"), candidate_name = c("F", "G"), elected = NA_character_)
+  testthat::expect_equal(
+    select_winners(bind_rows(candidates, sole), sole = "e")$candidate_name, c("B", "C", "F")
+  )
 })

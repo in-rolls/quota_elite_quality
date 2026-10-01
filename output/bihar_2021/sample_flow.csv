@@ -1,0 +1,13 @@
+tier,woman_reserved,source_seats,identified_winners,uncontested_winners,lot_winners,education_unknown,age_missing
+gp_head,FALSE,4484,4472,0,0,4472,0
+gp_head,TRUE,3583,3578,0,0,3578,0
+kachahari_member,FALSE,60583,59123,16831,0,59123,11
+kachahari_member,TRUE,49058,47532,14589,0,47532,8
+block_member,FALSE,5957,5938,0,0,5938,51
+block_member,TRUE,5138,5127,0,0,5127,42
+kachahari_head,FALSE,4480,4466,0,0,4466,0
+kachahari_head,TRUE,3587,3578,0,0,3578,1
+gp_ward,FALSE,60590,60518,718,0,60518,6
+gp_ward,TRUE,49051,48992,552,0,48992,3
+zp_member,FALSE,613,608,0,0,608,5
+zp_member,TRUE,547,542,0,0,542,1

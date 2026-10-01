@@ -29,6 +29,8 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
 options(knitr.graphics.rel_path = FALSE)
 source("R/paper.R")
 bihar_n <- jsonlite::read_json("output/bihar_2016/provenance.json")
+bihar_2021 <- jsonlite::read_json("output/bihar_2021/provenance.json")
+head_age <- function(year) get_result("Bihar", year, "gp_head", "age")
 bounds <- read_csv("output/missing_education_bounds.csv", show_col_types = FALSE)
 raj_bounds <- filter(bounds, state == "rajasthan")
 ```
@@ -121,6 +123,8 @@ knitr::include_graphics(normalizePath("output/bihar_2016/education.png"))
 
 The graduate-share estimate is negative in every office. The appendix reports illiteracy alongside graduate share as another part of the education distribution. Separate age regressions describe younger winners under reservation.
 
+Bihar's 2021 election adds `r num(bihar_2021$analysis_winners)` elected seats across the same six offices. Its candidate records include age but not education, so 2021 contributes age regressions only. Reservation comes from the State Election Commission's feed for the 2021–2026 term, whose women-reserved village-head seats match the Commission's 2021 report. Seats with a single nominee and no result record count their nominee as the winner, as 2016 counts uncontested winners. Reserved-seat village heads are `r fmt(-head_age(2021)$estimate)` years younger in 2021 (95% CI `r fmt(-head_age(2021)$conf_high)` to `r fmt(-head_age(2021)$conf_low)`), against `r fmt(-head_age(2016)$estimate)` years in 2016; the appendix reports every office.
+
 ## Kerala by election and office
 
 ```{r kerala-plot, fig.cap="Rural Kerala: graduate-share differences by election and office. Each point comes from a separate regression with caste-reservation controls. Block council members use block effects and clustering; village and district ward members use districts because block identifiers are unavailable. Bars are pointwise 95% confidence intervals. Unclassified qualifications are missing. The common horizontal scale permits comparison across offices. Source: Kerala election records through the central election repository."}
@@ -192,7 +196,7 @@ The confidence intervals reflect regression uncertainty conditional on the extra
 
 The scripts retain source identifiers, sample counts, recoding dictionaries and typed Parquet analysis files. Input hashes pin the local files used here. Some UP inputs come from integration work whose central adapter has uncommitted changes; the repository preserves the adapter diff and byte hashes rather than presenting that state as a published release. The final data release should reconcile those changes upstream. The included analysis snapshots allow inspection of the fitted samples in the meantime.
 
-The 2021 Bihar candidate release lacks statewide structured winner education. Its current reservation feeds and historical source checks are retained upstream; no 2021 Bihar reservation-effect estimate enters this paper. Delhi’s linked source profiles cover the recorded winner universe incompletely; the appendix includes every unlinked winner in the missing-record bounds.
+The 2021 Bihar candidate release lacks statewide structured winner education, so 2021 enters the age analysis only. Delhi’s linked source profiles cover the recorded winner universe incompletely; the appendix includes every unlinked winner in the missing-record bounds.
 
 The missing-education bounds hold the all-winner regression design fixed and allow each unclassified graduate indicator to be either zero or one. After residualizing reservation on the controls, the coefficient is a weighted sum of outcomes. Assigning missing outcomes according to the signs of those weights gives the exact minimum and maximum coefficient. These bounds concern the adjusted coefficient, not the causal effect, and contain no sampling uncertainty. UP's bounds remain negative in each election; Rajasthan's and Kerala's include both signs.
 
