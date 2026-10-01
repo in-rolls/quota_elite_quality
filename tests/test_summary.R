@@ -1,6 +1,10 @@
-source("R/paper.R")
+testthat::test_that("office names use factor values rather than their internal codes", {
+  tiers <- factor(c("block_member", "gp_ward", "zp_member"), levels = c("zp_member", "gp_ward", "block_member"))
+  testthat::expect_identical(office_name(tiers), c("Block member", "Ward member", "District member"))
+  testthat::expect_identical(office_name(as.character(tiers)), office_name(tiers))
+})
 
-testthat::test_that("the abstract's setting summary matches the saved estimates", {
+testthat::test_that("the abstract's setting summary matches the computed estimates", {
   ss <- setting_summary()
   head_rows <- rural$tier == "gp_head" & rural$outcome == "graduate_plus" & rural$state %in% c("Bihar", "Uttar Pradesh")
   heads <- rural[head_rows, ]

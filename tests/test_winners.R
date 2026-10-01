@@ -1,5 +1,3 @@
-source("R/winners.R")
-
 testthat::test_that("schooling preserves unknowns and distinguishes incomplete degrees", {
   up <- schooling(c("Graduate", "निरक्षर", NA, "जूनियर हाई\nहाई स्कूल"), "uttar_pradesh")
   testthat::expect_equal(up$graduate_plus, c(1L, 0L, NA_integer_, NA_integer_))
@@ -14,8 +12,8 @@ testthat::test_that("schooling preserves unknowns and distinguishes incomplete d
 
 testthat::test_that("winner samples conserve unique seats and retain outcome missingness", {
   for (state in c("uttar_pradesh", "rajasthan", "kerala")) {
-    d <- read_parquet(file.path("output", state, "winners.parquet"))
-    desc <- read_csv(file.path("output", state, "descriptive.csv"), show_col_types = FALSE)
+    d <- report$settings[[state]]$analysis
+    desc <- report$settings[[state]]$descriptive
     testthat::expect_equal(anyDuplicated(d$row_id), 0L)
     testthat::expect_equal(sum(desc$n), nrow(d))
     testthat::expect_equal(sum(desc$education_n), sum(!is.na(d$graduate_plus)))
@@ -31,9 +29,9 @@ testthat::test_that("new state estimates agree with explicit fixed-effect OLS", 
   )
   for (case in cases) {
     state <- case[1]
-    results <- read_csv(file.path("output", state, "regressions.csv"), show_col_types = FALSE) |>
+    results <- report$settings[[state]]$estimates |>
       filter(year == as.integer(case[2]), tier == case[3], outcome == "graduate_plus")
-    d <- read_parquet(file.path("output", state, "winners.parquet")) |>
+    d <- report$settings[[state]]$analysis |>
       filter(
         year == as.integer(case[2]), tier == case[3], !is.na(graduate_plus),
         !is.na(.data[[results$geography]])
@@ -56,7 +54,7 @@ testthat::test_that("new state estimates agree with explicit fixed-effect OLS", 
 })
 
 testthat::test_that("Mumbai contains one complete qualification observation per spell", {
-  d <- read_parquet("output/mumbai/winners.parquet")
+  d <- report$settings$mumbai$analysis
   testthat::expect_equal(anyDuplicated(d$councillor_spell_id), 0L)
   testthat::expect_equal(nrow(d), 449L)
   testthat::expect_false(any(d$educ5 %in% c("Unknown", "Other")))
@@ -64,7 +62,7 @@ testthat::test_that("Mumbai contains one complete qualification observation per 
 })
 
 testthat::test_that("missing-education bounds collapse to OLS with complete data", {
-  b <- read_csv("output/missing_education_bounds.csv", show_col_types = FALSE)
+  b <- report$bounds
   complete <- filter(b, state == "uttar_pradesh", year == 2015)
   testthat::expect_equal(complete$all_winners_lower, complete$classified_sample_estimate, tolerance = 1e-9)
   testthat::expect_equal(complete$all_winners_upper, complete$classified_sample_estimate, tolerance = 1e-9)
@@ -84,7 +82,7 @@ testthat::test_that("incomplete degrees and ambiguous postgraduate diplomas rema
 
 testthat::test_that("education indicators describe disjoint categories on the same sample", {
   for (state in c("bihar_2016", "uttar_pradesh", "rajasthan")) {
-    d <- read_parquet(file.path("output", state, "winners.parquet"))
+    d <- report$settings[[state]]$analysis
     testthat::expect_identical(is.na(d$graduate_plus), is.na(d$illiterate))
     known <- !is.na(d$graduate_plus)
     middle <- 1 - d$graduate_plus[known] - d$illiterate[known]
@@ -93,8 +91,8 @@ testthat::test_that("education indicators describe disjoint categories on the sa
 })
 
 testthat::test_that("all reported intervals use cluster rather than observation degrees of freedom", {
-  rural <- read_csv("output/rural_estimates.csv", show_col_types = FALSE)
-  mumbai <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE) |>
+  rural <- report$rural
+  mumbai <- report$settings$mumbai$estimates |>
     rename(estimate = coef_quota)
   d <- bind_rows(rural, mumbai)
   critical <- qt(0.975, df = d$clusters - 1)
@@ -105,8 +103,8 @@ testthat::test_that("all reported intervals use cluster rather than observation 
 
 
 testthat::test_that("Mumbai education and cases agree with explicit OLS and clustered covariance", {
-  d <- as.data.frame(read_parquet("output/mumbai/winners.parquet"))
-  results <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE)
+  d <- as.data.frame(report$settings$mumbai$analysis)
+  results <- report$settings$mumbai$estimates
   x <- residuals(lm(quota ~ factor(adminward) + factor(council), data = d))
   for (outcome in c("educ_grad_plus", "any_criminal")) {
     m <- lm(as.formula(paste(outcome, "~ quota + factor(adminward) + factor(council)")), data = d)

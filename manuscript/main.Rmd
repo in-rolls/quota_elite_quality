@@ -5,7 +5,7 @@ date: "Working draft"
 output:
   pdf_document:
     latex_engine: xelatex
-    keep_tex: true
+    keep_tex: false
     number_sections: true
     fig_caption: true
   html_document:
@@ -29,16 +29,12 @@ header-includes:
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
                      fig.align = "center", fig.pos = "H", out.width = "100%")
 options(knitr.graphics.rel_path = FALSE)
-source("R/paper.R")
-bihar_n <- jsonlite::read_json("output/bihar_2016/provenance.json")
-bihar_2021 <- jsonlite::read_json("output/bihar_2021/provenance.json")
 head_age <- function(year) get_result("Bihar", year, "gp_head", "age")
-bounds <- read_csv("output/missing_education_bounds.csv", show_col_types = FALSE)
+bounds <- report$bounds
 raj_bounds <- filter(bounds, state == "rajasthan")
 ss <- setting_summary()
 bihar_ward <- get_result("Bihar", 2016, "gp_ward")
 es <- economic_summary()
-source("R/literature.R")
 lit <- read_literature()
 lit_value <- function(key, comparison, population = "winners") {
   row <- lit[lit$key == key & lit$comparison == comparison & lit$population == population, ]
@@ -72,7 +68,7 @@ Occupation and assets measure economic independence. A winner with no occupation
 Six studies compare the schooling of women-reserved and open-seat village heads (Table \ref{tab:literature}). All find less schooling under reservation: about two to three years where schooling is measured in years [@cd, Table 3; @beaman, Table II; @ban, Table 9], lower completion of secondary school in a national village panel and in Andhra Pradesh [@deininger, Table 3; @afridi, Table 2], and `r fmt(-lit_value("bamezai", "reserved_vs_open"), 2)` standard deviations at Bihar's reservation threshold [@bamezai, Table 7]. On a common scale, the standardized difference in means, and counting the two studies of the same Birbhum councils once, the five samples pool to `r fmt(lit_meta$d, 2)` (95% CI `r fmt(lit_meta$d_low, 2)` to `r fmt(lit_meta$d_high, 2)`). They differ from one another no more than sampling error predicts.
 
 ```{r literature-forest, fig.cap="Published comparisons of schooling among elected village heads, women-reserved minus open seats, as standardized differences with 95\\% confidence intervals. Years of schooling are divided by the pooled within-group standard deviation; shares of heads with secondary schooling are converted through the log odds ratio; Bamezai et al. report standard-deviation units. The pooled estimate is a random-effects mean over five independent samples, with the Birbhum councils entered once through Chattopadhyay and Duflo.", out.width="90%"}
-knitr::include_graphics(normalizePath("output/meta/forest_literature.png"))
+knitr::include_graphics(normalizePath("figs/forest_literature.png"))
 ```
 
 Measured against other women in their villages, reserved-seat leaders are positively selected: in Bihar they are more educated than the average woman [@bamezai, Section 7.2.2], in South India they come from wealthier and better-informed households than eligible women [@ban, Table 9], and in Karnataka selection among women is stronger than among men [@moripublished]. In Bihar, the husbands of reserved-seat winners are also less educated than open-seat winners, by `r fmt(-lit_value("bamezai", "husband_vs_open"), 2)` standard deviations [@bamezai, Table 7]. Two further studies compare different groups: reserved women against men in all other seats in Karnataka [@raabe, Table 4], and candidates' standing in their village's education distribution [@mori, Table 3].
@@ -100,25 +96,25 @@ The administrative records come from state election repositories through [local_
 ## Village heads
 
 ```{r rural-heads-plot, fig.cap="Graduate-share differences among rural village heads, women-reserved minus open seats, with geography and caste-reservation effects. Bars are 95\\% confidence intervals clustered by geography. UP 2010 uses districts; other rows use blocks. Unclassified education, ambiguous winners and unknown reservation are excluded."}
-knitr::include_graphics(normalizePath("output/rural_heads.png"))
+knitr::include_graphics(normalizePath("figs/rural_heads.png"))
 ```
 
 In Uttar Pradesh, the graduate-share gap is `r contrast(get_result("Uttar Pradesh", 2010, "gp_head"))` in 2010, `r contrast(get_result("Uttar Pradesh", 2015, "gp_head"))` in 2015 and `r contrast(get_result("Uttar Pradesh", 2021, "gp_head"))` in 2021. In Rajasthan it is `r contrast(get_result("Rajasthan", 2020, "gp_head"))` among heads whose qualification can be classified. Many Rajasthan qualifications are recorded only as "Other"; if each could be either a degree or not, the all-winner difference lies anywhere between `r fmt(raj_bounds$all_winners_lower * 100)` and `r fmt(raj_bounds$all_winners_upper * 100)` points.
 
 ## Bihar's other offices
 
-Bihar's 2016 records cover `r num(bihar_n$analysis_winners)` elected seats across six village, block and district offices. The graduate-share gap is negative in every office.
+Bihar's 2016 records cover `r num(nrow(report$settings$bihar_2016$analysis))` elected seats across six village, block and district offices. The graduate-share gap is negative in every office.
 
 ```{r bihar-plot, fig.cap="Bihar 2016: graduate-share differences by office, women-reserved minus open seats, with block and caste-reservation effects (district effects for district council members). Bars are 95\\% confidence intervals clustered at that level."}
-knitr::include_graphics(normalizePath("output/bihar_2016/education.png"))
+knitr::include_graphics(normalizePath("figs/bihar_2016_education.png"))
 ```
 
-Bihar's 2021 records add `r num(bihar_2021$analysis_winners)` elected seats with age but not education. Reserved-seat village heads are `r fmt(-head_age(2021)$estimate)` years younger in 2021 (95% CI `r fmt(-head_age(2021)$conf_high)` to `r fmt(-head_age(2021)$conf_low)`), against `r fmt(-head_age(2016)$estimate)` years in 2016. Reservation for 2021 comes from the State Election Commission's feed for the 2021–2026 term, which matches the Commission's count of women-reserved village-head seats.
+Bihar's 2021 records add `r num(nrow(report$settings$bihar_2021$analysis))` elected seats with age but not education. Reserved-seat village heads are `r fmt(-head_age(2021)$estimate)` years younger in 2021 (95% CI `r fmt(-head_age(2021)$conf_high)` to `r fmt(-head_age(2021)$conf_low)`), against `r fmt(-head_age(2016)$estimate)` years in 2016. Reservation for 2021 comes from the State Election Commission's feed for the 2021–2026 term, which matches the Commission's count of women-reserved village-head seats.
 
 ## Kerala
 
 ```{r kerala-plot, fig.cap="Rural Kerala: graduate-share differences by election and office, women-reserved minus open seats, with caste-reservation effects. Block members use block effects and clustering; village and district members use districts. Bars are 95\\% confidence intervals."}
-knitr::include_graphics(normalizePath("output/kerala/education.png"))
+knitr::include_graphics(normalizePath("figs/kerala_education.png"))
 ```
 
 Among Kerala's village ward members, the graduate-share differences are `r contrast(get_result("Kerala", 2010, "gp_ward"))`, `r contrast(get_result("Kerala", 2015, "gp_ward"))` and `r contrast(get_result("Kerala", 2020, "gp_ward"))`. The same office in Bihar shows a gap of `r fmt(-100 * bihar_ward$estimate)` points, so the difference from the northern states is not only a difference between heads and members. Kerala records education as free text; the coding recognizes degrees and school qualifications and leaves incomplete or unrecognized entries missing.
@@ -130,7 +126,7 @@ Among Kerala's village ward members, the graduate-share differences are `r contr
 Mumbai's councillor records come from the Praja Foundation's report cards and affidavits, as deposited by @mumbaidata. Each councillor enters once per term.
 
 ```{r mumbai-plot, fig.cap="Mumbai councillors in the 2012 and 2017 councils: women-reserved minus open seats in graduate share, any pending case and declaring no tax ID (PAN), with administrative-ward and council effects. Bars are 95\\% confidence intervals clustered by electoral ward."}
-knitr::include_graphics(normalizePath("output/mumbai/quality.png"))
+knitr::include_graphics(normalizePath("figs/mumbai_quality.png"))
 ```
 
 ```{r mumbai-values, include=FALSE}
@@ -146,7 +142,7 @@ The graduate-share difference is `r contrast(mg)` and the pending-case differenc
 Delhi adds the 2012, 2017 and 2022 elections. Winners and assembly mapping for 2012 and 2017 come from Goyal's replication deposit [@delhigoyal]; for 2022, winners come from the OpenCity compilation of Lok Dhaba results and reservation from the State Election Commission's gazette [@delhi2022results; @delhi2022seats, Annexure B]. The 2012 reservation labels match the official schedule [@delhi2012seats, Annexures I–III]. Qualifications and pending cases come from each winner's MyNeta profile [@delhimyneta]; convictions are excluded from pending cases.
 
 ```{r delhi-plot, fig.cap="Delhi councillors by election: women-reserved minus open seats in graduate share, reporting no occupation and any pending case, with assembly-constituency and caste-reservation effects. Bars are 95\\% confidence intervals clustered by assembly constituency."}
-knitr::include_graphics(normalizePath("output/delhi/quality.png"))
+knitr::include_graphics(normalizePath("figs/delhi_quality.png"))
 ```
 
 The graduate-share differences are `r contrast(get_delhi(2012))`, `r contrast(get_delhi(2017))` and `r contrast(get_delhi(2022))` in 2012, 2017 and 2022. The pending-case differences are `r contrast(get_delhi(2012, "any_criminal"))`, `r contrast(get_delhi(2017, "any_criminal"))` and `r contrast(get_delhi(2022, "any_criminal"))`, and stay negative however the missing case records are filled in.
@@ -164,7 +160,7 @@ Reserved-seat heads also declare fewer assets: about `r fmt(-es$rajasthan_assets
 The education gap follows the setting. Pooling this paper's estimates with elections nested in settings, reserved-seat village heads in the northern states are `r fmt(-setting_meta$northern[1])` points less likely to hold a degree (95% CI `r fmt(-setting_meta$northern_high[1])` to `r fmt(-setting_meta$northern_low[1])`), against a difference of `r fmt(setting_meta$other_settings[1])` points (`r fmt(setting_meta$other_low[1])` to `r fmt(setting_meta$other_high[1])`) among Kerala's ward members and the two cities' councillors. Distinguishing the two groups cuts the unexplained spread across settings from `r fmt(setting_meta$tau_setting_pooled[1])` to `r fmt(setting_meta$tau_setting_moderated[1])` points. Office, data source and election years vary along with setting, and the second group is one state and two cities. Replacing Bihar's village heads with its ward members, the office we observe in Kerala, still leaves a northern gap of `r fmt(-setting_meta$northern[3])` points.
 
 ```{r settings-forest, fig.cap="This paper's graduate-share differences, women-reserved minus open seats, with 95\\% confidence intervals. Pooled estimates come from a random-effects model with elections nested in settings and an indicator for the northern village-head settings.", out.width="85%"}
-knitr::include_graphics(normalizePath("output/meta/forest_settings.png"))
+knitr::include_graphics(normalizePath("figs/forest_settings.png"))
 ```
 
 Where reserved-seat winners match open-seat winners on education, they still differ in economic independence. That is consistent with evidence that male relatives often exercise the office. In a Rajasthan phone audit, 9% of answered calls to reserved-seat village heads reached the elected woman, against 76% in open seats and 31.7% in urban Jaipur [@karekurvesood, pp. 1–2]. Women elected through quotas participate less in council decisions [@heinze], and surveys in two states find male family members prominent in everyday governance [@amar]. For the same reason, the lower rate of pending cases among urban reserved-seat councillors may overstate the change in the office's criminal exposure: affidavits list the officeholder's own cases, not her relatives', and @karekurvelee [p. 11] note that many Mumbai quota women have male relatives who face charges.
@@ -191,10 +187,10 @@ Less-qualified winners need not govern worse. In Rajasthan and Uttar Pradesh, lo
 
 ```{r missingness, results='asis'}
 coverage <- bind_rows(lapply(c("uttar_pradesh", "rajasthan", "kerala"), function(state) {
-  read_csv(file.path("output", state, "descriptive.csv"), show_col_types = FALSE) %>% mutate(state = state)
+  report$settings[[state]]$descriptive %>% mutate(state = state)
 })) %>%
   mutate(State = recode(state, uttar_pradesh = "UP", rajasthan = "Rajasthan", kerala = "Kerala"),
-         Office = unname(office_labels[tier]), Seat = if_else(quota == 1, "Women", "Open"),
+         Office = office_name(tier), Seat = if_else(quota == 1, "Women", "Open"),
          `Classified (%)` = fmt(100 * education_n / n), N = num(n)) %>%
   select(State, Year = year, Office, Seat, `Classified (%)`, N)
 kable(coverage, caption = "Education coverage among eligible winner records. N includes unclassified qualifications.",
@@ -208,7 +204,7 @@ The missing-education bounds keep the all-winner regression design and let each 
 ```{r education-bounds, results='asis'}
 bound_table <- bounds %>% mutate(
   State = recode(state, uttar_pradesh = "UP", rajasthan = "Rajasthan", kerala = "Kerala"),
-  Office = unname(office_labels[tier]),
+  Office = office_name(tier),
   Lower = fmt(all_winners_lower * 100), Upper = fmt(all_winners_upper * 100),
   Missing = num(unclassified), N = num(all_winners_n)
 ) %>% select(State, Year = year, Office, Lower, Upper, Missing, N)
@@ -253,7 +249,7 @@ delhi_table <- delhi %>% mutate(
   `Difference [95% CI]` = interval_text(estimate, conf_low, conf_high, scale), N = num(n), G = num(clusters)
 ) %>% select(Year = year, Outcome, `Difference [95% CI]`, N, G)
 kable(delhi_table, caption = "Delhi councillors: adjusted differences in percentage points, except age in years. Assembly-constituency and caste-reservation controls; pointwise intervals clustered by assembly constituency. G denotes clusters.", booktabs = TRUE, longtable = TRUE)
-delhi_coverage <- read_csv("output/delhi/descriptive.csv", show_col_types = FALSE) %>% mutate(
+delhi_coverage <- report$settings$delhi$descriptive %>% mutate(
   Seat = if_else(quota == 1, "Women", "Open"),
   `Education (%)` = fmt(100 * education_n / n), `Age (%)` = fmt(100 * age_n / n),
   `Cases (%)` = fmt(100 * cases_n / n), N = num(n)
@@ -271,5 +267,5 @@ kable(delhi_bound_table, caption = "Delhi missing-outcome bounds on the adjusted
 # Published comparisons
 
 ```{r literature-table, results='asis'}
-if (knitr::is_latex_output()) cat(readLines("output/literature_table.tex"), sep = "\n")
+if (knitr::is_latex_output()) cat(readLines("tabs/literature_table.tex"), sep = "\n")
 ```

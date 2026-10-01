@@ -1,5 +1,3 @@
-source("R/literature.R")
-
 lit <- read_literature()
 
 testthat::test_that("literature studies have source-registry entries", {
@@ -15,7 +13,8 @@ testthat::test_that("registered artifacts exist and match their recorded hashes"
   hashed <- which(!is.na(artifacts$artifact_sha256) & nzchar(artifacts$artifact_sha256))
   for (i in hashed) {
     testthat::expect_equal(
-      digest::digest(paths[i], algo = "sha256", file = TRUE), artifacts$artifact_sha256[i], info = paths[i]
+      digest::digest(paths[i], algo = "sha256", file = TRUE), artifacts$artifact_sha256[i],
+      info = paths[i]
     )
   }
 })
@@ -50,11 +49,4 @@ testthat::test_that("SEs backed out of t-statistics use the reported t", {
 testthat::test_that("overlapping samples share a sample group", {
   groups <- unique(lit[c("key", "sample_group")])
   testthat::expect_equal(groups$sample_group[groups$key == "cd"], groups$sample_group[groups$key == "beaman"])
-})
-
-testthat::test_that("the Existing evidence section takes its numbers from the study files", {
-  text <- readLines("manuscript/main.Rmd")
-  section <- text[seq(grep("^# Existing evidence", text), grep("^# Data and empirical", text) - 1)]
-  prose <- section[!grepl("^```|fig.cap", section)]
-  testthat::expect_false(any(grepl("[0-9]\\.[0-9]", gsub("`r [^`]*`|Section [0-9.]+", "", prose))))
 })

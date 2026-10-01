@@ -1,0 +1,11 @@
+source("R/analysis.R")
+report <- run_analysis()
+source("R/paper.R")
+if ("--test" %in% commandArgs(trailingOnly = TRUE)) source("tests/run.R", local = TRUE)
+
+dir.create("figs", showWarnings = FALSE)
+dir.create("tabs", showWarnings = FALSE)
+render_figures(report)
+render_literature_table()
+options(tinytex.install_packages = FALSE)
+rmarkdown::render("manuscript/main.Rmd", knit_root_dir = getwd(), envir = new.env(parent = environment()), quiet = TRUE)

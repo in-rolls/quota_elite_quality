@@ -11,10 +11,10 @@ This directory connects the manuscript's reported estimates and claims to their 
 | Data coverage and use | [Data inventory](data_inventory.csv) |
 | Claims, supporting artifacts, and limitations | [Claim ledger](claim_ledger.csv) and [audit checks](audit_checks.csv) |
 | Councillor deposit comparisons | [Deposit audit](deposit_audit.md) |
-| Earlier descriptive tables and education-label corrections | [Historical tables](legacy_readme_tables.json) and [Kerala corrections](kerala_label_corrections.csv) |
+| Education-label corrections | [Kerala corrections](kerala_label_corrections.csv) |
 
 Study YAML files hold the transcribed estimates. Their `key` matches `citation` in the source registry and the citation key in the [bibliography](../manuscript/references.bib). A source can have several registry rows for different excerpts; the registry also covers sources outside the literature table.
 
-The registry's `artifact` paths are relative to this directory: `excerpts/` holds images, and `../output/` points to generated audits. Blank artifact fields identify sources without a local artifact. Recorded SHA-256 hashes verify the excerpt files. Downloaded source PDFs, when available locally, remain in the ignored `sources/` cache.
+The registry's `artifact` paths are relative to this directory: `excerpts/` holds images. Blank artifact fields identify sources without a local artifact. Recorded SHA-256 hashes verify the excerpt files. Downloaded source PDFs, when available locally, remain in the ignored `sources/` cache.
 
-Run `make test` from the repository root to check study-to-registry coverage, artifact paths, recorded hashes, and the literature estimates. Generated tables, figures, and analyses live in [output](../output/); build commands are in the [project README](../README.md#reproduce).
+Run `make test` from the repository root to check source hashes, study-to-registry coverage, and estimates recomputed from upstream inputs. The analysis stays in memory; the build saves [figures](../figs/), [the literature table](../tabs/literature_table.tex), and [the manuscript](../manuscript/main.pdf). Build commands are in the [project README](../README.md#reproduce).

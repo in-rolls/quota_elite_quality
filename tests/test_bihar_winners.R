@@ -1,5 +1,3 @@
-source("scripts/bihar_winners.R")
-
 testthat::test_that("unknown schooling never becomes observed non-graduate or literate", {
   d <- education_outcomes(c("Graduate", "Post Graduate", "Illiterate", "--", "Others", NA))
   testthat::expect_equal(d$graduate_plus, c(1L, 1L, 0L, NA, NA, NA))
@@ -8,7 +6,7 @@ testthat::test_that("unknown schooling never becomes observed non-graduate or li
 })
 
 testthat::test_that("absorbed effects match explicit OLS and clustered score sums", {
-  d <- read_parquet("output/bihar_2016/winners.parquet") |>
+  d <- report$settings$bihar_2016$analysis |>
     filter(tier == "gp_head", !is.na(graduate_plus), !is.na(block_id)) |>
     as.data.frame()
   explicit <- lm(graduate_plus ~ quota + block_id + caste_reservation, data = d)
@@ -24,7 +22,7 @@ testthat::test_that("absorbed effects match explicit OLS and clustered score sum
     tolerance = 1e-9
   )
   testthat::expect_equal(manual_se, unname(se(absorbed)["quota"]), tolerance = 1e-9)
-  saved <- read_csv("output/bihar_2016/regressions.csv", show_col_types = FALSE) |>
+  saved <- report$settings$bihar_2016$estimates |>
     filter(tier == "gp_head", outcome == "graduate_plus", primary)
   testthat::expect_equal(saved$estimate, unname(coef(explicit)["quota"]), tolerance = 1e-9)
 })

@@ -1,14 +1,39 @@
 suppressPackageStartupMessages({
-  library(dplyr)
-  library(readr)
+  library(ggplot2)
   library(knitr)
 })
-source("R/style.R")
-rural <- read_csv("output/rural_estimates.csv", show_col_types = FALSE)
-mumbai <- read_csv("output/mumbai/regressions.csv", show_col_types = FALSE)
-delhi <- read_csv("output/delhi/regressions.csv", show_col_types = FALSE)
-delhi_flow <- read_csv("output/delhi/sample_flow.csv", show_col_types = FALSE)
-delhi_missing <- read_csv("output/delhi/missing_outcome_bounds.csv", show_col_types = FALSE)
+
+office_labels <- c(
+  gp_head = "Village head", gp_ward = "Ward member",
+  kachahari_head = "Sarpanch", kachahari_member = "Panch",
+  block_member = "Block member", zp_member = "District member"
+)
+
+office_name <- function(tier) unname(office_labels[as.character(tier)])
+
+theme_evidence <- function() {
+  ggplot2::theme_minimal(base_size = 11, base_family = "sans") +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.y = ggplot2::element_blank(),
+      strip.text = ggplot2::element_text(face = "bold"),
+      plot.caption = ggplot2::element_text(hjust = 0),
+      plot.title.position = "plot"
+    )
+}
+
+save_evidence <- function(plot, path, width, height) {
+  ggplot2::ggsave(paste0(path, ".pdf"), plot, width = width, height = height)
+  ggplot2::ggsave(paste0(path, ".png"), plot, width = width, height = height, dpi = 180)
+}
+
+# Manuscript values and tables ----
+
+rural <- report$rural
+mumbai <- report$settings$mumbai$estimates
+delhi <- report$settings$delhi$estimates
+delhi_flow <- report$settings$delhi$flow
+delhi_missing <- report$settings$delhi$bounds
 get_delhi <- function(year, outcome = "graduate_plus") {
   row <- delhi |> filter(.data$year == .env$year, .data$outcome == .env$outcome)
   stopifnot(nrow(row) == 1)
@@ -50,7 +75,7 @@ education_table <- function(d, caption) {
     filter(outcome == "graduate_plus") |>
     arrange(year, match(tier, names(office_labels))) |>
     mutate(
-      Office = unname(office_labels[tier]),
+      Office = office_name(tier),
       `Graduate or above` = interval_text(estimate, conf_low, conf_high),
       N = num(n), G = num(clusters),
       Controls = if_else(geography == "block_id", "Block", "District")
@@ -72,7 +97,7 @@ age_table <- function(d) {
     filter(outcome == "age") |>
     arrange(match(state, unique(d$state)), year, match(tier, names(office_labels))) |>
     mutate(
-      Office = unname(office_labels[tier]),
+      Office = office_name(tier),
       `Difference [95% CI]` = interval_text(estimate, conf_low, conf_high, scale = 1),
       N = num(n), G = num(clusters)
     ) |>
@@ -83,16 +108,16 @@ age_table <- function(d) {
   ), booktabs = TRUE, row.names = FALSE, longtable = TRUE)
 }
 
-delhi_comparison <- read_csv("output/delhi/source_comparison.csv", show_col_types = FALSE) |>
+delhi_comparison <- report$settings$delhi$source_comparison |>
   group_by(year) |>
   summarise(
     joint = sum(!is.na(graduate_disagreement)),
     disagreements = sum(graduate_disagreement, na.rm = TRUE), .groups = "drop"
   )
 
-lit_meta <- read_csv("output/meta/literature.csv", show_col_types = FALSE)[1, ]
-setting_meta <- read_csv("output/meta/settings.csv", show_col_types = FALSE)
-audit <- read_csv("output/audit/deposit_agreement.csv", show_col_types = FALSE)
+lit_meta <- report$meta$literature[1, ]
+setting_meta <- report$meta$settings
+audit <- report$deposit$agreement
 
 # Reserved-minus-open differences in reporting no occupation and in log declared assets.
 economic_summary <- function() {
@@ -101,7 +126,7 @@ economic_summary <- function() {
     delhi$estimate[delhi$outcome == "no_earnings"]
   )
   up_crime <- get_result("Uttar Pradesh", 2021, "gp_head", "criminal_record")
-  up_desc <- read_csv("output/uttar_pradesh/descriptive.csv", show_col_types = FALSE) |>
+  up_desc <- report$settings$uttar_pradesh$descriptive |>
     filter(year == 2021, tier == "gp_head")
   list(
     occupation_gap = 100 * range(occupation),
@@ -136,7 +161,7 @@ economic_table <- function() {
       mutate(state = "Mumbai", year = "2012, 2017", Office = "Councillor", estimate = coef_quota),
     rural |>
       filter(outcome %in% names(outcomes)) |>
-      mutate(Office = unname(office_labels[tier]), year = as.character(year)),
+      mutate(Office = office_name(tier), year = as.character(year)),
     delhi |>
       filter(outcome %in% names(outcomes)) |>
       mutate(state = "Delhi", Office = "Councillor", year = as.character(year))
@@ -157,4 +182,235 @@ economic_table <- function() {
     "in log points. No occupation counts nil, unemployed, homemaker and student entries. Mumbai, which records",
     "no occupation, reports whether the councillor declared a tax ID (PAN)."
   ), booktabs = TRUE, row.names = FALSE, longtable = TRUE)
+}
+
+# Figures ----
+
+render_figures <- function(report) {
+  rural <- report$rural
+  bihar <- filter(rural, state == "Bihar")
+
+  interval_plot <- function(d, title, limits = NULL) {
+    ggplot(d, aes(x = estimate * 100, y = label)) +
+      geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
+      geom_errorbar(aes(xmin = conf_low * 100, xmax = conf_high * 100),
+        orientation = "y", width = 0.16, colour = "#165B85"
+      ) +
+      geom_point(colour = "#165B85", size = 2) +
+      labs(x = "Reserved minus open seats (percentage points)", y = NULL, title = title) +
+      scale_x_continuous(limits = limits) +
+      theme_evidence()
+  }
+
+  heads <- rural |>
+    filter(tier == "gp_head", outcome == "graduate_plus") |>
+    mutate(label = factor(paste(state, year), levels = rev(paste(state, year))))
+  save_evidence(
+    interval_plot(heads, "Rural village heads: graduate or above"),
+    "figs/rural_heads", 7, 3.4
+  )
+  kerala <- rural |>
+    filter(state == "Kerala", outcome == "graduate_plus") |>
+    mutate(
+      label = factor(year, levels = rev(sort(unique(year)))),
+      office = factor(office_name(tier), levels = office_labels[c("gp_ward", "block_member", "zp_member")])
+    )
+  save_evidence(
+    interval_plot(kerala, "Kerala: graduate or above") + facet_wrap(~office, nrow = 1),
+    "figs/kerala_education", 9, 3.4
+  )
+  bihar_plot <- bihar |>
+    filter(year == 2016, outcome == "graduate_plus") |>
+    mutate(
+      label = factor(office_name(tier), levels = rev(unname(office_labels)))
+    )
+  save_evidence(
+    interval_plot(bihar_plot, "Bihar 2016: graduate or above"),
+    "figs/bihar_2016_education", 7, 4.2
+  )
+  mumbai <- report$settings$mumbai$estimates |>
+    filter(outcome %in% c("educ_grad_plus", "any_criminal", "no_pan")) |>
+    rename(estimate = coef_quota) |>
+    mutate(label = factor(
+      recode(outcome,
+        educ_grad_plus = "Graduate or above",
+        any_criminal = "Any pending criminal case",
+        no_pan = "No tax ID declared"
+      ),
+      levels = c("No tax ID declared", "Any pending criminal case", "Graduate or above")
+    ))
+  save_evidence(
+    interval_plot(mumbai, "Urban: Mumbai councillors, 2012 and 2017"),
+    "figs/mumbai_quality", 7, 3.1
+  )
+  delhi <- report$settings$delhi$estimates |>
+    filter(outcome %in% c("graduate_plus", "no_earnings", "any_criminal")) |>
+    mutate(
+      label = factor(year, levels = c(2022, 2017, 2012)),
+      outcome = factor(outcome,
+        levels = c("graduate_plus", "no_earnings", "any_criminal"),
+        labels = c("Graduate or above", "No occupation", "Any pending criminal case")
+      )
+    )
+  save_evidence(
+    interval_plot(delhi, "Urban: Delhi councillors") + facet_wrap(~outcome, nrow = 1),
+    "figs/delhi_quality", 9, 3.4
+  )
+
+
+  blue <- "#165B85"
+  diamond <- function(y, est, low, high) {
+    tibble(x = c(low, est, high, est), y = c(y, y + 0.3, y, y - 0.3))
+  }
+
+  # Panel of every published schooling comparison among elected leaders, including both Birbhum studies;
+  # the pooled estimate uses one per sample.
+  lit <- read_literature() |>
+    filter(population == "winners", comparison == "reserved_vs_open", family %in% c("years", "secondary_plus"))
+  es <- t(vapply(seq_len(nrow(lit)), function(i) standardized_difference(lit[i, ]), c(yi = 0, vi = 0)))
+  lit <- lit |>
+    mutate(yi = es[, "yi"], vi = es[, "vi"], low = yi - 1.96 * sqrt(vi), high = yi + 1.96 * sqrt(vi)) |>
+    arrange(desc(match(key, yaml::read_yaml("evidence/literature/tables.yaml")$study_order))) |>
+    mutate(
+      row = row_number() + 1,
+      label = paste0(label, ", ", sub(" \\(.*", "", state), ": ", tolower(sub(",.*", "", outcome)))
+    )
+  pooled <- report$meta$literature[1, ]
+  lit_plot <- ggplot(lit, aes(x = yi, y = row)) +
+    geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
+    geom_errorbar(aes(xmin = low, xmax = high), orientation = "y", width = 0.2, colour = blue) +
+    geom_point(colour = blue, size = 2) +
+    geom_polygon(
+      data = diamond(0.6, pooled$d, pooled$d_low, pooled$d_high), aes(x = x, y = y),
+      fill = "grey25", inherit.aes = FALSE
+    ) +
+    scale_y_continuous(breaks = c(0.6, lit$row), labels = c("Pooled, one per sample", lit$label)) +
+    labs(x = "Reserved minus open seats (Cohen's d)", y = NULL) +
+    theme_evidence()
+  save_evidence(lit_plot, "figs/forest_literature", width = 7.5, height = 3.6)
+
+  own <- own_estimates(report) |>
+    mutate(
+      group = if_else(northern == 1, "Northern village heads", "Kerala ward members and city councillors"),
+      low = yi - 1.96 * sqrt(vi), high = yi + 1.96 * sqrt(vi)
+    ) |>
+    arrange(northern, desc(election))
+  fits <- report$meta$settings[1, ]
+  other_rows <- sum(own$northern == 0)
+  own <- own |> mutate(row = row_number() + if_else(northern == 1, 2, 0) + 1)
+  own_plot <- ggplot(own, aes(x = yi, y = row)) +
+    geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
+    geom_errorbar(aes(xmin = low, xmax = high), orientation = "y", width = 0.2, colour = blue) +
+    geom_point(colour = blue, size = 2) +
+    geom_polygon(
+      data = diamond(0.8, fits$other_settings, fits$other_low, fits$other_high), aes(x = x, y = y),
+      fill = "grey25", inherit.aes = FALSE
+    ) +
+    geom_polygon(
+      data = diamond(other_rows + 2.2, fits$northern, fits$northern_low, fits$northern_high), aes(x = x, y = y),
+      fill = "grey25", inherit.aes = FALSE
+    ) +
+    scale_y_continuous(
+      breaks = c(0.8, other_rows + 2.2, own$row),
+      labels = c("Kerala and cities, pooled", "Northern heads, pooled", own$election)
+    ) +
+    labs(x = "Reserved minus open seats, graduate share (percentage points)", y = NULL) +
+    theme_evidence()
+  save_evidence(own_plot, "figs/forest_settings", width = 7, height = 4.2)
+}
+
+# Literature appendix ----
+
+render_literature_table <- function() {
+  # Typeset the literature table from the study files and table specification in evidence/literature/.
+
+  tab <- yaml::read_yaml("evidence/literature/tables.yaml")
+  lit <- read_literature() |> mutate(level = if_else(office == "Municipal councillor", "municipal", "village"))
+
+  latex_escape <- function(x) {
+    x <- gsub("\\", "\\textbackslash{}", x, fixed = TRUE)
+    x <- gsub("([&%$#_{}])", "\\\\\\1", x, perl = TRUE)
+    gsub("(?<=\\d)-(?=\\d)", "--", x, perl = TRUE)
+  }
+
+  unit_suffix <- c(share = " (\\%)", years = " (years)", sd = "", index = "", count = "")
+
+  value <- function(x, unit) {
+    ifelse(is.na(x), "", ifelse(unit == "share", formatC(100 * x, format = "f", digits = 1), as.character(x)))
+  }
+
+  # Print a reported difference to its SE's precision so -2.620 (0.766) is not shown as -2.62.
+  difference <- function(d) {
+    digits <- ifelse(d$unit == "share", 1, nchar(sub("^[^.]*\\.?", "", as.character(d$se))))
+    scale <- ifelse(d$unit == "share", 100, 1)
+    dagger <- ifelse(d$se_source == "reported", "", "$^\\dagger$")
+    minus <- function(x) sub("^-", "$-$", x)
+    paste0(
+      minus(mapply(formatC, scale * d$diff, format = "f", digits = digits)), " (",
+      mapply(formatC, scale * d$se, format = "f", digits = digits), ")", dagger
+    )
+  }
+
+  section_rows <- function(sec) {
+    d <- lit |>
+      filter(population == sec$population, comparison %in% unlist(sec$comparison)) |>
+      filter(level == if (is.null(sec$level)) "village" else sec$level) |>
+      arrange(match(key, tab$study_order))
+    if (nrow(d) == 0) {
+      return(character())
+    }
+    first <- !duplicated(d$key)
+    small <- function(x) paste0(" \\newline \\textit{", latex_escape(x), "}")
+    study <- ifelse(first, paste0(latex_escape(d$label), small(d$location)), "")
+    setting <- ifelse(first, latex_escape(paste0(d$state, "; ", d$years, "; ", d$office)), "")
+    design <- ifelse(first, latex_escape(paste0(d$design, if_else(d$adjusted, "; adjusted", ""))), "")
+    outcome <- paste0(latex_escape(d$outcome), unit_suffix[d$unit])
+    extra <- unlist(tab$comparison_labels)[d$comparison]
+    outcome <- ifelse(is.na(extra), outcome, paste0(outcome, small(extra)))
+    rows <- paste(
+      study, setting, design, outcome,
+      value(d$reserved, d$unit), value(d$open, d$unit), difference(d), format(d$n, big.mark = ","),
+      sep = " & "
+    )
+    rule <- ifelse(first & seq_along(first) > 1, "\\addlinespace[3pt]\n", "")
+    c(
+      "\\midrule",
+      sprintf("\\multicolumn{8}{l}{\\textit{%s}} \\\\", latex_escape(sec$heading)),
+      "\\addlinespace[2pt]",
+      paste0(rule, rows, " \\\\")
+    )
+  }
+
+  widths <- c(0.15, 0.17, 0.13, 0.20, 0.06, 0.06, 0.10, 0.05)
+  align <- rep(c("\\RaggedRight", "\\raggedleft"), each = 4)
+  colspec <- paste(sprintf(">{%s\\arraybackslash}p{%.2f\\linewidth}", align, widths), collapse = "")
+  notes <- latex_escape(paste(unlist(tab$notes), collapse = " "))
+  headers <- paste(
+    "\\textbf{Study}", "\\textbf{Setting}", "\\textbf{Design}", "\\textbf{Outcome}",
+    "\\textbf{Reserved}", "\\textbf{Open}", "\\textbf{Difference (SE)}", "\\textbf{N}",
+    sep = " & "
+  )
+  out <- c(
+    "\\begin{landscape}",
+    "{\\scriptsize",
+    "\\setlength{\\LTleft}{0pt}",
+    "\\setlength{\\LTright}{0pt}",
+    "\\setlength{\\tabcolsep}{3pt}",
+    "\\renewcommand{\\arraystretch}{1.1}",
+    sprintf("\\begin{longtable}{%s}", colspec),
+    sprintf("\\caption{%s}\\label{%s} \\\\", latex_escape(tab$caption), tab$label),
+    "\\toprule", paste(headers, "\\\\"),
+    "\\endfirsthead",
+    "\\multicolumn{8}{l}{\\textit{Table \\thetable{} (continued)}} \\\\",
+    "\\toprule", paste(headers, "\\\\"),
+    "\\endhead",
+    "\\bottomrule",
+    sprintf("\\multicolumn{8}{p{0.97\\linewidth}}{%s} \\\\", notes),
+    "\\endlastfoot",
+    unlist(lapply(tab$sections, section_rows)),
+    "\\end{longtable}",
+    "}",
+    "\\end{landscape}"
+  )
+  writeLines(out, "tabs/literature_table.tex")
 }

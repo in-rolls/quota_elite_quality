@@ -1,5 +1,3 @@
-source("R/delhi.R")
-
 testthat::test_that("Delhi recodes preserve unknown qualifications and cases", {
   edu <- delhi_education(c("Graduate Professional", "5th class", "Illiterate", "Others", "not Given", NA))
   testthat::expect_equal(edu$graduate_plus, c(1L, 0L, 0L, NA_integer_, NA_integer_, NA_integer_))
@@ -11,8 +9,8 @@ testthat::test_that("Delhi recodes preserve unknown qualifications and cases", {
 })
 
 testthat::test_that("Delhi winners conserve seats and match the official 2012 schedule", {
-  d <- arrow::read_parquet("output/delhi/winners.parquet")
-  flow <- readr::read_csv("output/delhi/sample_flow.csv", show_col_types = FALSE)
+  d <- report$settings$delhi$analysis
+  flow <- report$settings$delhi$flow
   testthat::expect_equal(anyDuplicated(d$ward_id), 0L)
   testthat::expect_equal(flow$winners, c(272, 272, 250))
   testthat::expect_equal(flow$classified_education, c(226, 262, 244))
@@ -30,8 +28,8 @@ testthat::test_that("Delhi winners conserve seats and match the official 2012 sc
 })
 
 testthat::test_that("Delhi estimates and inference match explicit OLS and manual clustered covariance", {
-  d <- arrow::read_parquet("output/delhi/winners.parquet")
-  results <- readr::read_csv("output/delhi/regressions.csv", show_col_types = FALSE)
+  d <- report$settings$delhi$analysis
+  results <- report$settings$delhi$estimates
   for (i in seq_len(nrow(results))) {
     row <- results[i, ]
     sample <- d |> dplyr::filter(year == row$year, !is.na(.data[[row$outcome]]))
@@ -57,8 +55,8 @@ testthat::test_that("Delhi estimates and inference match explicit OLS and manual
 })
 
 testthat::test_that("missing-outcome extrema are attained by binary completions", {
-  d <- arrow::read_parquet("output/delhi/winners.parquet")
-  results <- readr::read_csv("output/delhi/missing_outcome_bounds.csv", show_col_types = FALSE)
+  d <- report$settings$delhi$analysis
+  results <- report$settings$delhi$bounds
   for (i in seq_len(nrow(results))) {
     row <- results[i, ]
     sample <- d |> dplyr::filter(year == row$year)
