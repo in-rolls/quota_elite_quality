@@ -1,0 +1,33 @@
+key: gajwani
+label: Gajwani and Zhang (2015)
+version: World Bank Economic Review 29(2), 234-261
+url: https://documents1.worldbank.org/curated/en/419951488373496845/pdf/112425-JRN-PUBLIC-WBER-2015-29-2-gender-and-public-goods-provision-in-tamil-nadus-village-governments.pdf
+location: Table 5, column 6, p. 248
+setting:
+  state: Tamil Nadu (144 GPs)
+  years: '2005'
+  office: GP president
+  design: OLS
+  sample_group: tamil_nadu_2005
+  controls: Schooling, age, second term, caste, religion, income, party, and motive for running
+defaults:
+  population: winners
+  comparison: female_vs_male
+  adjusted: true
+  n_total: 141
+  se_source: reported
+  note: >-
+    Female-minus-male coefficient, with heteroskedasticity-robust SE. The 19-item
+    test covers panchayat rules and duties. The paper reports 47 reserved seats
+    but 46 female presidents, with no women in unreserved seats (p. 246); gender
+    and reservation are therefore not identical. Covariates include characteristics
+    that may respond to reservation, so this is a conditional gender comparison,
+    not a total reservation effect. Knowledge is excluded from the schooling pool.
+estimates:
+- outcome: Panchayat knowledge (0-19)
+  family: knowledge
+  unit: count
+  diff: -3.199
+  se: 0.474
+  status: confirmed
+  source: Table 5, Gender row, column 6; PDF page 15 visually checked

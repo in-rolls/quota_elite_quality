@@ -1,4 +1,4 @@
-# Female reservation and the quality of elected elites
+# Female reservation and the qualifications of local elected officials
 
 How does reserving an office for women change the qualifications of the person elected? We analyze **rural panchayats and urban councils separately**, by state, election and office.
 
@@ -24,7 +24,7 @@ Delhi adds the 2012, 2017 and 2022 elections. Graduate-share intervals include z
 
 Delhi qualifications now come from individual MyNeta profiles, after source checks exposed conflicting education entries in the older files. Winner rosters and geography come from [Goyal’s deposit](https://doi.org/10.7910/DVN/9XPV4I), [2022 results](https://data.opencity.in/dataset/delhi-mcd-elections-2022) and the [SEC gazette](https://sec.delhi.gov.in/sites/default/files/SEC/generic_multiple_files/reservationorder_0.pdf). Missing profiles stay missing; conviction tables are excluded from pending cases. [Upstream data and parser](https://github.com/in-rolls/local_elections/tree/d806f279f5ddba4952580e1ea63d90c11cda573e/data/delhi). [Source comparison code](R/urban.R) · [SEC source excerpt](evidence/excerpts/delhi_2022_reservation_annexure_b.png) · [ADR education table](evidence/excerpts/delhi_2022_adr_education.png).
 
-The manuscript opens with an abstract, evidence on why education, experience, criminal cases, age and economic resources may matter for governing, and existing reservation studies. It distinguishes causal findings from associations and includes contrary evidence on education. Graduate share is the common education outcome; the appendix reports illiteracy as another part of the same education distribution. Each citation identifies the version and source table.
+The manuscript reviews evidence on officials' qualifications, candidate selection as a possible mechanism, and the relationship between qualifications and governing performance. The [literature guide](evidence/literature/) records the comparison with the spending project's papers, source-version problems, and the closest articles used to guide the paper's organization. Graduate share is the common education outcome; the appendix also reports illiteracy. Each extracted comparison identifies its source version and table.
 
 ## Occupation, assets and the literature
 

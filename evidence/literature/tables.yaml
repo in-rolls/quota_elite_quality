@@ -1,6 +1,6 @@
-caption: Published comparisons of leader qualifications by women's reservation
+caption: Published comparisons of leader qualifications
 label: tab:literature
-study_order: [cd, beaman, ban, raabe, deininger, afridi, mori, bamezai, karekurvelee]
+study_order: [cd, beaman, ban, raabe, deininger, afridi, mori, bamezai, karekurvelee, gajwani]
 sections:
 - heading: Elected village leaders, women-reserved vs. open seats
   population: winners
@@ -8,6 +8,9 @@ sections:
 - heading: Elected leaders, reserved women vs. men in other seats
   population: winners
   comparison: [reserved_women_vs_men]
+- heading: Elected village leaders, women vs. men (conditional comparison)
+  population: winners
+  comparison: [female_vs_male]
 - heading: Municipal councillors, women-reserved vs. open seats
   population: winners
   comparison: [reserved_vs_open]
@@ -22,5 +25,7 @@ comparison_labels:
   relative_own_gender: Reserved winner's position among women vs. open winner's position among men
   husband_vs_open: Reserved winner's husband vs. open-seat winner
 notes:
-- Reserved and Open are group means; shares are in percent. Difference is reserved minus open, in the outcome's unit (percentage points for shares), with its standard error in parentheses. Adjusted differences come from the study's regression and need not equal the difference in means. A dagger marks an SE not reported by the study: computed from shares and group sizes as for independent samples, or from the reported t-statistic; these ignore clustering and repeated units. N is the number of reserved plus open units where reported separately, otherwise the regression sample. SD rows are standardized against the GP's citizens; selection-score rows measure position in the villager education distribution.
+- >-
+  Reserved and Open are group means; shares are in percent. Difference is reserved minus open, in the outcome's unit (percentage points for shares), with its standard error in parentheses. Adjusted differences come from the study's regression and need not equal the difference in means. A dagger marks an SE not reported by the study: computed from shares and group sizes as for independent samples, or from the reported t-statistic; these ignore clustering and repeated units. N is the number of reserved plus open units where reported separately, otherwise the regression sample. SD rows are standardized against the GP's citizens; selection-score rows measure position in the villager education distribution.
 - Chattopadhyay and Duflo (2001) and Beaman et al. (2009) study the same Birbhum GPs in successive terms; the published version of Chattopadhyay and Duflo (2004) omits the pradhan-characteristics table. Karekurve-Ramachandra and Lee (2020) use the same Mumbai councillor data as this paper. Mori et al.'s published version (2025) reports the same-gender benchmark. Row-level source locations and transcription notes are in the repository's evidence/literature/studies files.
+- Gajwani and Zhang's adjusted female-minus-male knowledge coefficient is excluded from the schooling meta-analysis; group means are unavailable.

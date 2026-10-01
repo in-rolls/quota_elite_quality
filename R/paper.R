@@ -284,10 +284,13 @@ render_figures <- function(report) {
       data = diamond(0.6, pooled$d, pooled$d_low, pooled$d_high), aes(x = x, y = y),
       fill = "grey25", inherit.aes = FALSE
     ) +
-    scale_y_continuous(breaks = c(0.6, lit$row), labels = c("Pooled, one per sample", lit$label)) +
-    labs(x = "Reserved minus open seats (Cohen's d)", y = NULL) +
+    scale_y_continuous(
+      breaks = c(0.6, lit$row),
+      labels = c("Pooled, one per sample", vapply(lit$label, function(x) paste(strwrap(x, 55), collapse = "\n"), ""))
+    ) +
+    labs(x = "Reserved minus open seats\n(Cohen's d)", y = NULL) +
     theme_evidence()
-  save_evidence(lit_plot, "figs/forest_literature", width = 7.5, height = 3.6)
+  save_evidence(lit_plot, "figs/forest_literature", width = 7.5, height = 4.4)
 
   own <- own_estimates(report) |>
     mutate(
@@ -376,6 +379,7 @@ render_literature_table <- function() {
     c(
       "\\midrule",
       sprintf("\\multicolumn{8}{l}{\\textit{%s}} \\\\", latex_escape(sec$heading)),
+      "\\nopagebreak",
       "\\addlinespace[2pt]",
       paste0(rule, rows, " \\\\")
     )
@@ -391,12 +395,11 @@ render_literature_table <- function() {
     sep = " & "
   )
   out <- c(
-    "\\begin{landscape}",
     "{\\scriptsize",
     "\\setlength{\\LTleft}{0pt}",
     "\\setlength{\\LTright}{0pt}",
     "\\setlength{\\tabcolsep}{3pt}",
-    "\\renewcommand{\\arraystretch}{1.1}",
+    "\\renewcommand{\\arraystretch}{1.0}",
     sprintf("\\begin{longtable}{%s}", colspec),
     sprintf("\\caption{%s}\\label{%s} \\\\", latex_escape(tab$caption), tab$label),
     "\\toprule", paste(headers, "\\\\"),
@@ -405,12 +408,11 @@ render_literature_table <- function() {
     "\\toprule", paste(headers, "\\\\"),
     "\\endhead",
     "\\bottomrule",
-    sprintf("\\multicolumn{8}{p{0.97\\linewidth}}{%s} \\\\", notes),
-    "\\endlastfoot",
+    "\\endfoot",
     unlist(lapply(tab$sections, section_rows)),
     "\\end{longtable}",
-    "}",
-    "\\end{landscape}"
+    paste0("\\noindent ", notes, "\\par"),
+    "}"
   )
   writeLines(out, "tabs/literature_table.tex")
 }
