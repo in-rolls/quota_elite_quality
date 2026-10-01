@@ -1,0 +1,6 @@
+key,label,sample_group,outcome,unit,diff,se,yi,vi
+afridi,"Afridi, Iversen and Sharan (2013)",andhra_2006,Higher secondary or more,share,-0.4,0.052,-1.048109079965735,0.02602396546128473
+bamezai,Bamezai et al. (2026),bihar_secc,"Schooling, SD of all citizens",sd,-0.921,0.073,-0.921,0.0053289999999999995
+cd,Chattopadhyay and Duflo (2001),birbhum,Years of schooling,years,-2.79,0.54,-0.8758901457504327,0.028739446105325406
+deininger,Deininger et al. (2011),reds_2007,At least secondary education,share,-0.3404,0.040561463957650735,-0.7840357081456343,0.01105316176563838
+ban,Ban and Rao (2007),south_india_2002,Years of schooling,years,-2.62,0.766,-0.7157909102539942,0.043795280745684756

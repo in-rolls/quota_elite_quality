@@ -18,7 +18,8 @@ Imports:
     rmarkdown,
     stringr,
     tidyr,
-    xml2
+    xml2,
+    yaml
 Suggests:
     lintr,
     renv,

@@ -14,6 +14,8 @@ analysis:
 
 figures: analysis
 	Rscript scripts/figures.R
+	Rscript scripts/meta.R
+	Rscript scripts/forest.R
 
 paper: figures
 	$(MAKE) manuscript
