@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Female Reservation and the Qualifications of Local Elected Officials in India"
+abstract: >-
+  Compares winners of women-reserved and open seats in rural councils in
+  Bihar, Uttar Pradesh, Rajasthan and Kerala and in the municipal councils of
+  Mumbai and Delhi. Reserved-seat village heads in Bihar and Uttar Pradesh are
+  much less likely to hold a degree; Kerala's council members and urban
+  councillors show no lower graduate share, and urban reserved-seat winners
+  are less likely to face pending criminal cases.
+authors:
+  - family-names: "Sood"
+    given-names: "Gaurav"
+repository-code: "https://github.com/in-rolls/quota_elite_quality"
+keywords:
+  - gender quotas
+  - political reservation
+  - India
+  - local government
+  - political selection

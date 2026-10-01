@@ -24,6 +24,11 @@ testthat::test_that("computed SEs follow the independent-proportions formula", {
   testthat::expect_equal(deininger$se, sqrt(0.2865 * 0.7135 / 180 + 0.6269 * 0.3731 / 459))
 })
 
+testthat::test_that("SEs backed out of t-statistics use the reported t", {
+  kl <- lit[lit$key == "karekurvelee" & lit$family == "criminal", ]
+  testthat::expect_equal(kl$se, 0.266 / 12.616)
+})
+
 testthat::test_that("overlapping samples share a sample group", {
   groups <- unique(lit[c("key", "sample_group")])
   testthat::expect_equal(groups$sample_group[groups$key == "cd"], groups$sample_group[groups$key == "beaman"])

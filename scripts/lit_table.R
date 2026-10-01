@@ -3,7 +3,7 @@ suppressPackageStartupMessages(library(dplyr))
 source("R/literature.R")
 
 tab <- yaml::read_yaml("lit/tables.yaml")
-lit <- read_literature()
+lit <- read_literature() |> mutate(level = if_else(office == "Municipal councillor", "municipal", "village"))
 
 latex_escape <- function(x) {
   x <- gsub("\\", "\\textbackslash{}", x, fixed = TRUE)
@@ -21,7 +21,7 @@ value <- function(x, unit) {
 difference <- function(d) {
   digits <- ifelse(d$unit == "share", 1, nchar(sub("^[^.]*\\.?", "", as.character(d$se))))
   scale <- ifelse(d$unit == "share", 100, 1)
-  dagger <- ifelse(d$se_source == "computed", "$^\\dagger$", "")
+  dagger <- ifelse(d$se_source == "reported", "", "$^\\dagger$")
   minus <- function(x) sub("^-", "$-$", x)
   paste0(
     minus(mapply(formatC, scale * d$diff, format = "f", digits = digits)), " (",
@@ -32,6 +32,7 @@ difference <- function(d) {
 section_rows <- function(sec) {
   d <- lit |>
     filter(population == sec$population, comparison %in% unlist(sec$comparison)) |>
+    filter(level == if (is.null(sec$level)) "village" else sec$level) |>
     arrange(match(key, tab$study_order))
   if (nrow(d) == 0) {
     return(character())

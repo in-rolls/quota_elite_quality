@@ -16,10 +16,10 @@ Source for the appendix table "Published comparisons of leader qualifications by
 |---|---|
 | `population` | `winners` or `candidates` |
 | `comparison` | `reserved_vs_open`; `reserved_women_vs_men` (reserved women vs. men in all other seats); `relative_own_gender` (each group benchmarked against citizens of its own gender); `husband_vs_open` |
-| `family`, `unit` | outcome family (`years`, `literate`, `illiterate`, `secondary_plus`, `graduate`, `selection_score`, `prior_office`, `first_time`, `knowledge`) and unit (`years`, `share`, `sd`, `index`, `count`) |
+| `family`, `unit` | outcome family (`years`, `literate`, `illiterate`, `secondary_plus`, `graduate`, `selection_score`, `prior_office`, `first_time`, `knowledge`, `criminal`) and unit (`years`, `share`, `sd`, `index`, `count`) |
 | `reserved`, `open` | group means as reported; shares stored as proportions |
 | `diff`, `se` | reserved minus open (signs reversed where the source reports open minus reserved) and its SE |
-| `se_source` | `reported`, or `computed` from shares and group sizes as for independent samples (ignores clustering) |
+| `se_source` | `reported`; `computed` from shares and group sizes as for independent samples (ignores clustering); or `from_t`, the difference divided by the reported `t` |
 | `adjusted` | `true` when `diff` is a regression coefficient rather than a difference in means |
 | `sample_group` | studies sharing a sample share this tag, so later pooling does not count them twice |
 | `status`, `source`, `note` | audit trail: `confirmed` once checked against the cited source page |

@@ -1,0 +1,39 @@
+key: karekurvelee
+label: Karekurve-Ramachandra and Lee (2020)
+version: Working paper, December 26 2020
+url: https://www.rochester.edu/college/faculty/alexander_lee/wp-content/uploads/2020/12/gender-performance7.pdf
+location: Table 1, printed p. 14
+setting:
+  state: Mumbai
+  years: 2011-2018 (2012 and 2017 terms)
+  office: Municipal councillor
+  design: Descriptive
+  sample_group: mumbai_praja
+  controls: None
+defaults:
+  population: winners
+  comparison: reserved_vs_open
+  adjusted: false
+  n_reserved: 561
+  n_open: 557
+  se_source: from_t
+  note: Observations are councillor-years from Praja's report cards, so councillors repeat; the paper reports non-quota minus quota, reversed here. SE is the difference divided by the reported t-statistic. Same Praja data as this paper's Mumbai estimates. The text says quota members are less likely to have completed high school, but the table shows a higher university share.
+estimates:
+- outcome: Attended university
+  family: graduate
+  unit: share
+  reserved: 0.437
+  open: 0.390
+  diff: 0.047
+  t: 1.601
+  status: confirmed
+  source: Table 1
+- outcome: Criminal record
+  family: criminal
+  unit: share
+  reserved: 0.037
+  open: 0.303
+  diff: -0.266
+  t: 12.616
+  status: confirmed
+  source: Table 1

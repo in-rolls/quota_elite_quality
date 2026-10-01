@@ -17,10 +17,12 @@ proportion_se <- function(p1, n1, p2, n2) sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2
 
 read_literature <- function(dir = "lit/studies") {
   d <- dplyr::bind_rows(lapply(list.files(dir, pattern = "\\.yaml$", full.names = TRUE), read_study))
-  for (col in c("reserved", "open", "se", "n_reserved", "n_open", "n_total")) {
+  for (col in c("reserved", "open", "se", "t", "n_reserved", "n_open", "n_total")) {
     if (!col %in% names(d)) d[[col]] <- NA_real_
   }
   computed <- d$se_source == "computed"
   d$se[computed] <- with(d[computed, ], proportion_se(reserved, n_reserved, open, n_open))
+  from_t <- d$se_source == "from_t"
+  d$se[from_t] <- abs(d$diff[from_t] / d$t[from_t])
   d |> dplyr::mutate(n = dplyr::coalesce(n_total, n_reserved + n_open))
 }
