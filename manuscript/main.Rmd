@@ -127,15 +127,16 @@ Among Kerala's village ward members, the graduate-share differences are `r contr
 
 ## Mumbai
 
-Mumbai's councillor records come from the Praja Foundation's report cards and affidavits, as deposited by Karekurve-Ramachandra and Lee [@mumbaidata]. Each councillor enters once per term.
+Mumbai's councillor records come from the Praja Foundation's report cards and affidavits, as deposited by @mumbaidata. Each councillor enters once per term.
 
-```{r mumbai-plot, fig.cap="Mumbai councillors in the 2012 and 2017 councils: women-reserved minus open seats, with administrative-ward and council effects. Bars are 95\\% confidence intervals clustered by electoral ward."}
+```{r mumbai-plot, fig.cap="Mumbai councillors in the 2012 and 2017 councils: women-reserved minus open seats in graduate share, any pending case and declaring no tax ID (PAN), with administrative-ward and council effects. Bars are 95\\% confidence intervals clustered by electoral ward."}
 knitr::include_graphics(normalizePath("output/mumbai/quality.png"))
 ```
 
 ```{r mumbai-values, include=FALSE}
 mg <- filter(mumbai, outcome == "educ_grad_plus") %>% rename(estimate = coef_quota)
 mc <- filter(mumbai, outcome == "any_criminal") %>% rename(estimate = coef_quota)
+mp <- filter(mumbai, outcome == "no_pan") %>% rename(estimate = coef_quota)
 ```
 
 The graduate-share difference is `r contrast(mg)` and the pending-case difference is `r contrast(mc)`.
@@ -144,7 +145,7 @@ The graduate-share difference is `r contrast(mg)` and the pending-case differenc
 
 Delhi adds the 2012, 2017 and 2022 elections. Winners and assembly mapping for 2012 and 2017 come from Goyal's replication deposit [@delhigoyal]; for 2022, winners come from the OpenCity compilation of Lok Dhaba results and reservation from the State Election Commission's gazette [@delhi2022results; @delhi2022seats, Annexure B]. The 2012 reservation labels match the official schedule [@delhi2012seats, Annexures I–III]. Qualifications and pending cases come from each winner's MyNeta profile [@delhimyneta]; convictions are excluded from pending cases.
 
-```{r delhi-plot, fig.cap="Delhi councillors by election: women-reserved minus open seats, with assembly-constituency and caste-reservation effects. Bars are 95\\% confidence intervals clustered by assembly constituency."}
+```{r delhi-plot, fig.cap="Delhi councillors by election: women-reserved minus open seats in graduate share, reporting no occupation and any pending case, with assembly-constituency and caste-reservation effects. Bars are 95\\% confidence intervals clustered by assembly constituency."}
 knitr::include_graphics(normalizePath("output/delhi/quality.png"))
 ```
 
@@ -154,9 +155,9 @@ We do not use the education recorded in the older Delhi files, which is also the
 
 # Occupation, assets and criminal records
 
-Reserved-seat winners are far more likely to report no occupation of their own, including where their education matches that of open-seat winners. In Rajasthan, `r fmt(100 * es$rajasthan_occupation$estimate, 0)` points more reserved-seat heads report no occupation (95% CI `r fmt(100 * es$rajasthan_occupation$conf_low, 0)` to `r fmt(100 * es$rajasthan_occupation$conf_high, 0)`). Among Kerala's ward members the gap is `r fmt(es$kerala_ward_occupation[1], 0)` to `r fmt(es$kerala_ward_occupation[2], 0)` points across the three elections, and among Delhi's councillors `r fmt(es$delhi_occupation[1], 0)` to `r fmt(es$delhi_occupation[2], 0)` points. Among Kerala's district council members the gap is smaller, `r fmt(es$kerala_district_occupation[1], 0)` to `r fmt(es$kerala_district_occupation[2], 0)` points. Counting "social worker" as missing rather than as an occupation moves no estimate by more than `r fmt(ceiling(es$social_shift), 0)` points.
+Reserved-seat winners are far more likely to report no occupation of their own, including where their education matches that of open-seat winners. In Rajasthan, `r fmt(100 * es$rajasthan_occupation$estimate, 0)` points more reserved-seat heads report no occupation (95% CI `r fmt(100 * es$rajasthan_occupation$conf_low, 0)` to `r fmt(100 * es$rajasthan_occupation$conf_high, 0)`). Among Kerala's ward members the gap is `r fmt(es$kerala_ward_occupation[1], 0)` to `r fmt(es$kerala_ward_occupation[2], 0)` points across the three elections, and among Delhi's councillors `r fmt(es$delhi_occupation[1], 0)` to `r fmt(es$delhi_occupation[2], 0)` points. Among Kerala's district council members the gap is smaller, `r fmt(es$kerala_district_occupation[1], 0)` to `r fmt(es$kerala_district_occupation[2], 0)` points. Mumbai records no occupation, but reserved-seat councillors there are `r contrast(mp)` more likely to declare no tax ID, all of it in the 2012 council. Counting "social worker" as missing rather than as an occupation moves no estimate by more than `r fmt(ceiling(es$social_shift), 0)` points.
 
-Reserved-seat heads also declare fewer assets: about `r fmt(-es$rajasthan_assets, 0)`% less in Rajasthan and `r fmt(-es$up_assets, 0)`% less in Uttar Pradesh. Criminal records are rare among Uttar Pradesh's 2021 village heads, `r fmt(es$up_crime_rate, 2)`% of those with a known record, and do not differ by seat type (`r contrast(es$up_crime)`). The appendix reports every estimate.
+Reserved-seat heads also declare fewer assets: about `r fmt(-es$rajasthan_assets, 0)`% less in Rajasthan and `r fmt(-es$up_assets, 0)`% less in Uttar Pradesh. Criminal records are rare among Uttar Pradesh's 2021 village heads, `r fmt(es$up_crime_rate, 2)`% of those with a known record, and do not differ by seat type (`r fmt(100 * es$up_crime$estimate, 2)` points, 95% CI `r fmt(100 * es$up_crime$conf_low, 2)` to `r fmt(100 * es$up_crime$conf_high, 2)`). The appendix reports every estimate.
 
 # Discussion
 
@@ -166,7 +167,7 @@ The education gap follows the setting. Pooling this paper's estimates with elect
 knitr::include_graphics(normalizePath("output/meta/forest_settings.png"))
 ```
 
-Where reserved-seat winners match open-seat winners on education, they still differ in economic independence. That is consistent with evidence that male relatives often exercise the office. In a Rajasthan phone audit, 9% of answered calls to reserved-seat village heads reached the elected woman, against 76% in open seats and 31.7% in urban Jaipur [@karekurvesood, pp. 1–2]. Women elected through quotas participate less in council decisions [@heinze], and surveys in two states find male family members prominent in everyday governance [@amar]. For the same reason, the lower rate of pending cases among urban reserved-seat councillors may overstate the change in the office's criminal exposure: affidavits list the officeholder's own cases, not her relatives', and Karekurve-Ramachandra and Lee note that many Mumbai quota women have male relatives who face charges [@karekurvelee, p. 11].
+Where reserved-seat winners match open-seat winners on education, they still differ in economic independence. That is consistent with evidence that male relatives often exercise the office. In a Rajasthan phone audit, 9% of answered calls to reserved-seat village heads reached the elected woman, against 76% in open seats and 31.7% in urban Jaipur [@karekurvesood, pp. 1–2]. Women elected through quotas participate less in council decisions [@heinze], and surveys in two states find male family members prominent in everyday governance [@amar]. For the same reason, the lower rate of pending cases among urban reserved-seat councillors may overstate the change in the office's criminal exposure: affidavits list the officeholder's own cases, not her relatives', and @karekurvelee [p. 11] note that many Mumbai quota women have male relatives who face charges.
 
 Less-qualified winners need not govern worse. In Rajasthan and Uttar Pradesh, lottery-assigned reservation has no detectable effect on the scale or content of public works [@greensinghsood].
 

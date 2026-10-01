@@ -126,10 +126,20 @@ economic_summary <- function() {
 }
 
 economic_table <- function() {
-  outcomes <- c(no_earnings = "No occupation", log_assets = "Log declared assets", criminal_record = "Criminal record")
+  outcomes <- c(
+    no_earnings = "No occupation", no_pan = "No tax ID declared", log_assets = "Log declared assets",
+    criminal_record = "Criminal record"
+  )
   rows <- bind_rows(
-    rural |> filter(outcome %in% names(outcomes)) |> mutate(Office = unname(office_labels[tier])),
-    delhi |> filter(outcome %in% names(outcomes)) |> mutate(state = "Delhi", Office = "Councillor")
+    mumbai |>
+      filter(outcome == "no_pan") |>
+      mutate(state = "Mumbai", year = "2012, 2017", Office = "Councillor", estimate = coef_quota),
+    rural |>
+      filter(outcome %in% names(outcomes)) |>
+      mutate(Office = unname(office_labels[tier]), year = as.character(year)),
+    delhi |>
+      filter(outcome %in% names(outcomes)) |>
+      mutate(state = "Delhi", Office = "Councillor", year = as.character(year))
   ) |>
     mutate(
       Outcome = unname(outcomes[outcome]), scale = if_else(outcome == "log_assets", 1, 100),
@@ -141,6 +151,7 @@ economic_table <- function() {
   kable(rows, caption = paste(
     "Occupation, assets and criminal records: reserved minus open seats, with the controls and clustering",
     "of the education models. No occupation and criminal record in percentage points; log declared assets",
-    "in log points. No occupation counts nil, unemployed, homemaker and student entries."
+    "in log points. No occupation counts nil, unemployed, homemaker and student entries. Mumbai, which records",
+    "no occupation, reports whether the councillor declared a tax ID (PAN)."
   ), booktabs = TRUE, row.names = FALSE, longtable = TRUE)
 }
