@@ -161,6 +161,18 @@ audit <- bind_rows(
     spearman = cor(mumbai_cased$deposit_cases, mumbai_cased$cases, method = "spearman")
   )
 )
+# If the 2012 labels were attached to rows a fixed distance away, some offset would match the profiles.
+all_rows <- read_csv(legacy_path, show_col_types = FALSE)
+winner_rows <- which(all_rows$`Election Outcome` == "Winner")
+profile <- myneta$education[match(all_rows$`Ward Number`[winner_rows], myneta$ward)]
+offsets <- tibble(offset = -40:40) |>
+  mutate(exact = vapply(offset, function(k) {
+    rows <- winner_rows + k
+    keep <- rows >= 1 & rows <= nrow(all_rows) & !is.na(profile)
+    mean(tolower(all_rows$Education[rows[keep]]) == tolower(profile[keep]), na.rm = TRUE)
+  }, 0))
+write_csv(offsets, "output/audit/delhi_2012_row_offsets.csv")
+
 write_csv(audit, "output/audit/deposit_agreement.csv")
 write_csv(
   graded |> count(legacy_education, education, name = "winners"),
