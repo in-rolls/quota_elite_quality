@@ -47,6 +47,6 @@ make check
 
 [Analysis samples](output/) are saved as Parquet, with CSV estimates, education-label dictionaries and sample accounting. [Data inventory](evidence/data_inventory.csv) distinguishes unused data from analyses already run; [winner-field counts](output/inventory/pooled_winner_fields.csv) document coverage. Some UP inputs reflect integration changes rather than a finalized central release; exact hashes and the [adapter diff](evidence/central_adapters.patch) record that state.
 
-CI runs numerical tests against the saved analysis samples and recompiles the paper with `make lint test manuscript`; rebuilding from central inputs requires `make check`.
+There is no hosted CI: the inputs live outside the repository, so the check that matters is `make check` run locally against them. `make lint test manuscript` re-checks the saved analysis samples and recompiles the paper without the inputs.
 
 The older `bihar.R`, `up.R`, `rajasthan.R` and `kerala.R` scripts reproduce historical descriptive specifications where their inputs are available. They are outside the manuscript build. `up.R` requires the original 2015 candidate directory through `UP_2015_CANDIDATES`; it must not be replaced with the 2015 winner file. Bihar 2021 affidavit extraction remains stopped.
