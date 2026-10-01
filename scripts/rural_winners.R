@@ -21,6 +21,13 @@ for (state in c("uttar_pradesh", "rajasthan", "kerala")) {
         winner_age = if_else(year == 2021, candidate_age, winner_age)
       )
   }
+  if (state == "rajasthan") {
+    assets <- read_parquet(file.path(master_dir(), "candidates_rajasthan.parquet")) |>
+      filter(year == 2020, elected == "1") |>
+      select(row_id, total_assets = candidate_total_assets)
+    stopifnot(!anyDuplicated(assets$row_id))
+    d <- left_join(d, assets, by = "row_id", relationship = "one-to-one")
+  }
   stopifnot(nrow(d) == nrow(seats))
   d <- prepare_controls(d, state)
   fit_winners(d, state)

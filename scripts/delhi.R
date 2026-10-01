@@ -4,6 +4,7 @@ suppressPackageStartupMessages({
   library(fixest)
 })
 source("R/delhi.R")
+source("R/occupation.R")
 dir.create("output/delhi", showWarnings = FALSE, recursive = TRUE)
 manifest <- read_csv("evidence/analysis_inputs.csv", show_col_types = FALSE)
 path <- "../local_elections/data/delhi/release/winners.parquet"
@@ -14,6 +15,7 @@ d <- arrow::read_parquet(path) |>
     ward_id = paste(year, ward_number, sep = ":"), education_raw = education,
     age = if_else(age >= 21 & age <= 100, age, NA_integer_),
     any_criminal = as.integer(pending_cases > 0),
+    no_earnings = no_earnings(occupation), no_earnings_social_missing = no_earnings(occupation, "missing"),
     corporation = case_when(
       year == 2012 ~ delhi_2012_roster()$corporation[match(as.integer(sub("-.*", "", ward_number)), 1:272)],
       year == 2017 ~ unname(c(N = "North", S = "South", E = "East")[sub(".*-", "", ward_number)]),
@@ -48,7 +50,9 @@ estimates <- list()
 bounds <- list()
 for (year in sort(unique(d$year))) {
   yearly <- d |> filter(.data$year == .env$year)
-  for (outcome in c("graduate_plus", "illiterate", "age", "any_criminal")) {
+  for (outcome in c(
+    "graduate_plus", "illiterate", "age", "any_criminal", "no_earnings", "no_earnings_social_missing"
+  )) {
     sample <- yearly |> filter(!is.na(.data[[outcome]]))
     model <- feols(as.formula(paste(outcome, "~ quota | assembly_id + caste_reservation")),
       data = sample, cluster = ~assembly_id, fixef.rm = "none"

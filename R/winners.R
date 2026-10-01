@@ -6,6 +6,7 @@ suppressPackageStartupMessages({
   library(stringr)
   library(fixest)
 })
+source("R/occupation.R")
 
 master_dir <- function() Sys.getenv("LOCAL_ELECTIONS_MASTER", "../local_elections/data/master")
 
@@ -18,9 +19,36 @@ read_seats <- function(state) {
 
 winner_extras <- function(seats) {
   d <- read_parquet(file.path(master_dir(), "master_extras.parquet")) |>
-    filter(row_id %in% seats$row_id, column %in% c("winner_education", "winner_age", "winner_occupation"))
+    filter(row_id %in% seats$row_id, column %in% c(
+      "winner_education", "winner_age", "winner_occupation",
+      "movable_property", "immovable_property", "criminal_history"
+    ))
   stopifnot(!anyDuplicated(paste(d$row_id, d$column)))
-  d |> pivot_wider(names_from = column, values_from = value)
+  d <- d |> pivot_wider(names_from = column, values_from = value)
+  for (col in c("winner_occupation", "movable_property", "immovable_property", "criminal_history")) {
+    if (!col %in% names(d)) d[[col]] <- NA_character_
+  }
+  d
+}
+
+# UP 2021 reports movable and immovable property separately; Rajasthan reports one total. Both are
+# declared rupee holdings, logged after adding one so zero holdings stay in the sample.
+economic_outcomes <- function(d) {
+  total <- if ("total_assets" %in% names(d)) {
+    suppressWarnings(as.numeric(d$total_assets))
+  } else {
+    rep(NA_real_, nrow(d))
+  }
+  split <- suppressWarnings(as.numeric(d$movable_property) + as.numeric(d$immovable_property))
+  assets <- coalesce(total, split)
+  d |> mutate(
+    no_earnings = no_earnings(winner_occupation),
+    no_earnings_social_missing = no_earnings(winner_occupation, social_work = "missing"),
+    log_assets = if_else(assets >= 0, log1p(assets), NA_real_),
+    criminal_record = case_when(
+      criminal_history == "हाँ" ~ 1L, criminal_history == "नहीं" ~ 0L, TRUE ~ NA_integer_
+    )
+  )
 }
 
 schooling <- function(x, state) {
@@ -98,7 +126,11 @@ fit_winners <- function(d, state) {
   out <- file.path("output", state)
   dir.create(out, recursive = TRUE, showWarnings = FALSE)
   coded <- schooling(d$winner_education, state)
-  d <- bind_cols(d, coded)
+  d <- bind_cols(d, coded) |> economic_outcomes()
+  write_csv(
+    count(d, year, tier, occupation = str_squish(str_to_lower(winner_occupation)), no_earnings, name = "records"),
+    file.path(out, "occupation_labels.csv")
+  )
   write_csv(
     count(d, year, tier, education_raw, graduate_plus, education_rule, name = "records"),
     file.path(out, "education_labels.csv")
@@ -115,7 +147,8 @@ fit_winners <- function(d, state) {
     filter(winner_known, !ambiguous, treatment_known, !is.na(caste_reservation)) |>
     select(
       row_id, year, tier, state_key, quota, district, block_id, caste_reservation,
-      graduate_plus, illiterate, age, education_rule
+      graduate_plus, illiterate, age, education_rule,
+      no_earnings, no_earnings_social_missing, log_assets, criminal_record
     )
   stopifnot(!anyDuplicated(analysis$row_id), all(na.omit(analysis$graduate_plus) %in% 0:1))
   write_parquet(analysis, file.path(out, "winners.parquet"), compression = "zstd")
@@ -125,7 +158,10 @@ fit_winners <- function(d, state) {
       n = n(), education_n = sum(!is.na(graduate_plus)),
       graduate_plus = mean(graduate_plus, na.rm = TRUE),
       illiterate = mean(illiterate, na.rm = TRUE), age_n = sum(!is.na(age)),
-      age = mean(age, na.rm = TRUE), .groups = "drop"
+      age = mean(age, na.rm = TRUE), occupation_n = sum(!is.na(no_earnings)),
+      no_earnings = mean(no_earnings, na.rm = TRUE), assets_n = sum(!is.na(log_assets)),
+      median_assets = median(expm1(log_assets), na.rm = TRUE), criminal_n = sum(!is.na(criminal_record)),
+      criminal_record = mean(criminal_record, na.rm = TRUE), .groups = "drop"
     )
   write_csv(desc, file.path(out, "descriptive.csv"))
   results <- list()
@@ -133,7 +169,11 @@ fit_winners <- function(d, state) {
     for (office in unique(analysis$tier[analysis$year == yr])) {
       base <- filter(analysis, year == yr, tier == office)
       geography <- if (office != "zp_member" && all(!is.na(base$block_id))) "block_id" else "district"
-      for (outcome in c("graduate_plus", "illiterate", "age")) {
+      outcomes <- c(
+        "graduate_plus", "illiterate", "age", "no_earnings", "no_earnings_social_missing",
+        "log_assets", "criminal_record"
+      )
+      for (outcome in outcomes) {
         sample <- base |> filter(!is.na(.data[[outcome]]), !is.na(.data[[geography]]))
         if (nrow(sample) == 0 || n_distinct(sample[[outcome]]) < 2) next
         stopifnot(n_distinct(sample$quota) == 2, n_distinct(sample[[geography]]) > 1)
