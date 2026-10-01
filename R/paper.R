@@ -89,3 +89,58 @@ delhi_comparison <- read_csv("output/delhi/source_comparison.csv", show_col_type
     joint = sum(!is.na(graduate_disagreement)),
     disagreements = sum(graduate_disagreement, na.rm = TRUE), .groups = "drop"
   )
+
+lit_meta <- read_csv("output/meta/literature.csv", show_col_types = FALSE)[1, ]
+setting_meta <- read_csv("output/meta/settings.csv", show_col_types = FALSE)
+audit <- read_csv("output/audit/deposit_agreement.csv", show_col_types = FALSE)
+
+# Reserved-minus-open differences in reporting no occupation and in log declared assets.
+economic_summary <- function() {
+  occupation <- c(
+    rural$estimate[rural$outcome == "no_earnings" & rural$tier %in% c("gp_head", "gp_ward", "block_member")],
+    delhi$estimate[delhi$outcome == "no_earnings"]
+  )
+  up_crime <- get_result("Uttar Pradesh", 2021, "gp_head", "criminal_record")
+  up_desc <- read_csv("output/uttar_pradesh/descriptive.csv", show_col_types = FALSE) |>
+    filter(year == 2021, tier == "gp_head")
+  list(
+    occupation_gap = 100 * range(occupation),
+    rajasthan_occupation = get_result("Rajasthan", 2020, "gp_head", "no_earnings"),
+    kerala_ward_occupation = 100 * range(
+      rural$estimate[rural$state == "Kerala" & rural$tier == "gp_ward" & rural$outcome == "no_earnings"]
+    ),
+    delhi_occupation = 100 * range(delhi$estimate[delhi$outcome == "no_earnings"]),
+    rajasthan_assets = 100 * (exp(get_result("Rajasthan", 2020, "gp_head", "log_assets")$estimate) - 1),
+    up_assets = 100 * (exp(get_result("Uttar Pradesh", 2021, "gp_head", "log_assets")$estimate) - 1),
+    up_crime = up_crime,
+    social_shift = 100 * max(abs(c(
+      rural$estimate[rural$outcome == "no_earnings_social_missing"] -
+        rural$estimate[rural$outcome == "no_earnings"],
+      delhi$estimate[delhi$outcome == "no_earnings_social_missing"] - delhi$estimate[delhi$outcome == "no_earnings"]
+    ))),
+    kerala_district_occupation = 100 * range(
+      rural$estimate[rural$state == "Kerala" & rural$tier == "zp_member" & rural$outcome == "no_earnings"]
+    ),
+    up_crime_rate = 100 * weighted.mean(up_desc$criminal_record, up_desc$criminal_n)
+  )
+}
+
+economic_table <- function() {
+  outcomes <- c(no_earnings = "No occupation", log_assets = "Log declared assets", criminal_record = "Criminal record")
+  rows <- bind_rows(
+    rural |> filter(outcome %in% names(outcomes)) |> mutate(Office = unname(office_labels[tier])),
+    delhi |> filter(outcome %in% names(outcomes)) |> mutate(state = "Delhi", Office = "Councillor")
+  ) |>
+    mutate(
+      Outcome = unname(outcomes[outcome]), scale = if_else(outcome == "log_assets", 1, 100),
+      `Difference [95% CI]` = interval_text(estimate, conf_low, conf_high, scale),
+      N = num(n)
+    ) |>
+    arrange(match(outcome, names(outcomes)), state, year) |>
+    select(Outcome, State = state, Year = year, Office, `Difference [95% CI]`, N)
+  kable(rows, caption = paste(
+    "Occupation, assets and criminal records: reserved minus open seats, with the controls and clustering",
+    "of the education models. No occupation and criminal record in percentage points; log declared assets",
+    "in log points. No occupation counts nil, unemployed, homemaker and student entries."
+  ), booktabs = TRUE, row.names = FALSE, longtable = TRUE)
+}

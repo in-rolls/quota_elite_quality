@@ -34,18 +34,9 @@ testthat::test_that("overlapping samples share a sample group", {
   testthat::expect_equal(groups$sample_group[groups$key == "cd"], groups$sample_group[groups$key == "beaman"])
 })
 
-testthat::test_that("numbers quoted in the Existing evidence section match the study files", {
+testthat::test_that("the Existing evidence section takes its numbers from the study files", {
   text <- readLines("manuscript/main.Rmd")
-  text <- paste(text[seq(grep("^# Existing evidence", text), grep("^# Data and empirical", text) - 1)], collapse = " ")
-  quoted <- c(
-    cd = "−2.79 \\(SE 0.54\\)", beaman = "−2.10 \\(SE 0.55\\)", ban = "−2.62 \\(SE 0.77\\)",
-    bamezai = "0.92 SD", bamezai = "−0.36 SD"
-  )
-  for (q in quoted) testthat::expect_match(text, q)
-  value <- function(key, outcome) lit$diff[lit$key == key & lit$outcome == outcome & lit$population == "winners"]
-  testthat::expect_equal(round(value("cd", "Years of schooling"), 2), -2.79)
-  testthat::expect_equal(round(value("beaman", "Years of schooling"), 2), -2.10)
-  testthat::expect_equal(round(value("ban", "Years of schooling"), 2), -2.62)
-  testthat::expect_equal(round(value("bamezai", "Schooling, SD of all citizens"), 2), -0.92)
-  testthat::expect_equal(round(value("bamezai", "Husband's schooling, SD of all citizens"), 2), -0.36)
+  section <- text[seq(grep("^# Existing evidence", text), grep("^# Data and empirical", text) - 1)]
+  prose <- section[!grepl("^```|fig.cap", section)]
+  testthat::expect_false(any(grepl("[0-9]\\.[0-9]", gsub("`r [^`]*`|Section [0-9.]+", "", prose))))
 })
