@@ -39,16 +39,24 @@ tab_2 <- up_all_dat |>
   )
 
 
-up_2021 <- readr::read_csv(Sys.getenv(
-  "UP_2021_CANDIDATES",
-  "../local_elections_up/data/up_gram_panchayat_pradhan_2021.csv.zip"
-))
+# 2021 candidates come from the central master; the seat's raw reservation label
+# is the grouping the original 2021 file carried.
+master_dir <- Sys.getenv("LOCAL_ELECTIONS_MASTER", "../local_elections/data/master")
+up_seats <- arrow::read_parquet(file.path(master_dir, "master_uttar_pradesh.parquet")) |>
+  filter(year == 2021) |>
+  select(row_id, reservation = reservation_raw)
+up_2021 <- arrow::read_parquet(file.path(master_dir, "candidates_uttar_pradesh.parquet")) |>
+  filter(year == 2021) |>
+  inner_join(up_seats, by = "row_id", relationship = "many-to-one")
+stopifnot(nrow(up_2021) == 373096L)
 
 tab_3 <- up_2021 |>
   group_by(reservation) |>
   summarize(
-    prop_illiterate = round(mean(education_2021 == "निरक्षर", na.rm = TRUE), 2),
-    prop_college_or_more = round(mean(education_2021 %in% c("परास्नातक", "स्नातक", "पी० एच० डी०"), na.rm = TRUE), 2),
+    prop_illiterate = round(mean(candidate_education == "निरक्षर", na.rm = TRUE), 2),
+    prop_college_or_more = round(
+      mean(candidate_education %in% c("परास्नातक", "स्नातक", "पी० एच० डी०"), na.rm = TRUE), 2
+    ),
     n = n()
   )
 
