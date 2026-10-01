@@ -1,4 +1,4 @@
-.PHONY: restore analysis figures paper lint format test check manuscript
+.PHONY: restore analysis figures paper lint format test check manuscript audit
 
 restore:
 	Rscript -e 'renv::restore(prompt = FALSE)'
@@ -30,5 +30,8 @@ lint:
 
 test:
 	Rscript tests/run.R
+
+audit:
+	Rscript scripts/deposit_audit.R
 
 check: paper lint test
