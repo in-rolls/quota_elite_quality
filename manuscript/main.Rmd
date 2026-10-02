@@ -29,6 +29,7 @@ header-includes:
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
                      fig.align = "center", fig.pos = "H", out.width = "100%")
 options(knitr.graphics.rel_path = FALSE)
+table_format <- if (knitr::is_latex_output()) "latex" else "pipe"
 head_age <- function(year) get_result("Bihar", year, "gp_head", "age")
 bounds <- report$bounds
 raj_bounds <- filter(bounds, state == "rajasthan")
@@ -50,7 +51,7 @@ lit_value <- function(key, comparison, population = "winners") {
 
 \begin{abstract}
 
-We examine how the qualifications of local elected officials differ between women-reserved and open seats. We compare winners of women-reserved and open seats in rural councils in Bihar, Uttar Pradesh, Rajasthan and Kerala and in the municipal councils of Mumbai and Delhi. Among village heads in Bihar and Uttar Pradesh, reserved-seat winners are `r fmt(ss$head_gap[1], 0)` to `r fmt(ss$head_gap[2], 0)` percentage points less likely to hold a university degree. Among Kerala's village council members and in the two cities, the estimated graduate-share differences are smaller and their confidence intervals include zero. Economic position differs in every village, block and city office with occupation records: reserved-seat winners are `r fmt(es$occupation_gap[1], 0)` to `r fmt(es$occupation_gap[2], 0)` points more likely to report no occupation, and they declare lower assets in Rajasthan and Uttar Pradesh. In Mumbai and Delhi they are `r fmt(ss$case_gap[1], 0)` to `r fmt(ss$case_gap[2], 0)` points less likely to face a pending criminal case. Across five distinct samples in the existing literature, reserved-seat village heads have `r fmt(-lit_meta$d, 2)` standard deviations less schooling.
+Gender quotas expand access to elected office, but their implications for officeholders' qualifications may vary across settings. We compare winners of women-reserved and open seats in rural Bihar, Uttar Pradesh, Rajasthan and Kerala and in Mumbai and Delhi, and combine these estimates with existing schooling studies. The combined schooling difference is `r fmt(combined_meta$d, 2)` standard deviations (95\% CI `r fmt(combined_meta$low, 2)` to `r fmt(combined_meta$high, 2)`), with substantial variation across settings. In our records, reserved-seat village heads in Bihar and Uttar Pradesh are `r fmt(ss$head_gap[1], 0)` to `r fmt(ss$head_gap[2], 0)` percentage points less likely to hold a university degree. Estimates for Kerala's village ward members and the two cities are smaller and their confidence intervals include zero. Reserved-seat winners are `r fmt(es$occupation_gap[1], 0)` to `r fmt(es$occupation_gap[2], 0)` points more likely to report no occupation in the village, block and city offices with occupation records, and declare lower assets in Rajasthan and Uttar Pradesh. In Mumbai and Delhi, they are `r fmt(ss$case_gap[1], 0)` to `r fmt(ss$case_gap[2], 0)` points less likely to face pending criminal charges. Qualification differences between reserved and open seats depend on both the attribute and the office.
 
 \end{abstract}
 
@@ -62,7 +63,7 @@ Research on Indian village heads often finds that winners of women-reserved seat
 
 This leaves a puzzle. Is the schooling gap a common consequence of reservation, or does it depend on the opportunities and barriers women face in a particular political setting? Much of the existing evidence concerns village heads. It does not establish whether the same pattern holds among other rural officials or urban councillors. Nor does a schooling difference establish a broader qualification disadvantage: economic position and criminal records could follow different patterns.
 
-We extend this literature by comparing qualifications across rural and urban offices in several Indian states. A common university-degree threshold makes the education comparisons easier to interpret across settings. Occupation, assets, age, and criminal records allow us to ask whether the education pattern extends to other attributes. We also assemble the published qualification comparisons, distinguish their populations and designs, and summarize the schooling evidence without counting overlapping samples twice. The contribution is to establish how qualification differences vary across offices, settings, and attributes, rather than to infer a single ranking of leader quality.
+We extend this literature by comparing qualifications across rural and urban offices in several Indian states. A common university-degree threshold makes the education comparisons easier to interpret across settings. Occupation, assets, age, and criminal records allow us to ask whether the education pattern extends to other attributes. We also combine the existing schooling evidence with our estimates in a meta-analysis, expressing differences in standard-deviation units and counting overlapping samples once. The contribution is to establish how qualification differences vary across offices, settings, and attributes, rather than to infer a single ranking of leader quality.
 
 Our analysis uses election records and candidate affidavits for rural councils in Bihar, Uttar Pradesh, Rajasthan, and Kerala and municipal councils in Mumbai and Delhi. We compare winners of women-reserved and open seats separately by state, election, and office; open seats can also elect women. The regressions include geographic and caste-reservation effects where the records permit them, with standard errors clustered geographically. A causal interpretation requires reservation to be as good as randomly assigned within the comparison groups. We also examine how missing qualifications limit conclusions about all winners.
 
@@ -74,19 +75,17 @@ Other attributes follow different patterns. Across the village, block, and city 
 
 ## Evidence on officials' qualifications
 
-The most consistent evidence on qualifications concerns schooling among village heads. Surveys generally find less schooling among winners of women-reserved seats. The comparisons assembled in Table \ref{tab:literature} report lower years of schooling in West Bengal and South India [@cd, Table 3; @beaman, Table II; @ban, Table 9], lower secondary-school attainment in a national village panel and Andhra Pradesh [@deininger, Table 3; @afridi, Table 2], and a lower standardized education score at Bihar's reservation threshold [@bamezai, Table 7]. These studies measure different outcomes and use different designs: most compare group means, while the Bihar study uses a reservation threshold. Their estimates should not be read as a common causal effect.
+The most consistent evidence on qualifications concerns schooling among village heads. Surveys generally find less schooling among winners of women-reserved seats. The comparisons assembled in Table \ref{tab:literature} report lower years of schooling in West Bengal and South India [@cd, Table 3; @beaman, Table II; @ban, Table 9], lower secondary-school attainment in a national village panel and Andhra Pradesh [@deininger, Table 3; @afridi, Table 2]. These studies combine descriptive and adjusted comparisons and measure different schooling outcomes. We synthesize differences in qualifications, without treating the estimates as a common causal effect.
 
-Across the five distinct samples with extractable reserved-seat versus open-seat schooling comparisons, the pooled standardized difference is `r fmt(lit_meta$d, 2)` (95% CI `r fmt(lit_meta$d_low, 2)` to `r fmt(lit_meta$d_high, 2)`). The two Birbhum studies enter once in this calculation. The summary describes this set of available estimates, rather than an exhaustive population of studies; several standard errors reconstructed from reported means and counts also omit clustering or repeated village observations. Other relevant comparisons do not enter the pool. In Tamil Nadu, female and male presidents have relatively similar reported schooling distributions [@gajwani, p. 246]. In Maharashtra, female sarpanches have fewer years of schooling, but the study compares women and men, including a woman elected without a current reservation, rather than reserved and open seats [@priebe, Table 2 and note 6].
-
-```{r literature-forest, fig.cap="Published comparisons of schooling among elected village heads, women-reserved minus open seats, as standardized differences with 95\\% confidence intervals. Years of schooling are divided by the pooled within-group standard deviation; shares of heads with secondary schooling are converted through the log odds ratio; Bamezai et al. report standard-deviation units. The pooled estimate is a random-effects mean over five independent samples, with the Birbhum councils entered once through Chattopadhyay and Duflo.", out.width="90%"}
-knitr::include_graphics(normalizePath("figs/forest_literature.png"))
-```
+The schooling measures range from years of education to completion of secondary school. We express these comparisons and our graduate-share estimates in standard-deviation units and present the combined meta-analysis in Section \ref{sec:synthesis}. Not every relevant study supplies an eligible comparison. In Tamil Nadu, female and male presidents have relatively similar reported schooling distributions [@gajwani, p. 246]. In Maharashtra, female sarpanches have fewer years of schooling, but the study compares women and men, including a woman elected without a current reservation, rather than reserved and open seats [@priebe, Table 2 and note 6].
 
 Schooling is one component of preparation for office. Reserved-seat leaders also have less prior political experience in West Bengal, South India, and Andhra Pradesh [@cd, Table 3; @ban, Table 9; @afridi, Table 2]. Local officials must also understand administrative procedures, obtain information, and negotiate with other officials. Village heads' responsibilities for budgets, public works, and benefit allocation make these skills relevant [@auerbach, pp. 708–710; @joshi, p. 56]. In Tamil Nadu, female presidents score `r fmt(-lit_value("gajwani", "female_vs_male"), 1)` points lower on a 19-question test of panchayat rules and duties after adjustment for schooling and other observed characteristics. They also report less contact with higher-level officials [@gajwani, Tables 5–6]. The knowledge coefficient is an adjusted gender comparison, not an estimate of the causal contribution of schooling. It nevertheless shows why similar educational attainment need not imply similar preparation for governing.
 
 ## Possible mechanisms
 
-Lower schooling relative to open-seat winners can coexist with positive selection relative to other women. Reserved-seat leaders in Bihar are more educated than the average woman in their villages [@bamezai, Section 7.2.2]. Their husbands, however, have `r fmt(-lit_value("bamezai", "husband_vs_open"), 2)` standard deviations less schooling than open-seat winners [@bamezai, Table 7]. In South India, they are wealthier and more politically informed than eligible women [@ban, Table 9]. Evidence from Karnataka similarly finds that female candidates are more positively selected on cognitive skills relative to female voters than male candidates are relative to male voters, while quotas allow households with less leadership experience to enter electoral politics [@moripublished]. These comparisons distinguish two potential sources of qualification gaps: differences between the eligible populations and differences in whom elections draw from each population. Our winner records cannot separate them.
+Lower schooling relative to open-seat winners can coexist with positive selection relative to other women. In South India, reserved-seat leaders are wealthier and more politically informed than eligible women [@ban, Table 9]. Evidence from Karnataka similarly finds that female candidates are more positively selected on cognitive skills relative to female voters than male candidates are relative to male voters [@moripublished]. For Bihar's 2016 and 2021 elections, @bamezai report lower schooling among reserved-seat winners near reservation thresholds, using local citizens as the benchmark. We discuss that evidence separately because it measures a local effect on citizen-standardized schooling, not the broad winner comparison synthesized here. Differences between eligible populations and differences in whom elections draw from each population are distinct potential sources of qualification gaps. Our winner records cannot separate them.
+
+Bhavnani, Huidobro and Prillaman's October 2024 draft also reports lower schooling in women-reserved seats. For Odisha's 2022 election, the adjusted difference is `r fmt(bhavnani$estimate[bhavnani$sample == "Odisha 2022" & bhavnani$caste == "Non-SC/ST"], 2)` years among seats without SC/ST reservation [@bhavnani, Table 2, column 4]. Their claims about equal or higher quality concern household-wealth residuals and education relative to one's identity group. Those measures address different questions from attained schooling and do not directly measure governing performance. The appendix reconstructs the caste-specific schooling comparisons.
 
 Gender quotas can also change representation along dimensions other than gender. In the Rural Economic and Demographic Survey, reservation for women reduces high-caste candidacy and representation; differences in women's mobility across caste groups provide a possible explanation [@cassan, Tables 1–2 and 9–11]. Education, assets, caste, and family political experience may therefore change together. Our controls for a seat's caste-reservation category distinguish institutional categories, but do not isolate the mechanisms through which candidates enter or voters choose among them.
 
@@ -135,6 +134,12 @@ Y_i = \alpha + \beta R_i + \gamma_{g(i)} + \delta_{c(i)} + \epsilon_i,
 \]
 
 where $R_i$ indicates a seat reserved for women, $\gamma_{g(i)}$ is a block effect (a district effect where blocks are not recorded throughout) and $\delta_{c(i)}$ is an effect for the seat's caste-reservation class. For binary outcomes, $100\beta$ is the reserved-minus-open difference in percentage points among seats in the same block and caste class. It is the effect of reservation if reservation is as good as randomly assigned within those cells. Standard errors are clustered by block or district, and 95% intervals use a $t$ distribution with one fewer degree of freedom than there are clusters; Kerala's ward and district-member models have only `r num(get_result("Kerala", 2020, "gp_ward")$clusters)` clusters. Mumbai pools its 2012 and 2017 councils with administrative-ward and council effects, clustered by electoral ward, and has no caste-reservation control. Delhi uses assembly-constituency and caste-reservation effects in each election, clustered by assembly constituency.
+
+## Combining the schooling evidence
+
+The meta-analysis combines existing reserved-versus-open schooling comparisons with this paper's estimates. Years of schooling are expressed relative to their within-sample standard deviation. For binary schooling thresholds, we convert log odds ratios to the same approximate scale. Our threshold estimates use logistic regressions with the controls and clustering described above. This conversion assumes that the thresholds measure a common underlying schooling distribution; it does not make secondary completion and a university degree the same qualification.
+
+We fit a random-effects model that allows differences across studies and settings, with repeated elections nested within each setting. The pooled estimate describes the assembled evidence, not an average over all Indian local offices. We retain one Birbhum study and exclude citizen-relative selection measures and local RD estimates from the pool. The appendix gives the conversion, model coverage, and sensitivity results.
 
 \Needspace{12\baselineskip}
 
@@ -206,13 +211,21 @@ Reserved-seat village heads declare fewer assets in both states with asset recor
 
 The urban difference in pending cases does not have a clear counterpart in Uttar Pradesh's village-head records. Only `r fmt(es$up_crime_rate, 2)`% of winners with a known record report a criminal history. The adjusted reserved-minus-open difference is `r fmt(100 * es$up_crime$estimate, 2)` percentage points (95% CI `r fmt(100 * es$up_crime$conf_low, 2)` to `r fmt(100 * es$up_crime$conf_high, 2)`), leaving the direction uncertain. This outcome is reported criminal history, whereas the urban measure concerns pending cases, so differences across these settings also reflect the measures available. The appendix reports the full estimates and sample sizes.
 
+## Schooling across the literature and our data \label{sec:synthesis}
+
+Combining the existing literature with our data, winners of women-reserved seats have less schooling on average, but the size of the difference varies substantially. The pooled difference is `r fmt(combined_meta$d, 2)` SD (95% CI `r fmt(combined_meta$low, 2)` to `r fmt(combined_meta$high, 2)`), across `r num(combined_meta$estimates)` estimates from `r num(sum(combined$inputs$source == "Literature"))` literature samples and `r num(n_distinct(combined$inputs$series[combined$inputs$source == "This paper"]))` settings in our data. Figure \ref{fig:combined-forest} shows where that average comes from. The published village-head comparisons and our northern village-head estimates are negative throughout. Our Kerala ward-member and city estimates are much closer to zero. The model's 95% prediction interval, `r fmt(combined_meta$prediction_low, 2)` to `r fmt(combined_meta$prediction_high, 2)` SD, reflects that variation: the negative average does not imply a schooling deficit in every setting.
+
+```{r combined-forest, fig.cap="Schooling differences, women-reserved minus open seats, combining the literature and this paper. Circles are individual estimates and diamonds are pooled means; bars show 95\\% confidence intervals. Years of schooling use pooled within-group SDs; binary thresholds use a log-odds conversion. Our estimates retain geography and reservation controls and clustered uncertainty. Group means come from a model with source/setting-group indicators; the overall mean comes from a model without them. Both allow elections within settings. Birbhum enters once; citizen-standardized RD estimates are excluded. Appendix A gives conversion assumptions and sensitivity checks.", out.width="100%"}
+knitr::include_graphics(normalizePath("figs/forest_combined.png"))
+```
+
+The graduate-share deficit is larger among northern village heads than among Kerala's village ward members and the two cities' councillors. Pooling this paper's estimates with elections nested in settings, reserved-seat village heads in the northern states are `r fmt(-setting_meta$northern[1])` points less likely to hold a degree (95% CI `r fmt(-setting_meta$northern_high[1])` to `r fmt(-setting_meta$northern_low[1])`), against a difference of `r fmt(setting_meta$other_settings[1])` points (`r fmt(setting_meta$other_low[1])` to `r fmt(setting_meta$other_high[1])`) among Kerala's ward members and the two cities' councillors. Office, data source and election years vary along with setting, and the second group is one state and two cities. Replacing Bihar's village heads with its ward members, the office we observe in Kerala, still leaves a northern gap of `r fmt(-setting_meta$northern[3])` points.
+
+The combined deficit is not driven by one study or setting. Omitting each study or setting in turn gives pooled differences from `r fmt(min(combined$influence$d), 2)` to `r fmt(max(combined$influence$d), 2)` SD; every interval remains below zero. Replacing the Birbhum comparison, excluding Rajasthan, and allowing correlated sampling errors across elections also preserves the negative pooled difference (Table \ref{tab:meta-sensitivity}). These checks support the average pattern in the assembled evidence. They do not resolve differences in schooling measures, research designs, or the coverage of winners with recorded education.
+
 # Discussion
 
-The graduate-share deficit is larger among northern village heads than among Kerala's village ward members and the two cities' councillors. Pooling this paper's estimates with elections nested in settings, reserved-seat village heads in the northern states are `r fmt(-setting_meta$northern[1])` points less likely to hold a degree (95% CI `r fmt(-setting_meta$northern_high[1])` to `r fmt(-setting_meta$northern_low[1])`), against a difference of `r fmt(setting_meta$other_settings[1])` points (`r fmt(setting_meta$other_low[1])` to `r fmt(setting_meta$other_high[1])`) among Kerala's ward members and the two cities' councillors. Distinguishing the two groups reduces the estimated standard deviation of residual differences across settings from `r fmt(setting_meta$tau_setting_pooled[1])` to `r fmt(setting_meta$tau_setting_moderated[1])` points. Office, data source and election years vary along with setting, and the second group is one state and two cities. Replacing Bihar's village heads with its ward members, the office we observe in Kerala, still leaves a northern gap of `r fmt(-setting_meta$northern[3])` points.
-
-```{r settings-forest, fig.cap="This paper's graduate-share differences, women-reserved minus open seats, with 95\\% confidence intervals. Pooled estimates come from a random-effects model with elections nested in settings and an indicator for the northern village-head settings.", out.width="80%"}
-knitr::include_graphics(normalizePath("figs/forest_settings.png"))
-```
+The schooling deficit documented among village heads does not extend uniformly to other local offices. Our evidence from Kerala's ward members and the two cities places a limit on that generalization, while the combined meta-analysis establishes a negative average across the available comparisons. The contrast is consistent with differences in women's educational opportunities and selection into politics. Because location, office, election year and measurement vary together, we cannot attribute it to any one mechanism.
 
 \Needspace{4\baselineskip}
 
@@ -245,6 +258,48 @@ We do not use the education recorded in the older Delhi files, whose coding also
 ## Asset measurement
 
 The asset regressions use $\log(A+1)$, where $A$ is declared assets in rupees. The added rupee retains zero declarations. Percentage differences are $100[\exp(\hat\beta)-1]$, with the same transformation applied to the confidence limits.
+
+## Schooling synthesis
+
+For years of schooling, we divide the reported difference and its standard error by the pooled within-group SD. For binary thresholds, $d=\log(OR)\sqrt{3}/\pi$, and the variance is multiplied by $3/\pi^2$. This is the logistic-distribution conversion in `metafor`'s `OR2DL` measure [@chinn]. Published threshold comparisons use the reported group shares and sizes, with counts rounded to integers. Our comparisons use the reservation coefficient from a fixed-effects logistic regression, with the same controls and clustering as the percentage-point models. Their individual intervals use $t_{G-1}$ critical values. Fixed-effect groups with no outcome variation do not identify the logistic coefficient and are excluded; Table \ref{tab:meta-coverage} reports the resulting coverage.
+
+```{r meta-coverage, results='asis'}
+combined$inputs %>%
+  filter(source == "This paper") %>%
+  transmute(Election = label, `Classified winners` = num(n_input),
+            `Logit sample` = num(n), Clusters = num(clusters)) %>%
+  kable(caption = "Samples used to standardize this paper's schooling estimates.", label = "meta-coverage", format = table_format,
+        booktabs = TRUE, row.names = FALSE, longtable = TRUE)
+```
+
+The combined model is $d_{sj}=\mu+u_s+v_{sj}+e_{sj}$, where $s$ indexes a published sample or one of our six settings, $j$ indexes an estimate, and $e_{sj}$ has the estimated sampling variance. We estimate both random-effect variances by restricted maximum likelihood and use $t$ intervals with containment degrees of freedom. The main model assumes independent sampling errors conditional on the random effects; a sensitivity model sets their correlation to 0.5 within settings. The prediction interval includes both random-effect variances. Separate group means distinguish published village heads, our northern village heads, and our Kerala ward members and city councillors.
+
+Chattopadhyay and Duflo represent Birbhum in the main pool; Beaman et al. replace them in a sensitivity check. Bamezai et al.'s Table 7, Panel B, column 1 estimates a fuzzy-RD effect near reservation thresholds on winners' education standardized against GP citizens. Column 2 uses a same-gender citizen benchmark; column 3 substitutes husbands' education. None enters our pool: the first has a different target population and standardization, and the others also change the comparison or whose qualifications are measured. Their 2016 Bihar sample overlaps ours; our Bihar estimate is the only one used in the pool. Earlier Delhi and Mumbai deposit-based estimates are not additional independent evidence. Comparisons of women and men, candidate outcomes, and selection relative to citizens are excluded. The pool is drawn from the studies we located and could extract, not a systematic census of the literature. Reconstructed standard errors for published threshold comparisons omit clustering and repeated village observations.
+
+```{r meta-sensitivity, results='asis'}
+combined$sensitivity %>%
+  transmute(Specification = sub("Within-setting sampling correlation of", "Error correlation:", specification), Estimates = estimates,
+            `Difference [95% CI], SD` = paste0(fmt(d, 2), " [", fmt(low, 2), ", ", fmt(high, 2), "]")) %>%
+  kable(caption = "Combined schooling synthesis: alternative samples and dependence assumptions.", label = "meta-sensitivity", format = table_format,
+        booktabs = TRUE, row.names = FALSE, longtable = TRUE)
+```
+
+### Additional schooling comparisons from Bhavnani et al.
+
+Table 2 of @bhavnani reports reservation-category coefficients against fully open seats. Within SC/ST-reserved seats, the women's-reservation difference is the SC/ST-women coefficient minus the SC/ST-open coefficient. Table \ref{tab:bhavnani-contrasts} reconstructs these comparisons. The coefficients' covariance is unreported, so the standard error of their difference can range from the absolute difference to the sum of their standard errors. The displayed interval uses that largest standard error and a normal approximation; it is an uncertainty envelope, not an exact reconstructed confidence interval.
+
+```{r bhavnani-contrasts, results='asis'}
+bhavnani %>%
+  transmute(Sample = sub("REDS survey", "REDS", sample), Caste = caste,
+            Difference = fmt(estimate, 2),
+            `SE range` = ifelse(se_low == se_high, fmt(se_low, 2),
+                               paste0(fmt(se_low, 2), " to ", fmt(se_high, 2))),
+            `95% envelope` = paste0("[", fmt(low, 2), ", ", fmt(high, 2), "]")) %>%
+  kable(caption = "Women's-reservation schooling differences in years, reconstructed from Bhavnani et al. (2024), Table 2, columns 4 and 6.", label = "bhavnani-contrasts", format = table_format,
+        booktabs = TRUE, row.names = FALSE, longtable = TRUE)
+```
+
+Odisha uses the 2022 reservation schedule and schooling from the 2011–12 census for matched winners. The other sample comes from the REDS listing survey of 2014–16; the draft does not specify a common election year. The reconstructed differences retain the source's covariate adjustment and matching restrictions. The reported tables lack the schooling SDs needed for standardization and the design information needed to recover our overall caste-adjusted reservation coefficient. We therefore report these results in years and keep them outside the pooled synthesis.
 
 ## Coverage and missing outcomes
 

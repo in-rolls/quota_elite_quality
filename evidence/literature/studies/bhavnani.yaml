@@ -1,0 +1,63 @@
+key: bhavnani
+label: Bhavnani, Huidobro and Prillaman (2024)
+version: October 23, 2024 working paper
+url: https://rbhavnani.github.io/files/BHPQuotasQuality.pdf
+location: Table 2, printed p. 19, columns 4 and 6
+setting:
+  state: Odisha; 13-state REDS sample
+  years: 2022 election; 2014-16 survey (election years unspecified)
+  office: GP chairperson
+  design: Adjusted reservation-category comparisons
+  sample_group: bhavnani_census
+  controls: Block FE in Odisha; state FE in REDS; population controls; Odisha group occupation controls; GP-clustered SEs
+defaults:
+  population: winners
+  family: years
+  unit: years
+  adjusted: true
+  se_source: reported
+  status: confirmed
+  note: Reservation columns only. All three coefficients share fully open seats as the reference. SC/ST-women minus SC/ST-open requires differencing coefficients. No coefficient covariance or leader-schooling SDs reported; no standardized pooled estimate constructed.
+estimates:
+- outcome: Schooling, Odisha 2022, non-SC/ST women-reserved
+  sample: Odisha 2022
+  comparison: non_scst_women_reserved_vs_open
+  diff: -1.08
+  se: 0.39
+  n_total: 2498
+  source: Table 2, column 4, Open Women
+- outcome: Schooling, Odisha 2022, SC/ST-open
+  sample: Odisha 2022
+  comparison: scst_open_vs_open
+  diff: -1.01
+  se: 0.31
+  n_total: 2498
+  source: Table 2, column 4, Open SC/ST
+- outcome: Schooling, Odisha 2022, SC/ST women-reserved
+  sample: Odisha 2022
+  comparison: scst_women_vs_open
+  diff: -3.30
+  se: 0.43
+  n_total: 2498
+  source: Table 2, column 4, SC/ST Women
+- outcome: Schooling, REDS survey 2014-16, non-SC/ST women-reserved
+  sample: REDS survey 2014-16
+  comparison: non_scst_women_reserved_vs_open
+  diff: -1.55
+  se: 0.92
+  n_total: 157
+  source: Table 2, column 6, Open Women
+- outcome: Schooling, REDS survey 2014-16, SC/ST-open
+  sample: REDS survey 2014-16
+  comparison: scst_open_vs_open
+  diff: -2.28
+  se: 1.07
+  n_total: 157
+  source: Table 2, column 6, Open SC/ST
+- outcome: Schooling, REDS survey 2014-16, SC/ST women-reserved
+  sample: REDS survey 2014-16
+  comparison: scst_women_vs_open
+  diff: -2.86
+  se: 1.64
+  n_total: 157
+  source: Table 2, column 6, SC/ST Women

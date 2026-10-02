@@ -115,8 +115,10 @@ delhi_comparison <- report$settings$delhi$source_comparison |>
     disagreements = sum(graduate_disagreement, na.rm = TRUE), .groups = "drop"
   )
 
-lit_meta <- report$meta$literature[1, ]
 setting_meta <- report$meta$settings
+combined <- report$meta$combined
+combined_meta <- combined$pooled
+bhavnani <- bhavnani_contrasts()
 audit <- report$deposit$agreement
 
 # Reserved-minus-open differences in reporting no occupation and in log declared assets.
@@ -259,67 +261,43 @@ render_figures <- function(report) {
 
 
   blue <- "#165B85"
-  diamond <- function(y, est, low, high) {
-    tibble(x = c(low, est, high, est), y = c(y, y + 0.3, y, y - 0.3))
-  }
-
-  # Panel of every published schooling comparison among elected leaders, including both Birbhum studies;
-  # the pooled estimate uses one per sample.
-  lit <- read_literature() |>
-    filter(population == "winners", comparison == "reserved_vs_open", family %in% c("years", "secondary_plus"))
-  es <- t(vapply(seq_len(nrow(lit)), function(i) standardized_difference(lit[i, ]), c(yi = 0, vi = 0)))
-  lit <- lit |>
-    mutate(yi = es[, "yi"], vi = es[, "vi"], low = yi - 1.96 * sqrt(vi), high = yi + 1.96 * sqrt(vi)) |>
-    arrange(desc(match(key, yaml::read_yaml("evidence/literature/tables.yaml")$study_order))) |>
-    mutate(
-      row = row_number() + 1,
-      label = paste0(label, ", ", sub(" \\(.*", "", state), ": ", tolower(sub(",.*", "", outcome)))
+  comparisons <- combined$inputs |>
+    transmute(panel = as.character(group), label, estimate = yi, low, high, pooled = FALSE)
+  summaries <- combined$groups |>
+    transmute(panel = group, label = "Group summary", estimate = d, low, high, pooled = TRUE)
+  overall <- combined_meta |>
+    transmute(
+      panel = "Combined literature and this paper", label = "Overall summary",
+      estimate = d, low, high, pooled = TRUE
     )
-  pooled <- report$meta$literature[1, ]
-  lit_plot <- ggplot(lit, aes(x = yi, y = row)) +
+  plot_data <- bind_rows(comparisons, summaries, overall) |>
+    mutate(panel = factor(panel, levels = c(levels(combined$inputs$group), overall$panel))) |>
+    group_by(panel) |>
+    mutate(row = rev(row_number())) |>
+    ungroup()
+  # Unique labels let each panel keep its own ordering without a legend.
+  plot_data <- plot_data |> mutate(position = paste(panel, row, sep = ":"))
+  labels <- setNames(plot_data$label, plot_data$position)
+  plot_data <- plot_data |> mutate(position = factor(position, levels = rev(position)))
+  synthesis_plot <- ggplot(plot_data, aes(x = estimate, y = position)) +
     geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
     geom_errorbar(aes(xmin = low, xmax = high), orientation = "y", width = 0.2, colour = blue) +
-    geom_point(colour = blue, size = 2) +
-    geom_polygon(
-      data = diamond(0.6, pooled$d, pooled$d_low, pooled$d_high), aes(x = x, y = y),
-      fill = "grey25", inherit.aes = FALSE
+    geom_point(data = filter(plot_data, !pooled), colour = blue, size = 2) +
+    geom_point(data = filter(plot_data, pooled), shape = 18, size = 3, colour = "grey25") +
+    facet_grid(panel ~ .,
+      scales = "free_y", space = "free_y", switch = "y",
+      labeller = as_labeller(c(
+        "Published village heads" = "Published\nvillage heads",
+        "Our northern village heads" = "This paper:\nnorthern heads",
+        "Our Kerala and cities" = "This paper:\nKerala and cities",
+        "Combined literature and this paper" = "Combined"
+      ))
     ) +
-    scale_y_continuous(
-      breaks = c(0.6, lit$row),
-      labels = c("Pooled, one per sample", vapply(lit$label, function(x) paste(strwrap(x, 55), collapse = "\n"), ""))
-    ) +
-    labs(x = "Reserved minus open seats\n(Cohen's d)", y = NULL) +
-    theme_evidence()
-  save_evidence(lit_plot, "figs/forest_literature", width = 7.5, height = 4.4)
-
-  own <- own_estimates(report) |>
-    mutate(
-      group = if_else(northern == 1, "Northern village heads", "Kerala ward members and city councillors"),
-      low = yi - 1.96 * sqrt(vi), high = yi + 1.96 * sqrt(vi)
-    ) |>
-    arrange(northern, desc(election))
-  fits <- report$meta$settings[1, ]
-  other_rows <- sum(own$northern == 0)
-  own <- own |> mutate(row = row_number() + if_else(northern == 1, 2, 0) + 1)
-  own_plot <- ggplot(own, aes(x = yi, y = row)) +
-    geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
-    geom_errorbar(aes(xmin = low, xmax = high), orientation = "y", width = 0.2, colour = blue) +
-    geom_point(colour = blue, size = 2) +
-    geom_polygon(
-      data = diamond(0.8, fits$other_settings, fits$other_low, fits$other_high), aes(x = x, y = y),
-      fill = "grey25", inherit.aes = FALSE
-    ) +
-    geom_polygon(
-      data = diamond(other_rows + 2.2, fits$northern, fits$northern_low, fits$northern_high), aes(x = x, y = y),
-      fill = "grey25", inherit.aes = FALSE
-    ) +
-    scale_y_continuous(
-      breaks = c(0.8, other_rows + 2.2, own$row),
-      labels = c("Kerala and cities, pooled", "Northern heads, pooled", own$election)
-    ) +
-    labs(x = "Reserved minus open seats, graduate share (percentage points)", y = NULL) +
-    theme_evidence()
-  save_evidence(own_plot, "figs/forest_settings", width = 7, height = 4.2)
+    scale_y_discrete(labels = labels) +
+    labs(x = "Schooling difference, reserved minus open seats (SD units)", y = NULL) +
+    theme_evidence() +
+    theme(strip.text.y.left = element_text(angle = 0), strip.placement = "outside")
+  save_evidence(synthesis_plot, "figs/forest_combined", width = 8.5, height = 8.3)
 }
 
 # Literature appendix ----

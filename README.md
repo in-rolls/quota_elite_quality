@@ -30,7 +30,7 @@ The manuscript reviews evidence on officials' qualifications, candidate selectio
 
 Reserved-seat winners are far more likely to report no occupation in Rajasthan, Kerala and Delhi, including settings with small estimated education differences, and declare fewer assets in Rajasthan and Uttar Pradesh. [Estimates](manuscript/main.pdf) · [occupation coding](R/analysis.R).
 
-Published reserved-vs-open schooling comparisons among village heads pool to a standardized difference of about −0.9 across five independent samples; this paper's graduate-share gaps pool by setting. [Forest plots](figs/) · [study files](evidence/literature/studies/).
+The schooling meta-analysis combines eligible literature comparisons with this paper's estimates on an approximate SD scale, with repeated elections nested within settings. Our Bihar estimate enters once; Bamezai's citizen-standardized local RD estimate remains separate. The combined result appears in Results and the abstract. [Forest plots](figs/) · [study files](evidence/literature/studies/).
 
 [Deposit audit](evidence/deposit_audit.md): the Delhi 2012 education in Karekurve-Ramachandra and Lee's AJPS deposit agrees with winners' MyNeta profiles no better than chance; their Mumbai deposit agrees.
 

@@ -9,12 +9,12 @@ setting:
   office: Mukhiya
   design: Fuzzy RD at population threshold
   sample_group: bihar_secc
-  controls: Election year, GP covariates; GP-clustered SEs
+  controls: Equation (9) names block effects and election year/caste controls; Table 7 note instead names GP effects; GP-clustered SEs
 defaults:
   adjusted: true
   se_source: reported
   unit: sd
-  note: Outcomes standardized against citizens of the GP (own-group columns against citizens of the same gender).
+  note: Outcomes standardized against citizens of the GP (own-group columns against citizens of the same gender). Fuzzy-RD estimates near reservation thresholds; not a broad winner difference in leader-reference SD units. Excluded from all schooling pools. Table 7 note and equation (9) disagree on GP versus block fixed effects.
 estimates:
 - outcome: Schooling, SD of all citizens
   location: Table 7, panel B
