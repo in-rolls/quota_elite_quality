@@ -118,6 +118,7 @@ delhi_comparison <- report$settings$delhi$source_comparison |>
 setting_meta <- report$meta$settings
 combined <- report$meta$combined
 combined_meta <- combined$pooled
+schooling_groups <- combined$groups
 bhavnani <- bhavnani_contrasts()
 audit <- report$deposit$agreement
 
@@ -265,13 +266,8 @@ render_figures <- function(report) {
     transmute(panel = as.character(group), label, estimate = yi, low, high, pooled = FALSE)
   summaries <- combined$groups |>
     transmute(panel = group, label = "Group summary", estimate = d, low, high, pooled = TRUE)
-  overall <- combined_meta |>
-    transmute(
-      panel = "Combined literature and this paper", label = "Overall summary",
-      estimate = d, low, high, pooled = TRUE
-    )
-  plot_data <- bind_rows(comparisons, summaries, overall) |>
-    mutate(panel = factor(panel, levels = c(levels(combined$inputs$group), overall$panel))) |>
+  plot_data <- bind_rows(comparisons, summaries) |>
+    mutate(panel = factor(panel, levels = levels(combined$inputs$group))) |>
     group_by(panel) |>
     mutate(row = rev(row_number())) |>
     ungroup()
@@ -289,15 +285,14 @@ render_figures <- function(report) {
       labeller = as_labeller(c(
         "Published village heads" = "Published\nvillage heads",
         "Our northern village heads" = "This paper:\nnorthern heads",
-        "Our Kerala and cities" = "This paper:\nKerala and cities",
-        "Combined literature and this paper" = "Combined"
+        "Our Kerala and cities" = "This paper:\nKerala and cities"
       ))
     ) +
     scale_y_discrete(labels = labels) +
     labs(x = "Schooling difference, reserved minus open seats (SD units)", y = NULL) +
     theme_evidence() +
     theme(strip.text.y.left = element_text(angle = 0), strip.placement = "outside")
-  save_evidence(synthesis_plot, "figs/forest_combined", width = 8.5, height = 8.3)
+  save_evidence(synthesis_plot, "figs/forest_combined", width = 8.5, height = 7.8)
 }
 
 # Literature appendix ----
