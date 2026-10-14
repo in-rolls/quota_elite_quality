@@ -77,4 +77,14 @@ There is no hosted CI because the inputs live outside this repository. Local che
 
 <!-- adjacent:start -->
 
+## 🔗 Adjacent Repositories
+
+- [in-rolls/quota_governance](https://github.com/in-rolls/quota_governance) — Women's political reservations and local governance in India
+- [in-rolls/quota_representation](https://github.com/in-rolls/quota_representation) — The Effect of Gender Quotas in Local Bodies on Women's Representation in Rural India
+- [in-rolls/quota_spending](https://github.com/in-rolls/quota_spending) — Effects of Randomly Assigned Reservations for Women Leaders in Indian Local Government on Allocation and Development Outcomes
+- [in-rolls/quota_corruption](https://github.com/in-rolls/quota_corruption) — Women’s seat reservations and corruption in rural India: published bribery evidence and SEPRI survey analysis.
+- [in-rolls/local_elections_uttarakhand](https://github.com/in-rolls/local_elections_uttarakhand) — Data on Local Elections from Uttarakhand
+
+_Powered by [Adjacent](https://github.com/gojiplus/adjacent)_
+
 <!-- adjacent:end -->
