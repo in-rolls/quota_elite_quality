@@ -74,3 +74,7 @@ The deposit comparison reads the replication data from the upstream checkout and
 [Data inventory](evidence/data_inventory.csv) records coverage and analyses not undertaken. The [adapter diff](evidence/central_adapters.patch) documents the earlier UP integration. Superseded descriptive analyses remain in Git history.
 
 There is no hosted CI because the inputs live outside this repository. Local checks require the upstream inputs; missing or changed inputs fail explicitly. Bihar 2021 affidavit extraction remains stopped.
+
+<!-- adjacent:start -->
+
+<!-- adjacent:end -->
